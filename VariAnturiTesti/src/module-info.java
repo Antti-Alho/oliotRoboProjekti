@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author antti
- *
- */
-module VariAnturiTesti {
-}
