@@ -4,7 +4,7 @@ import lejos.utility.Delay;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.*;
 import lejos.robotics.RegulatedMotor;
-public class Moi {
+public class ev3Test {
 
 	public static void main(String[] args) {
 			
