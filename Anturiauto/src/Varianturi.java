@@ -11,6 +11,8 @@ public class Varianturi {
 
 		public static void main(String[] args) {
 			
+			int[][] vertailuarvot = talennaVarit(3);
+			
 			Port port = LocalEV3.get().getPort("S1");	//mistä portista
 			SensorModes sensor = new EV3ColorSensor(port);	//mitä siinä portissa on
 			SampleProvider colorProvider = ((EV3ColorSensor)sensor).getRGBMode();	//mitä se anturi tekee
@@ -50,8 +52,27 @@ public class Varianturi {
 			return tulos;
 		}
 		
-		public static int[] talennaVarit(int maara) {
-			int[] tulos = new int[maara];
+		public static int[][] talennaVarit(int maara) {
+			int[][] tulos = new int[maara][maara];
+			
+			return tulos;
+		}
+		
+		public static int variEro(int[] a, int[] b) {
+			int tulos = 0;
+			for (int i = 0; i < a.length; i++) {
+				if (a[i]-b[i] >= tulos) {
+					tulos = a[i] - b[i];
+				}
+			}
+			return tulos;
+		}
+		
+		public static int variEroPyth(int[] a, int[] b) {
+			int tulos = 0;
+			for (int i = 0; i < a.length; i++) {
+				tulos = tulos + a[i] - b[i] * a[i] - b[i];
+			}
 			return tulos;
 		}
 }
