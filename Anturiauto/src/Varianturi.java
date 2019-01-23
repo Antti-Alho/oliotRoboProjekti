@@ -5,6 +5,7 @@ import lejos.hardware.sensor.SensorModes;
 import lejos.robotics.Color;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
+import java.math.*;
 
 public class Varianturi {
 
@@ -36,5 +37,21 @@ public class Varianturi {
 				
 				Delay.msDelay(1000);
 			}
+		}
+		
+		public static int[] listaaErot(int[] vari, int[][] vertailuarvot) {
+			int[] tulos = new int[vari.length];
+			for (int i = 0; i < vertailuarvot.length; i++) {
+				for (int j = 0; j < vari.length; j++) {
+					tulos[i] = tulos[i] + vari[j] - vertailuarvot[i][j] * vari[j] - vertailuarvot[i][j];
+				}
+				tulos[i] = (int) Math.sqrt(tulos[i]);
+			}
+			return tulos;
+		}
+		
+		public static int[] talennaVarit(int maara) {
+			int[] tulos = new int[maara];
+			return tulos;
 		}
 }
