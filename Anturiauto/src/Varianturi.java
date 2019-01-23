@@ -20,7 +20,7 @@ public class Varianturi {
 			while (true) {
 				
 				//laitetaan lamppu päälle
-				((EV3ColorSensor)sensor).setFloodlight(Color.BLUE);
+				((EV3ColorSensor)sensor).setFloodlight(Color.WHITE);
 				
 				//luetaan värit
 				colorProvider.fetchSample(sample, 0);
