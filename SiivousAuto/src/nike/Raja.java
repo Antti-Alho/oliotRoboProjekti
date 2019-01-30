@@ -2,13 +2,17 @@ package nike;
 
 import lejos.robotics.subsumption.Behavior;
 
+
 public class Raja implements Behavior{
 	private VariAnturi variAnturi;
+	private Moottorit moottori;
 	private volatile boolean suppressed = false; 
 
-	public Raja (VariAnturi v) {
+	public Raja (VariAnturi v, Moottorit m) {
 		this.variAnturi = v;
+		this.moottori = m;
 	}
+	
 
 	public boolean takeControl() {
 		return variAnturi.ylitys();
@@ -16,9 +20,12 @@ public class Raja implements Behavior{
 
 	public void action() {
 		suppressed = false;
+		moottori.MotorKayt();
+		moottori.Kaannos();
+		moottori.MotorKiinni();	
 		System.out.println("Kaannos");
-		while(!suppressed)Thread.yield();
-		System.out.println("dsa");
+		suppressed = true;
+		
 		
 	}
 

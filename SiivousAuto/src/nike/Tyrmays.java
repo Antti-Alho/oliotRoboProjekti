@@ -1,15 +1,22 @@
 package nike;
 
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.MotorPort;
+import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Behavior;
+
 
 
 public class Tyrmays implements Behavior{
 	private KosketusAnturi kosketus;
+	private Moottorit motor;
+
 	private volatile boolean suppressed = false;
 	
 	
-	public Tyrmays(KosketusAnturi k) {
+	public Tyrmays(KosketusAnturi k, Moottorit m) {
 		this.kosketus = k;
+		this.motor = m;
 	}
 
 	public boolean takeControl() { 
@@ -20,11 +27,11 @@ public class Tyrmays implements Behavior{
 	} 
 	public void action() { 
 		suppressed = false;
+		motor.MotorClose();
 		System.out.println("Laite suljettu.");
 		while(!suppressed) Thread.yield();
 		System.out.println("Asd");
-		//while(käännös kesken && !suppressed) Thread.yield(); 
-		//if(suppressed){ pysäytä moottorit } 
+ 
 		
 		} 
 
