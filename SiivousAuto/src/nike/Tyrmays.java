@@ -20,7 +20,7 @@ public class Tyrmays implements Behavior{
 	} 
 	public void action() { 
 		suppressed = false;
-		System.out.println("TÖRMÄYS!");
+		System.out.println("Laite suljettu.");
 		while(!suppressed) Thread.yield();
 		System.out.println("Asd");
 		//while(käännös kesken && !suppressed) Thread.yield(); 
