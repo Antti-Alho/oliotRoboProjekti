@@ -18,6 +18,12 @@ public class Moottorit {
 		moottoriC.setSpeed(300);
 	}
 	
+	public EV3LargeRegulatedMotor getMoottoriB() {
+		return moottoriB;
+	}
+	public EV3LargeRegulatedMotor getMoottoriC() {
+		return moottoriC;
+	}
 	public void Eteen() {
 		moottoriB.synchronizeWith(new RegulatedMotor[] {moottoriC});
 		moottoriB.forward();

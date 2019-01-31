@@ -31,4 +31,8 @@ public class KosketusAnturi {
 		return false;
 	}
 	
+	public SensorModes getSensor() {
+		return sensor;
+	}
+	
 }
