@@ -2,25 +2,48 @@ package nike;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.hardware.port.PortException;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
 
 public class Moottorit {
+
 	private VariAnturi vari;
 	private InfraAnturi infra;
-	private EV3LargeRegulatedMotor moottoriB= new EV3LargeRegulatedMotor(MotorPort.B);
-	private EV3LargeRegulatedMotor moottoriC= new EV3LargeRegulatedMotor(MotorPort.C);
+	private EV3LargeRegulatedMotor moottoriB;
+	private EV3LargeRegulatedMotor moottoriC;
 	
 	public Moottorit(VariAnturi v, InfraAnturi i) {
 		this.vari = v;
 		this.infra = i;
-		
+		while (moottoriB == null || moottoriC == null) {
+			try {
+			moottoriB = new EV3LargeRegulatedMotor(MotorPort.B);
+			} catch (PortException e) {
+				System.out.println("Laita moottori B kiinni");
+				continue;
+			}
+			try {
+			moottoriC = new EV3LargeRegulatedMotor(MotorPort.C);
+			} catch (PortException e) {
+				System.out.println("Laita moottori C kiinni");
+				continue;
+			}
+		}
+
+
 	}
 	public void MotorKayt() {
 		moottoriB.setSpeed(300);
 		moottoriC.setSpeed(300);
 	}
 	
+	public EV3LargeRegulatedMotor getMoottoriB() {
+		return moottoriB;
+	}
+	public EV3LargeRegulatedMotor getMoottoriC() {
+		return moottoriC;
+	}
 	public void Eteen() {
 		moottoriB.synchronizeWith(new RegulatedMotor[] {moottoriC});
 		moottoriB.forward();
