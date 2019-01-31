@@ -1,6 +1,5 @@
 package nike;
 
-
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
@@ -23,10 +22,6 @@ public class Robotti {
 		} else {
 			System.out.println("ei toimi");
 		}
-		
-		
-		
-		
 		
 	}
 }

@@ -11,7 +11,6 @@ public class Tyrmays implements Behavior{
 
 	private volatile boolean suppressed = false;
 	
-	
 	public Tyrmays(KosketusAnturi k, Moottorit m) {
 		this.kosketus = k;
 		this.motor = m;

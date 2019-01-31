@@ -12,15 +12,10 @@ public class Alustus {
 	}
 	
 	public boolean lahtoValmis() {
-		while (k.painettu() == false) {
-			if (k.getSensor() != null) continue;
-			if (v.getSensor() != null) continue;
-			if (m.getMoottoriB() != null) continue;
-			if (m.getMoottoriC() != null) continue;
-			System.out.println("paina minua!");
+		while (k.painettu() == true) {
+			v.talennaVari();
+			return true;
 		}
-		v.talennaVari();
-		return true;
+		return false;
 	}
-	
 }

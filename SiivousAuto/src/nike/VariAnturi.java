@@ -3,6 +3,7 @@ package nike;
 import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.port.Port;
+import lejos.hardware.port.PortException;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorModes;
 import lejos.robotics.Color;
@@ -12,17 +13,20 @@ import lejos.robotics.SampleProvider;
 public class VariAnturi{
 
 	private Port port = LocalEV3.get().getPort("S1");	//mistä portista
-	private SensorModes sensor = new EV3ColorSensor(port);	//mitä siinä portissa on
+	private SensorModes sensor;
 	private SampleProvider colorProvider = ((EV3ColorSensor)sensor).getRGBMode();	//mitä se anturi tekee
 	private float[] sample = new float[colorProvider.sampleSize()];	// tallennetaan anturin ottama väriarvo talteen
 	private int[] vari = {205, 45, 21};
 	int[] tulos;
-	
-	public SensorModes getSensor() {
-		return sensor;
-	}
+
 	public VariAnturi() {
-		
+		while (sensor == null) {
+			try {
+				sensor = new EV3ColorSensor(port);
+			} catch (PortException e) {
+				System.out.println("laita Vari anturi kiinni");
+			}
+		}
 	}
 	public boolean ylitys() {
 		colorProvider.fetchSample(sample, 0);
@@ -77,5 +81,9 @@ public class VariAnturi{
 			Sound.beep();
 			Delay.msDelay(3000);
 		}
+	}
+	
+	public SensorModes getSensor() {
+		return sensor;
 	}
 }
