@@ -22,5 +22,13 @@ public class InfraAnturi {
 		}
 		return false;
 	}
+	public boolean vaisto() {
+		distance.fetchSample(sample, 0);
+		if (sample[0] <= 1) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 }

@@ -8,12 +8,14 @@ import lejos.utility.Delay;
 
 public class Moottorit {
 
-  private VariAnturi vari;
+	private VariAnturi vari;
+	private InfraAnturi infra;
 	private EV3LargeRegulatedMotor moottoriB;
 	private EV3LargeRegulatedMotor moottoriC;
 	
-	public Moottorit(VariAnturi v) {
-    this.vari = v;
+	public Moottorit(VariAnturi v, InfraAnturi i) {
+		this.vari = v;
+		this.infra = i;
 		while (moottoriB == null || moottoriC == null) {
 			try {
 			moottoriB = new EV3LargeRegulatedMotor(MotorPort.B);
@@ -28,6 +30,7 @@ public class Moottorit {
 				continue;
 			}
 		}
+
 
 	}
 	public void MotorKayt() {
@@ -48,31 +51,62 @@ public class Moottorit {
 	}
 	
 	public void Kaannos() {
-		int ylitys = 0;
 		int min = 3000;
-		int max = 12000;
+		int max = 20000;
 		double random = min + Math.random()*(max-min) ;
 		int aika = (int)random;
 		System.out.println(aika);
-		moottoriB.backward();
-		moottoriC.backward();
-		Delay.msDelay(1200);
-		for (int i = 0; i < aika; i++) {
-			if (vari.ylitys()!=true && ylitys == 0) {
-				moottoriC.forward();
-			} else {
-				ylitys = 1;
-				moottoriB.backward();
-				moottoriC.backward();
-				if (vari.ylitys()!=true) {
-					moottoriB.stop(true);
-					moottoriC.stop(true);
-					moottoriB.forward();
-					moottoriC.backward();
-					Delay.msDelay(2500);
-					i = aika -1;
+		int ylitys = 0;
+		
+		if (infra.este() == true) {
+			for (int i = 0; i < aika; i++){
+				if (vari.ylitys()==false && ylitys == 0) {
+					if (i < aika/5) {
+						moottoriB.backward();
+						moottoriC.backward();
+					} else {
+						moottoriC.forward();
+					}
+				} else {
+					ylitys = 1;
+					while (infra.vaisto() != true) {
+						moottoriB.forward();
+						moottoriC.forward();
+						Delay.msDelay(800); }
+					for (int j = 0; j < 2000; j++) {
+						if (vari.ylitys()==false){
+							moottoriC.backward(); 
+							i = aika -1;
+						} else {
+							moottoriB.forward();
+							moottoriC.forward();
+							Delay.msDelay(400);
+							i = aika -1;
+							j = 1999;
+						}
+					}
 				}
-				
+			}
+		} else {						
+			moottoriB.backward();
+			moottoriC.backward();
+			Delay.msDelay(1200);
+			for (int j = 0; j < aika; j++) {
+				if (vari.ylitys()!=true && ylitys == 0) {
+					moottoriC.forward();
+				} else {
+					ylitys = 1;
+					moottoriB.backward();
+					moottoriC.backward();
+					if (vari.ylitys()!=true) {
+						moottoriB.stop(true);
+						moottoriC.stop(true);
+						moottoriB.forward();
+						moottoriC.backward();
+						Delay.msDelay(2500);
+						j = aika -1;
+					}
+				}
 			}
 		}
 	}
