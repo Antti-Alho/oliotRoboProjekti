@@ -9,15 +9,18 @@ import lejos.hardware.sensor.EV3TouchSensor;
 
 public class KosketusAnturi {
 	private Port port = LocalEV3.get().getPort("S2");
-	private SensorModes sensor = new EV3TouchSensor(port);
-	private SampleProvider touch = ((EV3TouchSensor)sensor).getTouchMode();
-	float[] sample = new float[touch.sampleSize()];
+	private SensorModes sensor;
+	private SampleProvider touch;
+	float[] sample;
 	
 	public KosketusAnturi() {
 		while (sensor == null) {
 			try {
 				sensor = new EV3TouchSensor(port);
-			} catch (PortException e) {
+				touch = ((EV3TouchSensor)sensor).getTouchMode();
+				sample = new float[touch.sampleSize()];
+				
+			} catch (IllegalArgumentException e) {
 				System.out.println("Laita kosketus anturi kiinni!");
 			}
 		}

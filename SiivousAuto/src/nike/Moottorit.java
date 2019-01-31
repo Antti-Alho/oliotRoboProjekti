@@ -1,7 +1,11 @@
 package nike;
 
+import lejos.hardware.DeviceException;
+import lejos.hardware.device.DeviceIdentifier;
+import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.hardware.port.Port;
 import lejos.hardware.port.PortException;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
@@ -12,20 +16,21 @@ public class Moottorit {
 	private InfraAnturi infra;
 	private EV3LargeRegulatedMotor moottoriB;
 	private EV3LargeRegulatedMotor moottoriC;
-	
+	private DeviceIdentifier di1;
+	private DeviceIdentifier di2;
 	public Moottorit(VariAnturi v, InfraAnturi i) {
 		this.vari = v;
 		this.infra = i;
 		while (moottoriB == null || moottoriC == null) {
 			try {
-			moottoriB = new EV3LargeRegulatedMotor(MotorPort.B);
-			} catch (PortException e) {
+				moottoriB = new EV3LargeRegulatedMotor(MotorPort.B);
+			} catch (DeviceException e) {
 				System.out.println("Laita moottori B kiinni");
 				continue;
 			}
 			try {
-			moottoriC = new EV3LargeRegulatedMotor(MotorPort.C);
-			} catch (PortException e) {
+				moottoriC = new EV3LargeRegulatedMotor(MotorPort.C);
+			} catch (DeviceException e) {
 				System.out.println("Laita moottori C kiinni");
 				continue;
 			}

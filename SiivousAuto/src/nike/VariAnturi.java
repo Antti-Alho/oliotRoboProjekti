@@ -8,23 +8,26 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorModes;
 import lejos.robotics.Color;
 import lejos.robotics.SampleProvider;
+import lejos.utility.Delay;
 
 
 public class VariAnturi{
 
 	private Port port = LocalEV3.get().getPort("S1");	//mistä portista
 	private SensorModes sensor;
-	private SampleProvider colorProvider = ((EV3ColorSensor)sensor).getRGBMode();	//mitä se anturi tekee
-	private float[] sample = new float[colorProvider.sampleSize()];	// tallennetaan anturin ottama väriarvo talteen
-	private int[] vari = {205, 45, 21};
-	int[] tulos;
+	private SampleProvider colorProvider;	//mitä se anturi tekee
+	private float[] sample;	// tallennetaan anturin ottama väriarvo talteen
+	private int[] vari = new int[3];
 
 	public VariAnturi() {
 		while (sensor == null) {
 			try {
 				sensor = new EV3ColorSensor(port);
-			} catch (PortException e) {
-				System.out.println("laita Vari anturi kiinni");
+				colorProvider = ((EV3ColorSensor)sensor).getRGBMode();
+				sample = new float[colorProvider.sampleSize()];
+				((EV3ColorSensor)sensor).setFloodlight(Color.WHITE);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Laita Vari anturi kiinni");
 			}
 		}
 	}
@@ -56,7 +59,7 @@ public class VariAnturi{
 	public void talennaVari() {
 		int[] vanha = {0, 0, 0};
 		while(true) {
-			((EV3ColorSensor)sensor).setFloodlight(Color.WHITE);
+			
 			
 			//luetaan värit
 			colorProvider.fetchSample(sample, 0);
