@@ -11,13 +11,18 @@ public class Robotti {
 		KosketusAnturi k = new KosketusAnturi();
 		VariAnturi v = new VariAnturi();
 		Moottorit m = new Moottorit(v);
+		Alustus a = new Alustus(k,m,v);
 		Behavior b1 = new EteenPäin(m);
 		Behavior b2 = new Raja(v,m);
 		Behavior b3 = new Tyrmays(k, m); 
 		Behavior [] bArray = {b1, b2, b3};
-		
-		Arbitrator arby = new Arbitrator(bArray); 
-		arby.go(); 
+
+		if (a.lahtoValmis()) {
+			Arbitrator arby = new Arbitrator(bArray);
+			arby.go(); 
+		} else {
+			System.out.println("ei toimi");
+		}
 		
 		
 		
