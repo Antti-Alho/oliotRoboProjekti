@@ -23,7 +23,6 @@ public class Raja implements Behavior{
 		moottori.MotorKayt();
 		moottori.Kaannos();
 		moottori.MotorKiinni();	
-		System.out.println("Kaannos");
 		suppressed = true;
 		
 		
