@@ -1,8 +1,5 @@
 package nike;
 
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.port.MotorPort;
-import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Behavior;
 
 
@@ -12,7 +9,6 @@ public class Tyrmays implements Behavior{
 	private Moottorit motor;
 
 	private volatile boolean suppressed = false;
-	
 	
 	public Tyrmays(KosketusAnturi k, Moottorit m) {
 		this.kosketus = k;

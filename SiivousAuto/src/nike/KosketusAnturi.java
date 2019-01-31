@@ -15,7 +15,14 @@ public class KosketusAnturi {
 	private SampleProvider touch = ((EV3TouchSensor)sensor).getTouchMode();
 	float[] sample = new float[touch.sampleSize()];
 	
-	public KosketusAnturi() {		
+	public KosketusAnturi() {
+		while (sensor == null) {
+			try {
+				sensor = new EV3TouchSensor(port);
+			} catch (PortException e) {
+				System.out.println("Laita kosketus anturi kiinni!");
+			}
+		}
 	}
 		
 	public boolean painettu() {		
