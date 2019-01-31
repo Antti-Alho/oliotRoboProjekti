@@ -8,8 +8,7 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorModes;
 import lejos.robotics.Color;
 import lejos.robotics.SampleProvider;
-import lejos.robotics.subsumption.Behavior;
-import lejos.utility.Delay;
+
 
 public class VariAnturi{
 

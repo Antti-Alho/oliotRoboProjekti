@@ -9,7 +9,7 @@ public class Robotti {
 	public static void main(String[] args) {
 		KosketusAnturi k = new KosketusAnturi();
 		VariAnturi v = new VariAnturi();
-		Moottorit m = new Moottorit();
+		Moottorit m = new Moottorit(v);
 		Alustus a = new Alustus(k,m,v);
 		Behavior b1 = new EteenPäin(m);
 		Behavior b2 = new Raja(v,m);
