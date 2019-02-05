@@ -13,13 +13,14 @@ import lejos.robotics.mapping.LineMap;
 public class Pilot {
 	
 	public static void main(String[] args) {
-	Wheel wheel1 = WheeledChassis.modelWheel(Motor.B, 43.2).offset(-99.2);
-	Wheel wheel2 = WheeledChassis.modelWheel(Motor.C, 43.2).offset(99.2);
+	Wheel wheel1 = WheeledChassis.modelWheel(Motor.B, 32.4).offset(-84.85);
+	Wheel wheel2 = WheeledChassis.modelWheel(Motor.C, 32.4).offset(84.85);
 	
 	
 	Chassis chassis = new WheeledChassis(new Wheel[] {wheel1,  wheel2}, WheeledChassis.TYPE_DIFFERENTIAL);
 	MovePilot pilot = new MovePilot(chassis);
-	pilot.travel(1000);
+//	pilot.travel(1000);
+	pilot.rotate(360*10);
 	
 	
 	Rectangle suorakulmio = new Rectangle(0, 0, 1000, 900);
