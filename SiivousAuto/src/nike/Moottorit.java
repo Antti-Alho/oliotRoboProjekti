@@ -18,6 +18,7 @@ public class Moottorit {
 	private EV3LargeRegulatedMotor moottoriC;
 	private DeviceIdentifier di1;
 	private DeviceIdentifier di2;
+	
 	public Moottorit(VariAnturi v, InfraAnturi i) {
 		this.vari = v;
 		this.infra = i;
@@ -74,10 +75,13 @@ public class Moottorit {
 					}
 				} else {
 					ylitys = 1;
-					while (infra.vaisto() != true) {
+					int k=0;
+					while (infra.vaisto() != true && vari.ylitys()!=true && k <=75) {
+						k++;
 						moottoriB.forward();
 						moottoriC.forward();
-						Delay.msDelay(800); }
+						System.out.println(k);
+						}
 					for (int j = 0; j < 2000; j++) {
 						if (vari.ylitys()==false){
 							moottoriC.backward(); 
