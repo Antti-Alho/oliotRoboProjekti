@@ -1,7 +1,13 @@
+import lejos.robotics.navigation.DestinationUnreachableException;
 import lejos.robotics.navigation.DifferentialPilot;
+import lejos.robotics.pathfinding.DijkstraPathFinder;
+import lejos.robotics.pathfinding.Path;
+import lejos.robotics.pathfinding.PathFinder;
+import lejos.robotics.pathfinding.ShortestPathFinder;
 import lejos.robotics.navigation.MovePilot;
-
-
+import lejos.robotics.navigation.Navigator;
+import lejos.robotics.navigation.Pose;
+import lejos.robotics.navigation.Waypoint;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
@@ -37,6 +43,20 @@ public class Pilot {
 	janat[7] = new Line(0,600,300,600);
 	  
 	LineMap kartta = new LineMap(janat, suorakulmio);
+	Pose pose = new Pose(200, 200, 90);
+	Navigator navi = new Navigator(pilot) ;
+	PathFinder polunEtsijä = new ShortestPathFinder(kartta);
+	Path path;
+	try {
+		path = polunEtsijä.findRoute(pose, new Waypoint(150, 850));
+		navi.setPath(path);
+		navi.followPath();
+		navi.waitForStop();
+	} catch (DestinationUnreachableException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 	}
 	
 
