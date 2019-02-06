@@ -8,6 +8,9 @@ import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.Navigator;
 import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
+
+import java.util.ArrayList;
+
 import lejos.hardware.motor.Motor;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
@@ -24,7 +27,7 @@ public class Pilot {
 		Wheel wheel2 = WheeledChassis.modelWheel(Motor.C, 32.4).offset(84.85);
 		
 		Chassis chassis = new WheeledChassis(new Wheel[] {wheel1,  wheel2}, WheeledChassis.TYPE_DIFFERENTIAL);
-		MovePilot pilot = new MovePilot(chassis);
+		MovePilot pilot = new MovePilot(chassis);		
 		
 		Rectangle suorakulmio = new Rectangle(0, 0, 1000, 900);
 		Line[] janat = new Line[13];
@@ -53,24 +56,26 @@ public class Pilot {
 		polunEtsijä.lengthenLines(150);
 		chassis.getPoseProvider().setPose(pose);
 
-		aja(new Waypoint(180, 800),navi, polunEtsijä, chassis);
-		aja(new Waypoint(850, 750),navi, polunEtsijä, chassis);
-		aja(new Waypoint(550, 150),navi, polunEtsijä, chassis);
-		aja(new Waypoint(200, 100),navi, polunEtsijä, chassis);
-
+		ArrayList<Waypoint> waypoints = new ArrayList();
+		waypoints.add(new Waypoint(180, 800));
+		waypoints.add(new Waypoint(850, 750));
+		waypoints.add(new Waypoint(550, 150));
+		waypoints.add(new Waypoint(200, 100));
+		
+		for(Waypoint waypoint : waypoints) {
+			aja(waypoint,navi, polunEtsijä, chassis);
+		}
 	}
 	
 	public static void aja(Waypoint wp, Navigator navi, PathFinder pf, Chassis c) {
 			Path path;
 			try {
-				path = pf.findRoute(c.getPoseProvider().getPose(),new Waypoint(180, 800));
+				path = pf.findRoute(c.getPoseProvider().getPose(),wp);
 				navi.setPath(path);
 				navi.followPath();
 				navi.waitForStop();
 			} catch (DestinationUnreachableException e) {
 				e.printStackTrace();
 			}
-			
 	}
-
 }
