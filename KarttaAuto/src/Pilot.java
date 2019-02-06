@@ -26,7 +26,9 @@ public class Pilot {
 	Chassis chassis = new WheeledChassis(new Wheel[] {wheel1,  wheel2}, WheeledChassis.TYPE_DIFFERENTIAL);
 	MovePilot pilot = new MovePilot(chassis);
 //	pilot.travel(1000);
-	pilot.rotate(360*10);
+//	pilot.rotate(360*10);
+
+
 	
 	
 	Rectangle suorakulmio = new Rectangle(0, 0, 1000, 900);
@@ -45,11 +47,23 @@ public class Pilot {
 	  
 	LineMap kartta = new LineMap(janat, suorakulmio);
 	Pose pose = new Pose(200, 200, 90);
-	Navigator navi = new Navigator(pilot) ;
+	Navigator navi = new Navigator(pilot,chassis.getPoseProvider()) ;
 	PathFinder polunEtsijä = new ShortestPathFinder(kartta);
+	chassis.getPoseProvider().setPose(pose);
+	
 	Path path;
 	try {
-		path = polunEtsijä.findRoute(pose, new Waypoint(150, 850));
+		path = polunEtsijä.findRoute(chassis.getPoseProvider().getPose(), new Waypoint(150, 800));
+		navi.setPath(path);
+		navi.followPath();
+		
+		navi.waitForStop();
+	} catch (DestinationUnreachableException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	try {
+		path = polunEtsijä.findRoute(chassis.getPoseProvider().getPose(), new Waypoint(850, 150));
 		navi.setPath(path);
 		navi.followPath();
 		navi.waitForStop();
@@ -59,6 +73,6 @@ public class Pilot {
 	}
 	
 	}
-	
+
 
 }
