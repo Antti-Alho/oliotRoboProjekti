@@ -1,3 +1,4 @@
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -36,16 +37,13 @@ public class Kone {
 		
 		LineMap kartta = new LineMap(janat, suorakulmio);
 		
-		
 		ArrayList<Waypoint> waypoints = new ArrayList();
 		waypoints.add(new Waypoint(180, 800));
 		waypoints.add(new Waypoint(850, 750));
 		waypoints.add(new Waypoint(550, 150));
 		waypoints.add(new Waypoint(200, 100));
-		
-		
 			
-		Socket s;
+		Socket s = null;
 		DataOutputStream out;
 		try {
 			s = new Socket("10.0.1.1", 1111);
@@ -60,17 +58,23 @@ public class Kone {
 				waypoint.dumpObject(out);
 			}
 			out.flush();
-			
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-
-	
-	
-	
-
+		DataInputStream in;
+		if (s != null) {
+			try {
+				in = new DataInputStream(s.getInputStream());
+				for (int i = 0; i < waypoints.size(); i++) {
+					System.out.println("X: " + in.readFloat());
+					System.out.println("Y: " + in.readFloat());
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

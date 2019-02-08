@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.Delayed;
 
 import lejos.hardware.motor.Motor;
 import lejos.robotics.chassis.Chassis;
@@ -26,26 +27,25 @@ import lejos.utility.Delay;
 public class Robo {
 	public static void main(String[] args) {
 		ServerSocket serv;
+		Socket s = null;
+		DataInputStream in = null;
 		Pose pose = new Pose();
 		LineMap kartta = new LineMap();
 		ArrayList<Waypoint> waypoints = new ArrayList<>();
-		Waypoint wp = new Waypoint(0, 0);
 		
 		try {
 			serv = new ServerSocket(1111);
-			Socket s = serv.accept();
-			DataInputStream in = new DataInputStream(s.getInputStream());
+			s = serv.accept();
+			in = new DataInputStream(s.getInputStream());
 			int a = in.readInt();
 			Delay.msDelay(2000);
 			pose.loadObject(in);
 			kartta.loadObject(in);
 			for (int i = 0; i < a; i++) {
+				Waypoint wp = new Waypoint(0,0);
 				wp.loadObject(in);
 				waypoints.add(wp);
 			}
-			
-			
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,15 +65,26 @@ public class Robo {
 		ShortestPathFinder polunEtsijä = new ShortestPathFinder(kartta);
 		polunEtsijä.lengthenLines(150);
 		chassis.getPoseProvider().setPose(pose);
+		
+		System.out.println("Starting point: " + pose);
 			
 		for(Waypoint waypoint : waypoints) {
+			System.out.println("Moving to the next waypoint " + waypoint);
 			aja(waypoint,navi, polunEtsijä, chassis);
+			dataa(s, chassis);
+			System.out.println("Arrived to the waypoint. ");
+		}
+		try {
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
 
 
-	public static void aja(Waypoint wp, Navigator navi, PathFinder pf, Chassis c) {
+	public static void aja(Waypoint wp, Navigator navi, ShortestPathFinder pf, Chassis c) {
 		Path path;
 		try {
 			path = pf.findRoute(c.getPoseProvider().getPose(),wp);
@@ -82,6 +93,20 @@ public class Robo {
 			navi.waitForStop();
 		} catch (DestinationUnreachableException e) {
 			e.printStackTrace();
+		}
+	}
+	public static void dataa(Socket s, Chassis c) {
+		DataOutputStream out;
+		if (s != null) {
+			try {
+				out = new DataOutputStream(s.getOutputStream());
+				out.writeFloat(c.getPoseProvider().getPose().getX());
+				out.writeFloat(c.getPoseProvider().getPose().getY());
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
