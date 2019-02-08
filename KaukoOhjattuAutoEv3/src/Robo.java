@@ -77,11 +77,8 @@ public class Robo {
 		Path path;
 		try {
 			path = pf.findRoute(c.getPoseProvider().getPose(),wp);
-			System.out.println("1");
 			navi.setPath(path);
-			System.out.println("2");
 			navi.followPath();
-			System.out.println("3");
 			navi.waitForStop();
 		} catch (DestinationUnreachableException e) {
 			e.printStackTrace();
