@@ -1,5 +1,7 @@
 package piece;
 
+import java.util.ArrayList;
+
 import shakkiBotti9000PC.Position;
 
 public class Pawn extends Piece{
@@ -11,6 +13,12 @@ public class Pawn extends Piece{
 		} else {
 			super.setArvo(-10);
 		}
+	}
+	
+	@Override
+	public ArrayList<Position> getMoves() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	private int[][] eval = {

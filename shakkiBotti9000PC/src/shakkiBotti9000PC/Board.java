@@ -29,7 +29,15 @@ public class Board {
 	}
 
 	public void undo() {
-		// TODO undo Last move that was done needs at least 3 last moves
-		
+		// TODO undo Last move that was done needs at least 3 last moves	
+	}
+	
+	public Boolean containsPiece(Position pos) {
+		for (Piece piece : pieces) {
+			if (piece.getPos() == piece.getPos()) {
+				return true;
+			}
+		} 
+		return false;
 	}
 }
