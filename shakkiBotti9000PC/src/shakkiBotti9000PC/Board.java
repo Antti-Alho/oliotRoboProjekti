@@ -1,12 +1,16 @@
 package shakkiBotti9000PC;
 
 import java.util.ArrayList;
-
+import java.util.Stack;
 import piece.*;
+import piece.Piece;
 
 public class Board {
+	
+	private Stack<Move> moves;
 	ArrayList<Piece> pieces= new ArrayList<>();
 	//Kaikki pelinappulat aloituspaikoilleen
+
 	public Board() {
 			pieces.add(new Knight(new Position(0, 1), Piece.BLACK));
 			pieces.add(new Knight(new Position(0, 6), Piece.BLACK));
@@ -33,11 +37,11 @@ public class Board {
 		
 	}
 	
-	
-	
-	
 	public ArrayList<Move> getLegalMoves(){
 		ArrayList<Move> moves = new ArrayList<Move>();
+		for (Piece piece : pieces) {
+			moves.addAll(piece.getMoves(this));
+		}
 		return moves;
 	}
 	
@@ -45,18 +49,30 @@ public class Board {
 		return pieces;
 	}
 
-	public Board uglyMove(Move move) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Board move(Move move) {
-		// TODO Auto-generated method stub
-		return null;
+	public void move(Move move) {
+		for (Piece piece : pieces) {
+			if(move.getP() == piece) {
+				piece.setPos(move.getNewPos());
+				moves.add(move);
+			}
+		}
 	}
 
 	public void undo() {
-		// TODO undo Last move that was done needs at least 3 last moves
-		
+		Piece p = moves.peek().getP();
+		for (Piece piece : pieces) {
+			if (p == piece) {
+				piece.setPos(moves.pop().getOldPos());
+			}
+		}
+	}
+	
+	public Boolean containsPiece(Position pos) {
+		for (Piece piece : pieces) {
+			if (piece.getPos() == pos) {
+				return true;
+			}
+		} 
+		return false;
 	}
 }
