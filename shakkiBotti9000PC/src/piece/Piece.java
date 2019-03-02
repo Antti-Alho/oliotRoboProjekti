@@ -2,12 +2,18 @@ package piece;
 
 import java.util.ArrayList;
 
+import shakkiBotti9000PC.Board;
+import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Piece implements IPiece{
 	public static Boolean BLACK = true;
 	public static Boolean WHITE = false;
 	private Boolean colour;
+	public Boolean getColour() {
+		return colour;
+	}
+
 	private Position pos;
 	private int value;
 	
@@ -33,16 +39,15 @@ public class Piece implements IPiece{
 	}
 
 	@Override
-	public void setArvo(int value) {
+	public void setValue(int value) {
 		this.value = value;
 		
 	}
 
 	@Override
-	public ArrayList<Position> getMoves() {
-		// TODO Auto-generated method stub
+	public ArrayList<Move> getMoves(Board board) {
+		// generic piece return nothing 
 		return null;
 	}
-
 
 }

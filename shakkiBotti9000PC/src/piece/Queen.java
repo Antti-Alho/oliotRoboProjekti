@@ -2,6 +2,8 @@ package piece;
 
 import java.util.ArrayList;
 
+import shakkiBotti9000PC.Board;
+import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Queen extends Piece{
@@ -9,15 +11,29 @@ public class Queen extends Piece{
 	public Queen(Position pos, Boolean colour) {
 		super(pos, colour);
 		if (colour) {
-			super.setArvo(100);
+			super.setValue(100);
 		} else {
-			super.setArvo(-100);
+			super.setValue(-100);
 		}
 	}
 	
+	/**
+	 * returns an ArrayList of moves the piece can currently take:
+	 */
 	@Override
-	public ArrayList<Position> getMoves() {
-		// TODO Auto-generated method stub
+	public ArrayList<Move> getMoves(Board board) {
+		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
+		int x = this.getPos().getX();
+		int y = this.getPos().getY();
+		while (x <= 8 && y <= 8 ) {
+			x++;
+			y++;
+			newLegalMoves.add(new Move(this,new Position(x, y)));
+			if (board.containsPiece(new Position(x, y))) {
+				break;
+			}
+		}
+		
 		return null;
 	}
 	
