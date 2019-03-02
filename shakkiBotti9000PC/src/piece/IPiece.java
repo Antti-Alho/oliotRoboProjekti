@@ -10,4 +10,5 @@ public interface IPiece {
 	public abstract int getValue();
 	public abstract void setArvo(int arvo);
 	public abstract ArrayList<Position> getMoves();
+	public abstract String getName();
 }
