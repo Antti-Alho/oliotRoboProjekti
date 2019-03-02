@@ -8,6 +8,7 @@ public class Piece implements IPiece{
 	public static Boolean BLACK = true;
 	public static Boolean WHITE = false;
 	private Boolean colour;
+
 	private Position pos;
 	private int value;
 	
@@ -40,6 +41,16 @@ public class Piece implements IPiece{
 
 	@Override
 	public ArrayList<Position> getMoves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Boolean getColour() {
+		return colour;
+	}
+
+	@Override
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

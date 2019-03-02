@@ -3,7 +3,6 @@ package piece;
 import shakkiBotti9000PC.Position;
 
 public class Pawn extends Piece{
-
 	public Pawn(Position pos, Boolean colour) {
 		super(pos, colour);
 		if (colour) {
@@ -12,6 +11,15 @@ public class Pawn extends Piece{
 			super.setArvo(-10);
 		}
 	}
+	//Pelinappulan nimi ja väri
+	@Override
+	  public String getName(){
+	    String s = "p";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
 	
 	private int[][] eval = {
 			{  0,  0,  0,  0,  0,  0,  0,  0},

@@ -3,7 +3,6 @@ package piece;
 import shakkiBotti9000PC.Position;
 
 public class Knight extends Piece{
-
 	public Knight(Position pos, Boolean colour) {
 		super(pos, colour);
 		if (colour) {
@@ -12,7 +11,14 @@ public class Knight extends Piece{
 			super.setArvo(-30);
 		}
 	}
-
+	@Override
+	  public String getName(){
+	    String s = "n";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
 	private int[][] eval = {
 			{ -5, -4, -3, -3, -3, -3, -5, -5},
 			{ -4, -2,  0,  0,  0,  0, -2, -4},
