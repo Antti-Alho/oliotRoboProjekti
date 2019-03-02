@@ -10,10 +10,6 @@ public class Piece implements IPiece{
 	public static Boolean BLACK = true;
 	public static Boolean WHITE = false;
 	private Boolean colour;
-	public Boolean getColour() {
-		return colour;
-	}
-
 	private Position pos;
 	private int value;
 	
@@ -47,6 +43,16 @@ public class Piece implements IPiece{
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
 		// generic piece return nothing 
+		return null;
+	}
+  
+	public Boolean getColour() {
+		return colour;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -8,7 +8,6 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class King extends Piece{
-
 	public King(Position pos, Boolean colour) {
 		super(pos, colour);
 		if (colour) {
@@ -37,6 +36,17 @@ public class King extends Piece{
 		
 		return null;
 	}
+
+	@Override
+	  public String getName(){
+	    String s = "k";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
+	
+
 	private int[][] endEval = {
 			{ -5, -4, -3, -2, -2, -3, -4, -5},
 			{ -3, -2, -1,  0,  0, -1, -2, -3},

@@ -7,7 +7,7 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Pawn extends Piece{
-	
+
 	public Pawn(Position pos, Boolean colour) {
 		super(pos, colour);
 		if (colour) {
@@ -16,6 +16,16 @@ public class Pawn extends Piece{
 			super.setValue(-10);
 		}
 	}
+  
+	//Pelinappulan nimi ja väri
+	@Override
+	  public String getName(){
+	    String s = "p";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
 	
 	/**
 	 * returns an ArrayList of moves the piece can currently take:

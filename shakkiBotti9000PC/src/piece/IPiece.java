@@ -12,4 +12,6 @@ public interface IPiece {
 	public abstract int getValue();
 	public abstract void setValue(int arvo);
 	public abstract ArrayList<Move> getMoves(Board board);
+	public abstract String getName();
+
 }

@@ -7,6 +7,7 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Bishop extends Piece{
+
 	/**
 	 * Creates a new Bishop piece.
 	 * @param pos
@@ -16,6 +17,17 @@ public class Bishop extends Piece{
 		super(pos, colour);
 		super.setValue(30);
 	}
+  
+	//Pelinappulan nimi ja väri
+	@Override
+	  public String getName(){
+	    String s = "b";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
+	
 	
 	/**
 	 * returns an ArrayList of moves the piece can currently take:
