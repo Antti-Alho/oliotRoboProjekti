@@ -36,24 +36,27 @@ public class Piece implements IPiece{
 
 	@Override
 	public void setValue(int value) {
-		this.value = value;
-		
+		this.value = value;	
 	}
-
+	
 	@Override
-	public ArrayList<Move> getMoves(Board board) {
-		// generic piece return nothing 
-		return null;
-	}
-  
 	public Boolean getColour() {
 		return colour;
 	}
 
 	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Move> getMoves(Board board) {
+		// generic piece cannot return moves 
+		return null; 
+	}
+	
+	@Override
+	public String getName(){
+	    String s = "b";
+	    if (getColour()) {
+	    	s.toUpperCase();
+	    }
+	    return s;
 	}
 
 }

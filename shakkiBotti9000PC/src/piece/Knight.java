@@ -17,6 +17,15 @@ public class Knight extends Piece{
 	}
 	
 	/**
+	 * return the current value of the piece to the minMax algorithm,
+	 * this including the position evaluation that is read from the evaluation table.
+	 */
+	@Override
+	public int getValue() {
+		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+	}
+	
+	/**
 	 * returns an ArrayList of moves the piece can currently take:
 	 */
 	@Override
