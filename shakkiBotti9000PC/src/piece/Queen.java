@@ -44,7 +44,10 @@ public class Queen extends Piece{
 		
 		return null;
 	}
-	//Pelinappulan nimi ja väri
+	
+	/**
+	 * Returns the string that represents this piece in the command line UI
+	 */
 	@Override
 	  public String getName(){
 	    String s = "q";

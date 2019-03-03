@@ -75,7 +75,8 @@ public class Board {
 		for (Piece piece : pieces) {
 			if(move.getP() == piece) {
 				piece.setPos(move.getNewPos());
-				piece.getPos().setPiece(piece);
+				positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+				positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
 				moves.add(move);
 			}
 		}
@@ -121,6 +122,13 @@ public class Board {
 		} else if (positions[newPos.getX()][newPos.getY()].getPiece().getColour() != piece.getColour()) {
 			return true;
 		} else return false;
+	}
+	/**
+	 * removes the piece in the given position
+	 * @param pos position where piece should be removed
+	 */
+	public void removePiece(Position pos) {
+		positions[pos.getX()][pos.getY()].setPiece(null);
 	}
 	/**
 	 * getPieces

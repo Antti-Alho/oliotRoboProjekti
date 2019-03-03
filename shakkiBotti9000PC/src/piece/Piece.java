@@ -50,6 +50,9 @@ public class Piece implements IPiece{
 		return null; 
 	}
 	
+	/**
+	 * Returns the string that represents this piece in the command line UI
+	 */
 	@Override
 	public String getName(){
 	    String s = "b";

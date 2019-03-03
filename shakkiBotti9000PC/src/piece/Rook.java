@@ -65,7 +65,7 @@ public class Rook extends Piece{
 	}
   
 	/**
-	 * return the name if the piece in string format that can be used on the command line UI
+	 * Returns the string that represents this piece in the command line UI
 	 */
 	@Override
 	  public String getName(){
