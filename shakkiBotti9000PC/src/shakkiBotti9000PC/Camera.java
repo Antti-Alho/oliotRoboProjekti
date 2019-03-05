@@ -1,8 +1,7 @@
-package tests;
+package shakkiBotti9000PC;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,12 +9,10 @@ import javax.imageio.ImageIO;
 
 import com.github.sarxos.webcam.Webcam;
 
-import piece.*;
-import shakkiBotti9000PC.*;
-
-public class MovesTest {
+public class Camera {
 	
-	public static void main(String[] args) {
+		
+	public void takePicture() {
 		Webcam webcam = null;
 		Pattern pat = Pattern.compile("Logitech QuickCam 3000 .");
 		Matcher m;
@@ -33,21 +30,10 @@ public class MovesTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		Board board = new Board();
-		Position[][] positions = board.getPositions();
-		
-		System.out.println("  ");
-		System.out.println("a b c d e f g h \n");
-		for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				System.out.print(positions[i][j].getPieceString() + " ");
-			}
-			System.out.println("  "+(i+1));
-		}
-		
+	}
+	
+	public void analyzePicture() {
 		
 	}
+	
 }
-							
