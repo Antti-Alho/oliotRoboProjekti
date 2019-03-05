@@ -46,8 +46,7 @@ public class Piece implements IPiece{
 
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
-		// generic piece cannot return moves 
-		return null; 
+		return null;
 	}
 	
 	/**
