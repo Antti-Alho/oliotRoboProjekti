@@ -36,24 +36,18 @@ public class MovesTest {
 		
 		
 		Board board = new Board();
-		ArrayList<Piece> pieces = board.getPieces();
+		Position[][] positions = board.getPositions();
+		
+		System.out.println("  ");
 		System.out.println("a b c d e f g h \n");
-			
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Piece p = null;
-				for (Piece piece : pieces) {
-					if (piece.getPos().getX() == i && piece.getPos().getY() == j) {
-						p = piece;
-					} 
-				}
-				if (p == null) {
-			System.out.print("X ");}
-				else System.out.print(p.getName() + " ");
+		for (int i = 0; i < positions.length; i++) {
+			for (int j = 0; j < positions.length; j++) {
+				System.out.print(positions[i][j].getPieceString() + " ");
 			}
-			System.out.println(" " + (i+1));
-			
+			System.out.println("  "+(i+1));
 		}
+		
+		
 	}
 }
 							

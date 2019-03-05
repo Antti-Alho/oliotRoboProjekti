@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import piece.Piece;
 
 public class ChessAI {
-	
+	/*
+	 * The root of the minMax algorithm that returns the "best" move the AI can take
+	 */
 	public Move calculateBestMove(int depth, Board board, Boolean isMaximizingPlayer) {
 		ArrayList<Move> moves = board.getLegalMoves();
 		int bestMoveVal = -9999;
@@ -22,7 +24,10 @@ public class ChessAI {
 		return bestMove;
 	}
 	
-	public int minMax(int depth, Board board, int alpha, int beta, Boolean isMaximizingPlayer) {
+	/*
+	 * recursive part of the minMax
+	 */
+	private int minMax(int depth, Board board, int alpha, int beta, Boolean isMaximizingPlayer) {
 		ArrayList<Move> bestMoves = board.getLegalMoves();
 		if (depth == 0) {
 			return -eval(board.getPieces());
@@ -54,6 +59,9 @@ public class ChessAI {
 			return eval(board.getPieces());
 		}
 	}
+	/*
+	 * final evaluation of the board value in the minMax algorithm.
+	 */
 	private int eval(ArrayList<Piece> pieces) {
 		int totalEvaluation = 0;
 
