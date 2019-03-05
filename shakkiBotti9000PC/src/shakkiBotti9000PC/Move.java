@@ -30,4 +30,20 @@ public class Move {
 		return oldPos;
 	}
 	
+	public int hashCode() {
+		int hashcode = 0;
+		hashcode = hashcode * 33 ^ newPos.getX();
+		hashcode = hashcode * 33 ^ newPos.getY();
+		hashcode = hashcode * 33 ^ oldPos.getX();
+		hashcode = hashcode * 33 ^ oldPos.getY();
+		hashcode = hashcode * 33 ^ p.getValue();
+		hashcode = hashcode * 33 ^ p.hashCode();
+        return hashcode;
+    }
+	
+	@Override
+	public String toString() {
+		return "("+oldPos.getX()+","+oldPos.getY()+") to ("+newPos.getX()+ ","+ newPos.getY()+")";
+	}
+	
 }

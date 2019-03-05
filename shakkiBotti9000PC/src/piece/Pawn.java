@@ -7,45 +7,9 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Pawn extends Piece{
-
-	public Pawn(Position pos, Boolean colour) {
-		super(pos, colour);
-		if (colour) {
-			super.setValue(10);
-		} else {
-			super.setValue(-10);
-		}
-	}
-  
-	//Pelinappulan nimi ja väri
-	@Override
-	  public String getName(){
-	    String s = "p";
-	    if (super.getColour()) {
-	      s.toUpperCase();
-	    }
-	    return s;
-	  }
 	
-	/**
-	 * returns an ArrayList of moves the piece can currently take:
-	 */
-	@Override
-	public ArrayList<Move> getMoves(Board board) {
-		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
-		int x = this.getPos().getX();
-		int y = this.getPos().getY();
-		while (x <= 8 && y <= 8 ) {
-			x++;
-			y++;
-			newLegalMoves.add(new Move(this,new Position(x, y)));
-			if (board.containsPiece(new Position(x, y))) {
-				break;
-			}
-		}
-		
-		return null;
-	}
+	private Position firstPos;
+	
 	/*
 	 * evaluation array witch tells how much the piece if worth in each position.
 	 */
@@ -59,5 +23,78 @@ public class Pawn extends Piece{
 			{  1,  1,  1, -2, -2,  1,  1,  1},
 			{  0,  0,  0,  0,  0,  0,  0,  0}
 		};
+	
+	public Pawn(Position pos, Boolean colour) {
+		super(pos, colour);
+		firstPos = pos;
+		if (colour) {
+			super.setValue(10);
+		} else {
+			super.setValue(-10);
+		}
+	}
+  
+	/**
+	 * Returns the string that represents this piece in the command line UI
+	 */
+	@Override
+	  public String getName(){
+	    String s = "p";
+	    if (super.getColour()) {
+	      s.toUpperCase();
+	    }
+	    return s;
+	  }
+	
+	/**
+	 * return the current value of the piece to the minMax algorithm,
+	 * this including the position evaluation that is read from the evaluation table.
+	 */
+	@Override
+	public int getValue() {
+		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+	}
+	
+	/**
+	 * returns an ArrayList of moves the piece can currently take.
+	 */
+	@Override
+	public ArrayList<Move> getMoves(Board board) {
+		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
+		int x = this.getPos().getX();
+		int y = this.getPos().getY();
+		
+		if (super.getColour()) {
+			if (board.getPositions()[x][y--].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x][y-1]));
+			}
+			if (board.canEat(this, board.getPositions()[x+1][y+1])){
+				newLegalMoves.add(new Move(this, board.getPositions()[x+1][y-1]));
+			} 
+			if (board.canEat(this, board.getPositions()[x-1][y+1])) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x-1][y-1]));
+			}
+			if (board.getPositions()[x][y-2].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x][y-2]));
+			}
+		} else {
+			if (board.getPositions()[x][y++].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x][y+1]));
+			}
+			if (board.canEat(this, board.getPositions()[x+1][y+1])){
+				newLegalMoves.add(new Move(this, board.getPositions()[x+1][y+1]));
+			} 
+			if (board.canEat(this, board.getPositions()[x-1][y+1])) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x-1][y+1]));
+			}
+			if (board.getPositions()[x][y+2].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[x][y+2]));
+			}
+		}
+		
+		
+		return newLegalMoves;
+	}
+
 
 }

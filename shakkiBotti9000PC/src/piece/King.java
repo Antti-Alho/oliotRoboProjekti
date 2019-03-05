@@ -18,6 +18,15 @@ public class King extends Piece{
 	}
 
 	/**
+	 * return the current value of the piece to the minMax algorithm,
+	 * this including the position evaluation that is read from the evaluation table.
+	 */
+	@Override
+	public int getValue() {
+		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+	}
+	
+	/**
 	 * returns an ArrayList of moves the piece can currently take:
 	 */
 	@Override
@@ -37,6 +46,9 @@ public class King extends Piece{
 		return null;
 	}
 
+	/**
+	 * Returns the string that represents this piece in the command line UI
+	 */
 	@Override
 	  public String getName(){
 	    String s = "k";
@@ -48,25 +60,25 @@ public class King extends Piece{
 	
 
 	private int[][] endEval = {
-			{ -5, -4, -3, -2, -2, -3, -4, -5},
-			{ -3, -2, -1,  0,  0, -1, -2, -3},
-			{ -3, -1,  2,  3,  3,  2, -1, -3},
-			{ -3, -1,  3,  4,  4,  3, -1, -3},
-			{ -3, -1,  3,  4,  4,  3, -1, -3},
-			{ -3, -1,  2,  3,  3,  2, -1, -3},
-			{ -3, -3,  0,  0,  0,  0, -3, -3},
-			{ -5, -3, -3, -3, -3, -3, -1, -5}
-		};
+		{ -5, -4, -3, -2, -2, -3, -4, -5},
+		{ -3, -2, -1,  0,  0, -1, -2, -3},
+		{ -3, -1,  2,  3,  3,  2, -1, -3},
+		{ -3, -1,  3,  4,  4,  3, -1, -3},
+		{ -3, -1,  3,  4,  4,  3, -1, -3},
+		{ -3, -1,  2,  3,  3,  2, -1, -3},
+		{ -3, -3,  0,  0,  0,  0, -3, -3},
+		{ -5, -3, -3, -3, -3, -3, -1, -5}
+	};
 	
 	private int[][] eval = {
-			{ -5, -4, -3, -2, -2, -3, -4, -5},
-			{ -3, -2, -1,  0,  0, -1, -2, -3},
-			{ -3, -1,  2,  3,  3,  2, -1, -3},
-			{ -3, -1,  3,  4,  4,  3, -1, -3},
-			{ -3, -1,  3,  4,  4,  3, -1, -3},
-			{ -3, -1,  2,  3,  3,  2, -1, -3},
-			{ -3, -3,  0,  0,  0,  0, -3, -3},
-			{ -5, -3, -3, -3, -3, -3, -3, -5}
-		};
+		{ -5, -4, -3, -2, -2, -3, -4, -5},
+		{ -3, -2, -1,  0,  0, -1, -2, -3},
+		{ -3, -1,  2,  3,  3,  2, -1, -3},
+		{ -3, -1,  3,  4,  4,  3, -1, -3},
+		{ -3, -1,  3,  4,  4,  3, -1, -3},
+		{ -3, -1,  2,  3,  3,  2, -1, -3},
+		{ -3, -3,  0,  0,  0,  0, -3, -3},
+		{ -5, -3, -3, -3, -3, -3, -3, -5}
+	};
 
 }

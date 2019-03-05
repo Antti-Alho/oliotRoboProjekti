@@ -18,7 +18,9 @@ public class Bishop extends Piece{
 		super.setValue(30);
 	}
   
-	//Pelinappulan nimi ja väri
+	/**
+	 * Returns the string that represents this piece in the command line UI
+	 */
 	@Override
 	  public String getName(){
 	    String s = "b";
@@ -28,6 +30,14 @@ public class Bishop extends Piece{
 	    return s;
 	  }
 	
+	/**
+	 * return the current value of the piece to the minMax algorithm,
+	 * this including the position evaluation that is read from the evaluation table.
+	 */
+	@Override
+	public int getValue() {
+		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+	}
 	
 	/**
 	 * returns an ArrayList of moves the piece can currently take:
