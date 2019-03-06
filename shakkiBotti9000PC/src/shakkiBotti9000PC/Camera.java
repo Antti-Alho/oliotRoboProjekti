@@ -8,13 +8,9 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
-
 import com.github.sarxos.webcam.Webcam;
 
 public class Camera {
-	
 		
 	public void takePicture() {
 		Webcam webcam = null;
@@ -25,7 +21,6 @@ public class Camera {
 			m = pat.matcher(webcams.getName());
 			if (m.matches()) {
 				webcam = webcams;
-			//	webcam.open();
 			}
 		}
 		try {
@@ -39,7 +34,6 @@ public class Camera {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
