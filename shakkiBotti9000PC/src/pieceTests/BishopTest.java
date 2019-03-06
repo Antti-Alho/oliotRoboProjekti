@@ -3,6 +3,7 @@ package pieceTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import piece.Bishop;
 import piece.Pawn;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
+import shakkiBotti9000PC.MoveComparator;
 
 class BishopTest {
 
@@ -43,7 +45,11 @@ class BishopTest {
         moves.add(new Move(piece, board.getPositions()[3][2]));
         moves.add(new Move(piece, board.getPositions()[4][1]));
         moves.add(new Move(piece, board.getPositions()[5][0]));
-        assertEquals(moves, piece.getMoves(board), "List Bishop start moves without Pawn");
+        Collections.sort(moves, new MoveComparator());
+        
+        ArrayList<Move> movesReal = piece.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        assertEquals(moves, movesReal, "List Bishop start moves without Pawn");
     }
     public void testGetMovesBishopAllDirections() {
     	board.move(new Move(piece, board.getPositions()[3][4]));
@@ -59,7 +65,12 @@ class BishopTest {
         moves.add(new Move(piece, board.getPositions()[5][4]));
         moves.add(new Move(piece, board.getPositions()[6][5]));
         moves.add(new Move(piece, board.getPositions()[7][6]));
-        assertEquals(moves, piece.getMoves(board), "List Bishop moves All directions");
+   
+        Collections.sort(moves, new MoveComparator());
+        
+        ArrayList<Move> movesReal = piece.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        assertEquals(moves, movesReal, "List Bishop moves All directions");
     }
 
 }
