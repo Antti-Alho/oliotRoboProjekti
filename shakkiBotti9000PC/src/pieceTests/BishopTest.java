@@ -26,7 +26,6 @@ class BishopTest {
 
     @Test
     public void testGetMovesBishopCantMove() {
-    	board.move(new Move(piece, board.getPositions()[4][4]));
         ArrayList<Move> moves = new ArrayList<Move>();
         assertEquals(moves, piece.getMoves(board), "List of Bishop start moves");
     }
