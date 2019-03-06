@@ -3,6 +3,7 @@ package pieceTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import piece.Rook;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
+import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 
 class RookTest {
@@ -36,13 +38,20 @@ class RookTest {
 			}
 			System.out.println("  "+(i+1));
 		}
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(rook, board.getPositions()[1][0]));
-        moves.add(new Move(rook, board.getPositions()[2][0]));
-        moves.add(new Move(rook, board.getPositions()[3][0]));
-        moves.add(new Move(rook, board.getPositions()[4][0]));
-        moves.add(new Move(rook, board.getPositions()[5][0]));
-        assertEquals(moves, rook.getMoves(board), "list of possible rook moves when rook can mov on X axis");
+        
+    	ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(rook, board.getPositions()[1][0]));
+        movesExpected.add(new Move(rook, board.getPositions()[2][0]));
+        movesExpected.add(new Move(rook, board.getPositions()[3][0]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][0]));
+        movesExpected.add(new Move(rook, board.getPositions()[5][0]));
+        movesExpected.add(new Move(rook, board.getPositions()[6][0]));
+        Collections.sort(movesExpected, new MoveComparator());
+        
+        ArrayList<Move> movesReal = rook.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        
+        assertEquals(movesExpected, movesReal, "list of possible rook moves when rook can mov on X axis");
     }
     @Disabled
     @Test
