@@ -1,10 +1,8 @@
 package shakkiBotti9000PC;
 
-import java.util.Comparator;
-
 import piece.Piece;
 
-public class Move implements Comparator<Move> {
+public class Move {
 	
 	private Piece p;
 	private Position newPos;
@@ -54,12 +52,6 @@ public class Move implements Comparator<Move> {
 	@Override
 	public String toString() {
 		return "("+oldPos.getX()+","+oldPos.getY()+") to ("+newPos.getX()+ ","+ newPos.getY()+")";
-	}
-
-	public int compare(Move m1, Move m2) {
-		int x = m1.getNewPos().getX()*10+m1.getNewPos().getY();
-		int y = m2.getNewPos().getX()*10+m2.getNewPos().getY();
-		return x-y;
 	}
 	
 }
