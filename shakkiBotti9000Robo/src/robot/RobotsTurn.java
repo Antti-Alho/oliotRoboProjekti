@@ -28,7 +28,6 @@ public class RobotsTurn implements Behavior{
 		data.clearCrdnts();
 		suppressed = true;
 		while (!suppressed)Thread.yield();
-		motors.startMotors();
-		data.clearCrdnts();
+		motors.stopMotors();
 	}
 }
