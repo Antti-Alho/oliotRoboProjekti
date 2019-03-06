@@ -1,12 +1,12 @@
 package view;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public class BoardGUI extends Application{
+//import javafx.application.Application;
+//import javafx.stage.Stage;
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+public class BoardGUI{
+
+	public void start() {
 		// TODO Auto-generated method stub
 		
 	}
