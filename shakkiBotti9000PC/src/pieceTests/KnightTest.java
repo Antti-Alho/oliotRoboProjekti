@@ -2,21 +2,27 @@ package pieceTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import piece.Knight;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
+import shakkiBotti9000PC.MoveComparator;
+import shakkiBotti9000PC.Position;
+
 
 class KnightTest {
 
 	private Board board;
 	private Knight piece;
 	
-	@Before
+	@BeforeEach
 	public void Before() {
 		 this.board = new Board();
 	     this.piece = (Knight) board.getPositions()[0][6].getPiece();
@@ -24,10 +30,16 @@ class KnightTest {
 
     @Test
     public void testGetMovesKnightFirstMove() {
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(piece, board.getPositions()[2][7]));
-        moves.add(new Move(piece, board.getPositions()[2][5]));
-        assertEquals(moves, piece.getMoves(board), "List Knight start moves");
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(piece, board.getPositions()[2][7]));
+        movesExpected.add(new Move(piece, board.getPositions()[2][5]));
+        
+        Collections.sort(movesExpected, new MoveComparator());
+        
+        ArrayList<Move> movesReal = piece.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        
+        assertEquals(movesExpected, piece.getMoves(board), "List Knight start moves");
     }
 
     @Test

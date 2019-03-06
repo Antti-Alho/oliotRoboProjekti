@@ -53,10 +53,34 @@ class RookTest {
         
         assertEquals(movesExpected, movesReal, "list of possible rook moves when rook can mov on X axis");
     }
-    @Disabled
+    
     @Test
     public void testGetMovesY() {
+    	positions = board.getPositions(); 
+    	board.move(new Move(rook, board.getPositions()[4][3]));
+    	
+    	for (int i = 0; i < positions.length; i++) {
+			for (int j = 0; j < positions.length; j++) {
+				System.out.print(positions[i][j].getPieceString() + " ");
+			}
+			System.out.println("  "+(i+1));
+		}
         ArrayList<Move> moves = new ArrayList<Move>();
+        moves.add(new Move(rook, board.getPositions()[5][3]));
+        moves.add(new Move(rook, board.getPositions()[6][3]));
+        moves.add(new Move(rook, board.getPositions()[3][3]));
+        moves.add(new Move(rook, board.getPositions()[2][3]));
+        moves.add(new Move(rook, board.getPositions()[4][4]));
+        moves.add(new Move(rook, board.getPositions()[4][5]));
+        moves.add(new Move(rook, board.getPositions()[4][6]));
+        moves.add(new Move(rook, board.getPositions()[4][7]));
+        moves.add(new Move(rook, board.getPositions()[4][2]));
+        moves.add(new Move(rook, board.getPositions()[4][1]));
+        moves.add(new Move(rook, board.getPositions()[4][0]));
+        
+        ArrayList<Move> movesReal = rook.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        
         assertEquals(moves, rook.getMoves(board), "List of possible rook moves when rook can move on Y axis");
     }
     @Disabled
@@ -71,13 +95,5 @@ class RookTest {
         ArrayList<Move> moves = new ArrayList<Move>();
         assertEquals(moves, rook.getMoves(board), "List of rook moves when Queens side castle is possible");
     }
-    
-    @Disabled
-    @Test
-    public void testGetMovesSomethingOnWay() {
-        ArrayList<Move> moves = new ArrayList<Move>();
-        assertEquals(moves, rook.getMoves(board), "List of rook moves when Queens side castle is possible");
-    }
-   
   
 }
