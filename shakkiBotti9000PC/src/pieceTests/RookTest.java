@@ -1,4 +1,4 @@
-package piece;
+package pieceTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import piece.Rook;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
@@ -58,6 +59,13 @@ class RookTest {
     @Disabled
     @Test
     public void testGetMovesCastleQueen() {
+        ArrayList<Move> moves = new ArrayList<Move>();
+        assertEquals(moves, rook.getMoves(board), "List of rook moves when Queens side castle is possible");
+    }
+    
+    @Disabled
+    @Test
+    public void testGetMovesSomethingOnWay() {
         ArrayList<Move> moves = new ArrayList<Move>();
         assertEquals(moves, rook.getMoves(board), "List of rook moves when Queens side castle is possible");
     }

@@ -14,7 +14,11 @@ import piece.*;
 import shakkiBotti9000PC.*;
 
 public class MovesTest {
-	
+
+	/**
+	 * launches the command line UI mainly used for logic testing.
+	 * 
+	 */
 	public static void main(String[] args) {
 		Webcam webcam = null;
 		Pattern pat = Pattern.compile("Logitech QuickCam 3000 .");

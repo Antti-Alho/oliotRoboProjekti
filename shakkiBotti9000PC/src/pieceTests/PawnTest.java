@@ -1,4 +1,4 @@
-package piece;
+package pieceTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import piece.Pawn;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
