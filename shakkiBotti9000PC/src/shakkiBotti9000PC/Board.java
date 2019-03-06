@@ -123,6 +123,17 @@ public class Board {
 		} 
 		return false;
 	}
+	/**
+	 * Return true if target position contains enemy piece
+	 * @param pos
+	 * @return
+	 */
+	public Boolean containsEnemy(Piece piece, Position pos) {
+		if (piece.getPos() == pos && piece.getColour() != pos.getPiece().getColour()) {
+			return true;
+		} 
+		return false;
+	}
 	
 	/**
 	 * returns true if the target position is empty or the piece can eat the piece that is on the way

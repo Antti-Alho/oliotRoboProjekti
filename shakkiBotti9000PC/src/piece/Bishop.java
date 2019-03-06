@@ -47,16 +47,36 @@ public class Bishop extends Piece{
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		while (x <= 8 && y <= 8 ) {
-			x++;
-			y++;
-			newLegalMoves.add(new Move(this,new Position(x, y)));
-			if (board.containsPiece(new Position(x, y))) {
-				break;
-			}
+		
+		int i = x;
+		int j = y;
+		while (i <= 7 && j <= 7) {
+			i++;
+			j++;
 		}
 		
-		return null;
+		i = x;
+		j = y;
+		while (i >= 0 && j >= 0) {
+			i++;
+			j++;
+		}
+		
+		i = x;
+		j = y;
+		while (i >= 0 && j <= 7) {
+			i++;
+			j++;
+		}
+		
+		i = x;
+		j = y;
+		while (i <= 7 && j >= 0) {
+			i++;
+			j++;
+		}
+		
+		return newLegalMoves;
 	}
 
 	/**

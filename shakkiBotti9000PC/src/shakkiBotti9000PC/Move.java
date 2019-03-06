@@ -37,6 +37,11 @@ public class Move {
 	public Piece getTarget() {
 		return target;
 	}
+	
+	public void setTarget(Piece piece) {
+		this.target = piece;
+	}
+	
 
 	public int hashCode() {
 		int hashcode = 0;
