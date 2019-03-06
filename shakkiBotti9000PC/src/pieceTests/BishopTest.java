@@ -35,22 +35,22 @@ class BishopTest {
     	board.getPositions()[1][4].setPiece(null);
     	board.getPositions()[1][5].setPiece(null);
         ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(piece, board.getPositions()[6][1]));
-        moves.add(new Move(piece, board.getPositions()[7][2]));
+        moves.add(new Move(piece, board.getPositions()[1][6]));
+        moves.add(new Move(piece, board.getPositions()[2][7]));
         
-        moves.add(new Move(piece, board.getPositions()[4][1]));
-        moves.add(new Move(piece, board.getPositions()[3][2]));
-        moves.add(new Move(piece, board.getPositions()[2][3]));
         moves.add(new Move(piece, board.getPositions()[1][4]));
-        moves.add(new Move(piece, board.getPositions()[0][5]));
+        moves.add(new Move(piece, board.getPositions()[2][3]));
+        moves.add(new Move(piece, board.getPositions()[3][2]));
+        moves.add(new Move(piece, board.getPositions()[4][1]));
+        moves.add(new Move(piece, board.getPositions()[5][0]));
         assertEquals(moves, piece.getMoves(board), "List Bishop start moves without Pawn");
     }
     public void testGetMovesBishopAllDirections() {
-    	board.move(new Move(piece, board.getPositions()[4][3]));
+    	board.move(new Move(piece, board.getPositions()[3][4]));
         ArrayList<Move> moves = new ArrayList<Move>();
         
-        moves.add(new Move(piece, board.getPositions()[3][2]));
-        moves.add(new Move(piece, board.getPositions()[5][2]));
+        moves.add(new Move(piece, board.getPositions()[2][3]));
+        moves.add(new Move(piece, board.getPositions()[2][5]));
         
         moves.add(new Move(piece, board.getPositions()[3][4]));
         moves.add(new Move(piece, board.getPositions()[2][5]));
