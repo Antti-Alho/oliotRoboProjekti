@@ -1,5 +1,7 @@
 package robot;
 
+import java.util.ArrayList;
+
 import lejos.hardware.DeviceException;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
@@ -11,6 +13,7 @@ public class Motors {
 	private EV3LargeRegulatedMotor width;
 	private EV3MediumRegulatedMotor height;
 	private EV3MediumRegulatedMotor pliers;
+	private Data data;
 	
 	//katsotaan pelaajan näkökulmasta
 	//pitkittäin	lenght	default rotate suunta: + pelaajaa päin,	- pois päin
@@ -24,7 +27,8 @@ public class Motors {
 	int pliersRot = -325;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
 	int toBoard = 372;		// 372	vakio etäisyys odotuspaikan ja ensimmäisen ruudun välillä
 	
-	public Motors() {
+	public Motors(Data data) {
+		this.data = data;
 		while (length == null || width == null || height == null || pliers == null) {
 			try {
 				length = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -53,38 +57,71 @@ public class Motors {
 		}
 	}
 	
-	public void StartMove() {
+	public void startMotors() {
 		length.setSpeed(320);
 		width.setSpeed(450);
 		height.setSpeed(120);
 		pliers.setSpeed(300);
-		length.rotate(toBoard);
 	}
 	
-	
-	public void MovePiece(int fromX, int fromY, int toX, int toY) {
-		length.rotate(fromX * lenghtRot);
-		width.rotate(fromY * widthRot);
+	public void movePieces() {
+		ArrayList<Integer> crdnts = new ArrayList<>();
+		crdnts = data.getCrdnts();
+		int firstFromX 	= crdnts.get(0); 
+		int firstFromY 	= crdnts.get(1);
+		int firstToX 	= crdnts.get(2);
+		int firstToY 	= crdnts.get(3);
+		int secondFromX = crdnts.get(4);
+		int secondFromY = crdnts.get(5);
+		length.rotate(toBoard);
+		length.rotate(firstFromX * lenghtRot);
+		width.rotate(firstFromY * widthRot);
 		height.rotate(-heightRot);
 		pliers.rotate(-pliersRot);
 		height.rotate(heightRot);
-		if (toX < 0) {				// jos syödään nappula
-			width.rotate(-fromY * widthRot);
-			length.rotate(-fromX * lenghtRot);
-			length.rotate(-toBoard);
-			pliers.rotate(pliersRot);	
-		} else {
-			length.rotate( (toX - fromX) * lenghtRot);
-			width.rotate( (toY - fromY) * widthRot);
+		if (firstToX >= 0) {				// siirretään nappula
+			length.rotate( (firstToX - firstFromX) * lenghtRot);
+			width.rotate( (firstToY - firstFromY) * widthRot);
 			height.rotate(-heightRot);
 			pliers.rotate(pliersRot);
 			height.rotate(heightRot);
-			width.rotate(-toY * widthRot);
-			length.rotate(-toX * lenghtRot);
+			width.rotate(-firstToY * widthRot);
+			length.rotate(-firstToX * lenghtRot);
+		} else {						// syödään nappula
+			width.rotate(-firstFromY * widthRot);
+			length.rotate(-firstFromX * lenghtRot);
 			length.rotate(-toBoard);
+			pliers.rotate(pliersRot);
+			length.rotate(toBoard);		//takasin laudalla
+			//alotetaan toisen nappulan siirto
+			length.rotate(secondFromX * lenghtRot);
+			width.rotate(secondFromY * widthRot);
+			height.rotate(-heightRot);
+			pliers.rotate(-pliersRot);
+			height.rotate(heightRot);
+			length.rotate( (firstFromX - secondFromX) * lenghtRot);
+			width.rotate( (firstFromY - secondFromY) * widthRot);
+			height.rotate(-heightRot);
+			pliers.rotate(pliersRot);
+			height.rotate(heightRot);
+			width.rotate(-firstFromY * widthRot);
+			length.rotate(-firstFromX * lenghtRot);
 		}
+		length.rotate(-toBoard);
 	}
 	
+	public void stopMotors() {
+		length.stop(true);
+		width.stop(true);
+		height.stop(true);
+		pliers.stop(true);
+	}
 	
+	public void closeMotors() {
+		length.close();
+		width.close();
+		height.close();
+		pliers.close();
+	}
 	
 }
