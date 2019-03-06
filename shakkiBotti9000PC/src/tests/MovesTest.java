@@ -7,7 +7,11 @@ import piece.*;
 import shakkiBotti9000PC.*;
 
 public class MovesTest {
-	
+
+	/**
+	 * launches the command line UI mainly used for logic testing.
+	 * 
+	 */
 	public static void main(String[] args) {
 		Camera cam = new Camera();
 		

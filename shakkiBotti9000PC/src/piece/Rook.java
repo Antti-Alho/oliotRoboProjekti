@@ -36,28 +36,35 @@ public class Rook extends Piece{
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		for (int i = x; i <= 8; i++) {
-			Position newPos = new Position(i, y);
+		for (int i = x; i <= 7; i++) {
+			Position newPos = board.getPositions()[i][y];
 			if (board.canEatOrMove(this,newPos)) {
 				newLegalMoves.add(new Move(this, newPos));
+				if (board.canEat(this, newPos)) break;
 			}
 		}
+
 		for (int i = x; i >= 0; i--) {
 			Position newPos = new Position(i, y);
 			if (board.canEatOrMove(this,newPos)) {
 				newLegalMoves.add(new Move(this, newPos));
+				if (board.canEat(this, newPos)) break;
 			}
 		}
-		for (int i = y; i <= 8; i++) {
+
+		for (int i = y; i <= 7; i++) {
 			Position newPos = new Position(x, i);
 			if (board.canEatOrMove(this,newPos)) {
 				newLegalMoves.add(new Move(this, newPos));
+				if (board.canEat(this, newPos)) break;
 			}
 		}
+
 		for (int i = y; i >= 0; i--) {
 			Position newPos = new Position(x, i);
 			if (board.canEatOrMove(this,newPos)) {
 				newLegalMoves.add(new Move(this, newPos));
+				if (board.canEat(this, newPos)) break;
 			}
 		}
 		

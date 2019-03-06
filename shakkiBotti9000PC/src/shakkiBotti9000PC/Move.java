@@ -7,11 +7,15 @@ public class Move {
 	private Piece p;
 	private Position newPos;
 	private Position oldPos;
+	private Piece target;
 	
 	public Move(Piece p, Position pos) {
 		this.p = p;
 		oldPos = p.getPos();
 		this.newPos = pos;
+		if (pos.getPiece() != null) {
+			this.target = pos.getPiece();
+		}
 	}
 
 	public Piece getP() {
@@ -30,6 +34,10 @@ public class Move {
 		return oldPos;
 	}
 	
+	public Piece getTarget() {
+		return target;
+	}
+
 	public int hashCode() {
 		int hashcode = 0;
 		hashcode = hashcode * 33 ^ newPos.getX();
