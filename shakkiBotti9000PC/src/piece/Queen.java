@@ -33,13 +33,121 @@ public class Queen extends Piece{
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		while (x <= 8 && y <= 8 ) {
-			x++;
-			y++;
-			newLegalMoves.add(new Move(this,new Position(x, y)));
-			if (board.containsPiece(new Position(x, y))) {
+		
+		int i = x+1;
+		int j = y+1;
+		while (i <= 7 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
 				break;
 			}
+			i++;
+			j++;
+		}
+		
+		i = x-1;
+		j = y-1;
+		while (i >= 0 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
+			j--;
+		}
+		
+		i = x-1;
+		j = y+1;
+		while (i >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
+			j++;
+		}
+		
+		i = x+1;
+		j = y-1;
+		while (i <= 7 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i++;
+			j--;
+		}
+		
+		i = x+1;
+		j = y;
+		while (i <= 7 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i++;
+		}
+		
+		i = x-1;
+		j = y;
+		while (i >= 0 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
+		}
+		
+		i = x;
+		j = y+1;
+		while (i >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			j++;
+		}
+		
+		i = x;
+		j = y-1;
+		while (i <= 7 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			j--;
 		}
 		
 		return newLegalMoves;

@@ -49,7 +49,7 @@ class QueenTest {
         ArrayList<Move> movesReal = queen.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible Queen moves with 2 missing pieces next to it");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible Queen moves with 2 missing pieces next to it");
     }
 
 	@Test
@@ -84,12 +84,12 @@ class QueenTest {
         movesExpected.add(new Move(queen, board.getPositions()[1][2])); 	// Open square, pawn was removed in TestSystemInit
         movesExpected.add(new Move(queen, board.getPositions()[3][5]));
         movesExpected.add(new Move(queen, board.getPositions()[2][5]));
-        
+        Collections.sort(movesExpected, new MoveComparator());
         
         ArrayList<Move> movesReal = queen.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of possible queen moves at open field");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of possible queen moves at open field");
     }
 
 }
