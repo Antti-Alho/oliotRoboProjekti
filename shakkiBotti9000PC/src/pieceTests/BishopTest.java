@@ -20,7 +20,7 @@ class BishopTest {
 	private Board board;
 	private Bishop piece;
 
-	@Before
+	@BeforeEach
 	public void Before() {
 		 this.board = new Board();
 	     this.piece = (Bishop) board.getPositions()[0][5].getPiece();
@@ -29,17 +29,13 @@ class BishopTest {
     @Test
     public void testGetMovesBishopCantMove() {
         ArrayList<Move> moves = new ArrayList<Move>();
-        assertEquals(moves, piece.getMoves(board), "List of Bishop start moves");
+        assertEquals(moves.toString(), piece.getMoves(board).toString(), "List of Bishop start moves");
     }
 
     @Test
     public void testGetMovesBishopOneDirection() {
     	board.getPositions()[1][4].setPiece(null);
-    	board.getPositions()[1][5].setPiece(null);
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(piece, board.getPositions()[1][6]));
-        moves.add(new Move(piece, board.getPositions()[2][7]));
-        
+        ArrayList<Move> moves = new ArrayList<Move>();        
         moves.add(new Move(piece, board.getPositions()[1][4]));
         moves.add(new Move(piece, board.getPositions()[2][3]));
         moves.add(new Move(piece, board.getPositions()[3][2]));
@@ -49,8 +45,10 @@ class BishopTest {
         
         ArrayList<Move> movesReal = piece.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
-        assertEquals(moves, movesReal, "List Bishop start moves without Pawn");
+        assertEquals(moves.toString(), movesReal.toString(), "List Bishop start moves without Pawn");
     }
+    
+    @Test
     public void testGetMovesBishopAllDirections() {
     	board.move(new Move(piece, board.getPositions()[3][4]));
         ArrayList<Move> moves = new ArrayList<Move>();
@@ -58,19 +56,19 @@ class BishopTest {
         moves.add(new Move(piece, board.getPositions()[2][3]));
         moves.add(new Move(piece, board.getPositions()[2][5]));
         
-        moves.add(new Move(piece, board.getPositions()[3][4]));
-        moves.add(new Move(piece, board.getPositions()[2][5]));
-        moves.add(new Move(piece, board.getPositions()[1][6]));
+        moves.add(new Move(piece, board.getPositions()[4][3]));
+        moves.add(new Move(piece, board.getPositions()[5][2]));
+        moves.add(new Move(piece, board.getPositions()[6][1]));
         
-        moves.add(new Move(piece, board.getPositions()[5][4]));
-        moves.add(new Move(piece, board.getPositions()[6][5]));
-        moves.add(new Move(piece, board.getPositions()[7][6]));
+        moves.add(new Move(piece, board.getPositions()[4][5]));
+        moves.add(new Move(piece, board.getPositions()[5][6]));
+        moves.add(new Move(piece, board.getPositions()[6][7]));
    
         Collections.sort(moves, new MoveComparator());
         
         ArrayList<Move> movesReal = piece.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
-        assertEquals(moves, movesReal, "List Bishop moves All directions");
+        assertEquals(moves.toString(), movesReal.toString(), "List Bishop moves All directions");
     }
 
 }

@@ -48,32 +48,67 @@ public class Bishop extends Piece{
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
 		
-		int i = x;
-		int j = y;
+		int i = x+1;
+		int j = y+1;
 		while (i <= 7 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour() && board.getPositions()[i][j].getPiece().getColour() != null){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else if (board.getPositions()[i][j].getPiece().getColour() == this.getColour()) {
+				break;
+			}
 			i++;
 			j++;
 		}
 		
-		i = x;
-		j = y;
+		i = x-1;
+		j = y-1;
 		while (i >= 0 && j >= 0) {
-			i++;
-			j++;
+			System.out.println("--"+i+j);
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
+			j--;
 		}
 		
-		i = x;
-		j = y;
+		i = x-1;
+		j = y+1;
 		while (i >= 0 && j <= 7) {
-			i++;
+			System.out.println("-+"+i+j);
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
 			j++;
 		}
 		
-		i = x;
-		j = y;
+		i = x+1;
+		j = y-1;
 		while (i <= 7 && j >= 0) {
+			System.out.println("+-"+i+j);
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
 			i++;
-			j++;
+			j--;
 		}
 		
 		return newLegalMoves;
