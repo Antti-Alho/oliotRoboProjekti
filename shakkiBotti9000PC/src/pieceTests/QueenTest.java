@@ -63,33 +63,33 @@ class QueenTest {
 			}
 			System.out.println("  "+(i+1));
 		}
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(queen, board.getPositions()[5][5]));
-        moves.add(new Move(queen, board.getPositions()[6][5]));
-        moves.add(new Move(queen, board.getPositions()[5][6]));
-        moves.add(new Move(queen, board.getPositions()[6][7]));
-        moves.add(new Move(queen, board.getPositions()[5][4]));
-        moves.add(new Move(queen, board.getPositions()[6][3]));
-        moves.add(new Move(queen, board.getPositions()[4][6]));
-        moves.add(new Move(queen, board.getPositions()[4][7]));
-        moves.add(new Move(queen, board.getPositions()[4][4]));
-        moves.add(new Move(queen, board.getPositions()[4][3]));
-        moves.add(new Move(queen, board.getPositions()[4][2]));
-        moves.add(new Move(queen, board.getPositions()[4][1]));
-        moves.add(new Move(queen, board.getPositions()[4][0]));
-        moves.add(new Move(queen, board.getPositions()[3][6]));
-        moves.add(new Move(queen, board.getPositions()[2][7]));
-        moves.add(new Move(queen, board.getPositions()[3][4]));
-        moves.add(new Move(queen, board.getPositions()[2][3]));
-        moves.add(new Move(queen, board.getPositions()[1][2])); // Tästä ruudusta poistettu nappula alustuksessa
-        moves.add(new Move(queen, board.getPositions()[3][5]));
-        moves.add(new Move(queen, board.getPositions()[2][5]));
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(queen, board.getPositions()[5][5]));
+        movesExpected.add(new Move(queen, board.getPositions()[6][5])); 	// Queen eats
+        movesExpected.add(new Move(queen, board.getPositions()[5][6]));
+        movesExpected.add(new Move(queen, board.getPositions()[6][7])); 	// Queen eats
+        movesExpected.add(new Move(queen, board.getPositions()[5][4]));
+        movesExpected.add(new Move(queen, board.getPositions()[6][3]));		// Queen eats
+        movesExpected.add(new Move(queen, board.getPositions()[4][6]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][7]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][4]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][3]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][2]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][1]));
+        movesExpected.add(new Move(queen, board.getPositions()[4][0]));
+        movesExpected.add(new Move(queen, board.getPositions()[3][6]));
+        movesExpected.add(new Move(queen, board.getPositions()[2][7]));
+        movesExpected.add(new Move(queen, board.getPositions()[3][4]));
+        movesExpected.add(new Move(queen, board.getPositions()[2][3]));
+        movesExpected.add(new Move(queen, board.getPositions()[1][2])); 	// Open square, pawn was removed in TestSystemInit
+        movesExpected.add(new Move(queen, board.getPositions()[3][5]));
+        movesExpected.add(new Move(queen, board.getPositions()[2][5]));
         
         
         ArrayList<Move> movesReal = queen.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(moves, queen.getMoves(board), "List of possible queen moves at open field");
+        assertEquals(movesExpected, movesReal, "List of possible queen moves at open field");
     }
 
 }

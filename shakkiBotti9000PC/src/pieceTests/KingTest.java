@@ -62,21 +62,21 @@ class KingTest {
 			}
 			System.out.println("  "+(i+1));
 		}
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(king, board.getPositions()[5][3]));
-        moves.add(new Move(king, board.getPositions()[5][4]));
-        moves.add(new Move(king, board.getPositions()[5][2]));
-        moves.add(new Move(king, board.getPositions()[4][4]));
-        moves.add(new Move(king, board.getPositions()[4][2]));
-        moves.add(new Move(king, board.getPositions()[3][3]));
-        moves.add(new Move(king, board.getPositions()[3][4]));
-        moves.add(new Move(king, board.getPositions()[3][2]));
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(king, board.getPositions()[5][3]));
+        movesExpected.add(new Move(king, board.getPositions()[5][4]));
+        movesExpected.add(new Move(king, board.getPositions()[5][2]));
+        movesExpected.add(new Move(king, board.getPositions()[4][4]));
+        movesExpected.add(new Move(king, board.getPositions()[4][2]));
+        movesExpected.add(new Move(king, board.getPositions()[3][3]));
+        movesExpected.add(new Move(king, board.getPositions()[3][4]));
+        movesExpected.add(new Move(king, board.getPositions()[3][2]));
        
         
         ArrayList<Move> movesReal = king.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(moves, king.getMoves(board), "List of possible king moves at open field");
+        assertEquals(movesExpected, movesReal, "List of possible king moves at open field");
     }
 
 	@Test
