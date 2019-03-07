@@ -53,10 +53,10 @@ public class Bishop extends Piece{
 		while (i <= 7 && j <= 7) {
 			if (board.getPositions()[i][j].getPiece() == null) {
 				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour() && board.getPositions()[i][j].getPiece().getColour() != null){
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
 				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 				break;
-			} else if (board.getPositions()[i][j].getPiece().getColour() == this.getColour()) {
+			} else {
 				break;
 			}
 			i++;
@@ -66,7 +66,6 @@ public class Bishop extends Piece{
 		i = x-1;
 		j = y-1;
 		while (i >= 0 && j >= 0) {
-			System.out.println("--"+i+j);
 			if (board.getPositions()[i][j].getPiece() == null) {
 				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
@@ -82,7 +81,6 @@ public class Bishop extends Piece{
 		i = x-1;
 		j = y+1;
 		while (i >= 0 && j <= 7) {
-			System.out.println("-+"+i+j);
 			if (board.getPositions()[i][j].getPiece() == null) {
 				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
@@ -98,7 +96,6 @@ public class Bishop extends Piece{
 		i = x+1;
 		j = y-1;
 		while (i <= 7 && j >= 0) {
-			System.out.println("+-"+i+j);
 			if (board.getPositions()[i][j].getPiece() == null) {
 				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){

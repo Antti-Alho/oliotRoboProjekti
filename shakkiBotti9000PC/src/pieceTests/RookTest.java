@@ -51,7 +51,7 @@ class RookTest {
         ArrayList<Move> movesReal = rook.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible rook moves when rook can mov on X axis");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible rook moves when rook can mov on X axis");
     }
     
     @Test
@@ -83,7 +83,7 @@ class RookTest {
         ArrayList<Move> movesReal = rook.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible rook moves when rook can mov on X axis");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible rook moves when rook can mov on X axis");
     }
     @Disabled
     @Test
