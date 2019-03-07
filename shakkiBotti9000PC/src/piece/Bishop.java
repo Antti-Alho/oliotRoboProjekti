@@ -44,6 +44,7 @@ public class Bishop extends Piece{
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
+		Boolean eat = false;
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
@@ -51,6 +52,16 @@ public class Bishop extends Piece{
 		int i = x;
 		int j = y;
 		while (i <= 7 && j <= 7) {
+			if (eat = true) {
+				break;
+			} else if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != super.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				eat = true;
+			} else {
+				break;
+			}
 			i++;
 			j++;
 		}
