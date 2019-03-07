@@ -56,7 +56,6 @@ class PawnTest {
     @Test
     public void testGetMovesEatWhite() {
     	
-    	
     	positions = board.getPositions(); 
     	for (int i = 0; i < positions.length; i++) {
 			for (int j = 0; j < positions.length; j++) {
