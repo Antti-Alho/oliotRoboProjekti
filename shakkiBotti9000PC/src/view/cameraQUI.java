@@ -13,59 +13,66 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import piece.Piece;
+import shakkiBotti9000PC.Position;
+
 
 public class cameraQUI extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
 
-        Image kuvatiedosto = new Image("file:board.png");
-        ImageView kuva = new ImageView(kuvatiedosto);
+//    	Image nollaus = new Image("file:board.png");
+    	Position[][] newPosition = new Position[8][8];
 
         Pane ruutu = new Pane();
-        ruutu.getChildren().add(kuva);
+        
 
         stage.setScene(new Scene(ruutu));
         stage.show();
+        
+        File file= new File("board.png");
+		BufferedImage image = ImageIO.read(file);
+		boolean find = false;
+		int n = 20;
+		int m = 20;
+		for (int i = 0; i < 8; i++) {
+//					System.out.println("----------- " +i);
+			for (int j = 0; j < 8; j++) {
+				newPosition[j][i] = new Position(i, j);
+				find = false;
+//						System.out.println("j = "+j);
+				for (int j2 =78+i*54+n; j2 <=78+(i+1)*54; j2+=2) {
+					for (int k =10+j*54+m; k <10+(j+1)*54; k+=2) {
+						
+						int clr =  image.getRGB(j2, k);
+						int red = (clr & 0x00ff0000) >> 16;
+						int green = (clr & 0x0000ff00) >> 8;
+						int blue = clr & 0x000000ff;
+						image.setRGB(j2, k,0x000000ff);
+						if (red <= 255 && red >= 110 && green <= 70 && green >= 0 && blue <= 100 && blue >= 0) {
+							if (find == false) {
+								System.out.println("Found in " + j + " " + i);
+								find = true;
+								newPosition[j][i].setPiece(new Piece(newPosition[j][i], Piece.WHITE));
+							}
+							image.setRGB(j2, k, 0x00ff0000);
+						}
+					}
+				}
+			}
+		}
+		ImageIO.write(image,  "PNG", new File("board.png"));
+		Image kuvatiedosto = new Image("file:board.png");
+        ImageView kuva = new ImageView(kuvatiedosto);
+        ruutu.getChildren().add(kuva);
+        
 
     }
 
     public static void main(String[] args) throws IOException {
-		File file= new File("board.png");
-		BufferedImage image = ImageIO.read(file);
-		boolean find = false;
-		// Getting pixel color by position x and y 
-		for (int i = 180; i <= 220; i += 2) {
-			for (int j = 300; j <= 340; j += 2) {
-				
-				
-				
-				int clr =  image.getRGB(i, j);
-				int red = (clr & 0x00ff0000) >> 16;
-				int green = (clr & 0x0000ff00) >> 8;
-				int blue = clr & 0x000000ff;
-				if (red <= 28 && red >= 7 && green <= 93 && green >= 11 && blue <= 158 && blue >= 70) {
-					System.out.println("Red Color value = "+ red);
-					System.out.println("Green Color value = "+ green);
-					System.out.println("Blue Color value = "+ blue);
-					System.out.println("Coords = " + i + " " +j);
-					i = 220;
-					j = 339;
-					find = true;
-				if (i == 220 && j == 340 && find == false) {
-					System.out.println("Ei nappulaa");
-				}
-					
-				}
-			}
-			
-		}
-		
-		
-		
-		
-		
-   // 	launch(args);
+    	launch(args);
+
     }
 
 }

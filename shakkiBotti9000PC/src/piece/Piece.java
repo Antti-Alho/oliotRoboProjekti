@@ -54,7 +54,7 @@ public class Piece implements IPiece{
 	 */
 	@Override
 	public String getName(){
-	    String s = "b";
+	    String s = "x";
 	    if (getColour()) {
 	    	s.toUpperCase();
 	    }
