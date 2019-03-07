@@ -76,23 +76,14 @@ public class Board {
 
 	/**
 	 * does the changes to move piece in board and saves the move in the move stack
-	 * @param move move object that is to be executed and saved in to the moves stack.
+	 * @param move object that is to be executed and saved in to the moves stack.
 	 */
 	public void move(Move move) {
-		for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				if (positions[i][j].getPiece() != null) {
-					if (move.getP() == positions[i][j].getPiece()) {
-						Piece piece = positions[i][j].getPiece();
-						piece.setPos(move.getNewPos());
-						positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-						positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
-						moves.add(move);
-						return;
-					}
-				}
-			}
-		}
+		Piece piece = positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece();
+		piece.setPos(move.getNewPos());
+		positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+		positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+		moves.add(move);
 	}
 	
 
