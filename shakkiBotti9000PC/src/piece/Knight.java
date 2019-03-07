@@ -36,86 +36,65 @@ public class Knight extends Piece{
 		
 		int i = x+2;
 		int j = y+1;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 
-		
 		i = x-2;
 		j = y-1;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
 		i = x+2;
 		j = y-1;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
 		i = x-2;
 		j = y+1;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
 		i = x+1;
 		j = y+2;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 
 		
 		i = x-1;
 		j = y-2;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
 		i = x+1;
 		j = y-2;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
 		i = x-1;
 		j = y+2;
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-			}
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		return newLegalMoves;
+	}
+	
+	private boolean isLegal(int i, int j, Board board) {
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				return true;
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 	
 	/**
