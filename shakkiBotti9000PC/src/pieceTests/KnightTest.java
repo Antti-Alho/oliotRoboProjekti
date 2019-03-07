@@ -30,11 +30,10 @@ class KnightTest {
         movesExpected.add(new Move(piece, board.getPositions()[2][5]));
         
         Collections.sort(movesExpected, new MoveComparator());
-        
         ArrayList<Move> movesReal = piece.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List Knight start moves");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List Knight start moves");
     }
 
     @Test
@@ -54,10 +53,11 @@ class KnightTest {
         movesExpected.add(new Move(piece, board.getPositions()[6][4]));		// knight eats pawn
         movesExpected.add(new Move(piece, board.getPositions()[5][5]));
         
+        Collections.sort(movesExpected, new MoveComparator());
         ArrayList<Move> movesReal = piece.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List Knight moves in middle of board");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List Knight moves in middle of board");
     }
  
 

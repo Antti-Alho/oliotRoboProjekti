@@ -48,7 +48,7 @@ class KingTest {
         ArrayList<Move> movesReal = king.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible king moves with 2 missing pieces next to it");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible king moves with 2 missing pieces next to it");
     }
 
     @Test
@@ -72,21 +72,11 @@ class KingTest {
         movesExpected.add(new Move(king, board.getPositions()[3][4]));
         movesExpected.add(new Move(king, board.getPositions()[3][2]));
        
-        
+        Collections.sort(movesExpected, new MoveComparator());
         ArrayList<Move> movesReal = king.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of possible king moves at open field");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of possible king moves at open field");
     }
-
-	@Test
-	void testGetName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testKing() {
-		fail("Not yet implemented");
-	}
 
 }

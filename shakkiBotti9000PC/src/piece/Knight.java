@@ -33,29 +33,103 @@ public class Knight extends Piece{
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		while (x <= 8 && y <= 8 ) {
-			x++;
-			y++;
-			newLegalMoves.add(new Move(this,new Position(x, y)));
-			if (board.containsPiece(new Position(x, y))) {
-				break;
+		
+		int i = x+2;
+		int j = y+1;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+
+		
+		i = x-2;
+		j = y-1;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 			}
 		}
 		
-		return null;
+		i = x+2;
+		j = y-1;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+		
+		i = x-2;
+		j = y+1;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+		
+		i = x+1;
+		j = y+2;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+
+		
+		i = x-1;
+		j = y-2;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+		
+		i = x+1;
+		j = y-2;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+		
+		i = x-1;
+		j = y+2;
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			}
+		}
+		return newLegalMoves;
 	}
 	
 	/**
 	 * Returns the string that represents this piece in the command line UI
 	 */
 	@Override
-	  public String getName(){
+	public String getName(){
 	    String s = "n";
 	    if (super.getColour()) {
 	      s.toUpperCase();
 	    }
 	    return s;
-	  }
+	}
+	
 	private int[][] eval = {
 			{ -5, -4, -3, -3, -3, -3, -5, -5},
 			{ -4, -2,  0,  0,  0,  0, -2, -4},
