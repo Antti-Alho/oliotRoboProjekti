@@ -14,7 +14,7 @@ public class Board {
 	 * The board constructor creates the starting position of the game.
 	 */
 	public Board() {
-		
+		moves = new Stack<Move>();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				positions[i][j] = new Position(i, j);
@@ -40,6 +40,13 @@ public class Board {
 		for (int i = 0; i <8; i++) {
 			positions[1][i].setPiece(new Pawn(new Position(1, i), Piece.BLACK));
 			positions[6][i].setPiece(new Pawn(new Position(6, i), Piece.WHITE));
+		}
+		for (int i = 0; i < positions.length; i++) {
+			for (int j = 0; j < positions.length; j++) {
+				if (positions[i][j].getPiece() != null) {
+					pieces.add(positions[i][j].getPiece());
+				}
+			}
 		}
 	}
 	
@@ -72,27 +79,34 @@ public class Board {
 	 * @param move move object that is to be executed and saved in to the moves stack.
 	 */
 	public void move(Move move) {
-		for (Piece piece : pieces) {
-			if(move.getP() == piece) {
-				piece.setPos(move.getNewPos());
-				positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-				positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
-				moves.add(move);
+		for (int i = 0; i < positions.length; i++) {
+			for (int j = 0; j < positions.length; j++) {
+				if (positions[i][j].getPiece() != null) {
+					if (move.getP() == positions[i][j].getPiece()) {
+						Piece piece = positions[i][j].getPiece();
+						piece.setPos(move.getNewPos());
+						positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+						positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+						moves.add(move);
+						return;
+					}
+				}
 			}
 		}
 	}
+	
 
 	/**
 	 * takes the last move from the move stack and moves the piece back where it came from
 	 * used in the MinMax algorithm for the AI
 	 */
 	public void undo() {
-		Piece p = moves.peek().getP();
-		for (Piece piece : pieces) {
-			if (p == piece) {
-				piece.setPos(moves.pop().getOldPos());
-			}
-		}
+		Move m = moves.pop();
+		m.getOldPos().setPiece(m.getP());
+		m.getNewPos().setPiece(null);
+		if (m.getTarget() == null) {
+			m.getNewPos().setPiece(null);
+		} else m.getNewPos().setPiece(m.getTarget());
 	}
 	
 	/**
@@ -106,6 +120,17 @@ public class Board {
 			if (piece.getPos() == pos) {
 				return true;
 			}
+		} 
+		return false;
+	}
+	/**
+	 * Return true if target position contains enemy piece
+	 * @param pos
+	 * @return
+	 */
+	public Boolean containsEnemy(Piece piece, Position pos) {
+		if (piece.getPos() == pos && piece.getColour() != pos.getPiece().getColour()) {
+			return true;
 		} 
 		return false;
 	}

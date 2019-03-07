@@ -6,16 +6,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.imageio.ImageIO;
 import com.github.sarxos.webcam.Webcam;
 import piece.Piece;
 
 public class Camera {
+
 	private Position[][] newPosition = new Position[8][8];
 	private Board board;
 	private Webcam webcam;
-
 		
 	public Camera(Board board) {
 		this.board = board;
@@ -28,7 +27,6 @@ public class Camera {
 				this.webcam = webcams;
 				this.webcam.setViewSize(webcam.getViewSizes()[2]);
 				this.webcam.open();
-				
 			}
 		}
 	}
@@ -43,7 +41,6 @@ public class Camera {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

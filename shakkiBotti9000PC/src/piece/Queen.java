@@ -42,7 +42,7 @@ public class Queen extends Piece{
 			}
 		}
 		
-		return null;
+		return newLegalMoves;
 	}
 	
 	/**
