@@ -7,7 +7,7 @@ import lejos.hardware.sensor.SensorModes;
 import lejos.robotics.SampleProvider;
 
 public class Button {
-	private Port port = LocalEV3.get().getPort("S2");
+	private Port port = LocalEV3.get().getPort("S1");
 	private SensorModes sensor;
 	private SampleProvider touch;
 	float[] sample;
@@ -20,7 +20,7 @@ public class Button {
 				sample = new float[touch.sampleSize()];
 				
 			} catch (IllegalArgumentException e) {
-				System.out.println("Kiinnitä napin johto porttiin 4.");
+				System.out.println("Kiinnitä napin johto porttiin 1.");
 			}
 		}
 	}

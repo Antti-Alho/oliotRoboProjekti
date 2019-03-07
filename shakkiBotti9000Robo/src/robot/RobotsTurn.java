@@ -24,6 +24,7 @@ public class RobotsTurn implements Behavior{
 	@Override
 	public void action() {
 		suppressed = false;
+		System.out.println("PELAA");
 		motors.movePieces();
 		data.clearCrdnts();
 		suppressed = true;
