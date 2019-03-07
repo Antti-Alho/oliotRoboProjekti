@@ -19,7 +19,7 @@ public class King extends Piece{
 
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
 	 */
 	@Override
 	public int getValue() {
@@ -27,7 +27,7 @@ public class King extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take:
+	 * returns an ArrayList of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {

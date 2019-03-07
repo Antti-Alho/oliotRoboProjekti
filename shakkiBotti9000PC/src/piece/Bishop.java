@@ -32,7 +32,7 @@ public class Bishop extends Piece{
 	
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
 	 */
 	@Override
 	public int getValue() {
@@ -40,7 +40,7 @@ public class Bishop extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take:
+	 * returns an ArrayList of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -112,7 +112,7 @@ public class Bishop extends Piece{
 	}
 
 	/**
-	 * array witch contains the pieces value in different positions
+	 * An array that contains piece's value in different positions
 	 */
 	private int[][] eval = {
 			{ -2, -1, -1, -1, -1, -1, -1, -2},
