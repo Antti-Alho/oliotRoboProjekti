@@ -37,7 +37,7 @@ class PawnTest {
         ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of Black Pawn's start moves");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of Black Pawn's start moves");
     }
     
     @Test
@@ -51,7 +51,7 @@ class PawnTest {
         ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of Black Pawn's moves when pawn has already moved once");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of Black Pawn's moves when pawn has already moved once");
     }
     
     @Test
@@ -61,13 +61,13 @@ class PawnTest {
     	board.move(new Move(pawn, board.getPositions()[5][4]));
     	
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-    	movesExpected.add(new Move(pawn, new Position(2, 4)));
-    	movesExpected.add(new Move(pawn, new Position(3, 4)));
+    	movesExpected.add(new Move(pawn, new Position(6, 3)));
+    	movesExpected.add(new Move(pawn, new Position(6, 5)));
     	
     	ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
     	
-        assertEquals(movesExpected, movesReal, "list of black pawn's eating movements");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of black pawn's eating movements");
     }
     
     @Test
@@ -75,11 +75,11 @@ class PawnTest {
         ArrayList<Move> movesExpected = new ArrayList<Move>();
         movesExpected.add(new Move(pawnWhite, board.getPositions()[5][4]));
         movesExpected.add(new Move(pawnWhite, board.getPositions()[4][4]));
-        
+        Collections.sort(movesExpected, new MoveComparator());
         ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of white pawn's start moves");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of white pawn's start moves");
     }
     
     @Test
@@ -93,7 +93,7 @@ class PawnTest {
         ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "List of white pawn's moves when pawn has already moved once");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of white pawn's moves when pawn has already moved once");
     }
     
     @Test
@@ -110,7 +110,7 @@ class PawnTest {
     	ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
     	
-        assertEquals(movesExpected, movesReal, "list of white pawn's eating movements");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of white pawn's eating movements");
     }
 
 }
