@@ -26,15 +26,18 @@ public class Pressing implements Behavior{
 	public void action() { 
 		suppressed = false;
 		if(data.haveMoves() == true) {
-			Delay.msDelay(2000);
+			Delay.msDelay(1000);
 			while (button.pressed() == false) {
-				//onko jotai listenerii
+				System.out.println("Stop");
 			}
 			data.clearCrdnts();
 			suppressed = true;
 		} else {
+			System.out.println("PAINETTU");
 			data.playerDone();
+			System.out.println("KONEELLE ILMOTETTU");
 			data.receiveMoves();
+			System.out.println("Siirron pitäisi olla saapunut");
 			suppressed = true;
 		}
 	}
