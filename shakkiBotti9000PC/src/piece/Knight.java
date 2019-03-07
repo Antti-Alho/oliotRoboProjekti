@@ -49,13 +49,14 @@ public class Knight extends Piece{
 	 * Returns the string that represents this piece in the command line UI
 	 */
 	@Override
-	  public String getName(){
+	public String getName(){
 	    String s = "n";
 	    if (super.getColour()) {
 	      s.toUpperCase();
 	    }
 	    return s;
-	  }
+	}
+	
 	private int[][] eval = {
 			{ -5, -4, -3, -3, -3, -3, -5, -5},
 			{ -4, -2,  0,  0,  0,  0, -2, -4},
