@@ -33,16 +33,13 @@ public class BoardController {
 			int x = Integer.parseInt(s.nextLine());
 			System.out.print("Anna mistä y:");
 			int y = Integer.parseInt(s.nextLine());
-			System.out.print("Anna mihin y:");
+			System.out.print("Anna mihin x:");
 			int x2 = Integer.parseInt(s.nextLine());
 			System.out.print("Anna mihin y:");
 			int y2 = Integer.parseInt(s.nextLine());
 			
 			board.move(new Move(board.getPositions()[x][y].getPiece(), board.getPositions()[x2][y2]));
 			Move m = ai.calculateBestMove(depth);
-			m.getP().getPos().getX();
-			m.getNewPos();
-			m.getTarget().getPos().getX();
 			board.move(m);
 		}
 		
