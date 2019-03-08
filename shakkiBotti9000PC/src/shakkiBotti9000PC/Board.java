@@ -86,9 +86,6 @@ public class Board {
 	    positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
 	    positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
 	    moves.add(move);
-		
-//		positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece());
-//		positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
 	}
 	
 
