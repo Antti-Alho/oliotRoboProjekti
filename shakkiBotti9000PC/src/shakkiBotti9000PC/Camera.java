@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import com.github.sarxos.webcam.Webcam;
 import piece.Piece;
-import piece.Queen;
 
 public class Camera {
 	private Board board;
