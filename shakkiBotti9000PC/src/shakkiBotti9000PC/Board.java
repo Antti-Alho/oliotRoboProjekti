@@ -64,12 +64,15 @@ public class Board {
 	
 	/**
 	 * goes trough all the pieces on the board and asks for all the legal moves
+	 * @param player 
 	 * @return ArrayList of legal moves on the board
 	 */
-	public ArrayList<Move> getLegalMoves(){
+	public ArrayList<Move> getLegalMoves(Boolean player){
 		ArrayList<Move> moves = new ArrayList<Move>();
 		for (Piece piece : pieces) {
-			moves.addAll(piece.getMoves(this));
+			if(piece.getColour() == player) {
+				moves.addAll(piece.getMoves(this));
+			}
 		}
 		return moves;
 	}
@@ -93,11 +96,14 @@ public class Board {
 	 */
 	public void undo() {
 		Move m = moves.pop();
-		m.getOldPos().setPiece(m.getP());
-		m.getNewPos().setPiece(null);
-		if (m.getTarget() == null) {
-			m.getNewPos().setPiece(null);
-		} else m.getNewPos().setPiece(m.getTarget());
+		positions[m.getOldPos().getX()][m.getOldPos().getY()].setPiece(m.getP());
+		positions[m.getNewPos().getX()][m.getNewPos().getY()].setPiece(null);
+		m.getP().setPos(positions[m.getOldPos().getX()][m.getOldPos().getY()]);
+		if (m.getTarget() != null) {
+			positions[m.getNewPos().getX()][m.getNewPos().getY()].setPiece(m.getTarget());
+			m.getTarget().setPos(positions[m.getNewPos().getX()][m.getNewPos().getY()]);
+			pieces.add(m.getTarget());
+		}
 	}
 	
 	/**

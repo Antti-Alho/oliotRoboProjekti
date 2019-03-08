@@ -68,26 +68,34 @@ public class Pawn extends Piece{
 				if (board.getPositions()[x-1][y].getPiece() == null) {
 					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y]));
 				}
-				if (board.canEat(this, board.getPositions()[x-1][y+1])){
-					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y+1]));
-				} 
-				if (board.canEat(this, board.getPositions()[x-1][y-1])) {
-					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y-1]));
+				if (y != 7) {
+					if (board.canEat(this, board.getPositions()[x-1][y+1])){
+						newLegalMoves.add(new Move(this, board.getPositions()[x-1][y+1]));
+					} 
 				}
-				if (board.getPositions()[x-2][y].getPiece() == null && this.getPos() == firstPos) {
+				if (y != 0) {
+					if (board.canEat(this, board.getPositions()[x-1][y-1])) {
+						newLegalMoves.add(new Move(this, board.getPositions()[x-1][y-1]));
+					}
+				}
+				if (board.getPositions()[x-2][y].getPiece() == null && this.getPos() == firstPos && board.getPositions()[x-1][y].getPiece() == null) {
 					newLegalMoves.add(new Move(this, board.getPositions()[x-2][y]));
 				}
 			} else {
 				if (board.getPositions()[x+1][y].getPiece() == null) {
 					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y]));
 				}
-				if (board.canEat(this, board.getPositions()[x+1][y+1])){
-					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y+1]));
-				} 
-				if (board.canEat(this, board.getPositions()[x+1][y-1])) {
-					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y-1]));
+				if (y != 7) {
+					if (board.canEat(this, board.getPositions()[x+1][y+1])){
+						newLegalMoves.add(new Move(this, board.getPositions()[x+1][y+1]));
+					} 
 				}
-				if (board.getPositions()[x+2][y].getPiece() == null && this.getPos() == firstPos) {
+				if(y != 0) {
+					if (board.canEat(this, board.getPositions()[x+1][y-1])) {
+						newLegalMoves.add(new Move(this, board.getPositions()[x+1][y-1]));
+					}
+				}
+				if (board.getPositions()[x+2][y].getPiece() == null && this.getPos() == firstPos && board.getPositions()[x-1][y].getPiece() == null) {
 					newLegalMoves.add(new Move(this, board.getPositions()[x+2][y]));
 				}
 			}
