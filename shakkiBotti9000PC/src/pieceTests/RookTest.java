@@ -51,7 +51,7 @@ class RookTest {
         ArrayList<Move> movesReal = rook.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible rook moves when rook can mov on X axis");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible rook moves when rook can mov on X axis");
     }
     
     @Test
@@ -65,23 +65,25 @@ class RookTest {
 			}
 			System.out.println("  "+(i+1));
 		}
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(rook, board.getPositions()[5][3]));
-        moves.add(new Move(rook, board.getPositions()[6][3]));
-        moves.add(new Move(rook, board.getPositions()[3][3]));
-        moves.add(new Move(rook, board.getPositions()[2][3]));
-        moves.add(new Move(rook, board.getPositions()[4][4]));
-        moves.add(new Move(rook, board.getPositions()[4][5]));
-        moves.add(new Move(rook, board.getPositions()[4][6]));
-        moves.add(new Move(rook, board.getPositions()[4][7]));
-        moves.add(new Move(rook, board.getPositions()[4][2]));
-        moves.add(new Move(rook, board.getPositions()[4][1]));
-        moves.add(new Move(rook, board.getPositions()[4][0]));
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(rook, board.getPositions()[5][3]));
+        movesExpected.add(new Move(rook, board.getPositions()[6][3]));
+        movesExpected.add(new Move(rook, board.getPositions()[3][3]));
+        movesExpected.add(new Move(rook, board.getPositions()[2][3]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][4]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][5]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][6]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][7]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][2]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][1]));
+        movesExpected.add(new Move(rook, board.getPositions()[4][0]));
+        
+        Collections.sort(movesExpected, new MoveComparator());
         
         ArrayList<Move> movesReal = rook.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(moves, rook.getMoves(board), "List of possible rook moves when rook can move on Y axis");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible rook moves when rook can mov on X axis");
     }
     @Disabled
     @Test

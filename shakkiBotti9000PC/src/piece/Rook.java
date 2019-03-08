@@ -19,7 +19,7 @@ public class Rook extends Piece{
 	
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
 	 */
 	@Override
 	public int getValue() {
@@ -27,45 +27,70 @@ public class Rook extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take:
+	 * returns an ArrayList of all possible moves the piece can currently take.
 	 * @param Board the board where this piece is.
-	 * @return ArrayList<Move> of moves the piece can currentru take.
+	 * @return ArrayList<Move> of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		for (int i = x+1; i <= 7; i++) {
-			Position newPos = board.getPositions()[i][y];
-			if (board.canEatOrMove(this,newPos)) {
-				newLegalMoves.add(new Move(this, newPos));
-				if (board.canEat(this, newPos)) break;
+		
+		int i = x+1;
+		int j = y;
+		while (i <= 7 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
 			}
+			i++;
 		}
-
-		for (int i = x-1; i >= 0; i--) {
-			Position newPos = new Position(i, y);
-			if (board.canEatOrMove(this,newPos)) {
-				newLegalMoves.add(new Move(this, newPos));
-				if (board.canEat(this, newPos)) break;
+		
+		i = x-1;
+		j = y;
+		while (i >= 0 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
 			}
+			i--;
 		}
-
-		for (int i = y+1; i <= 7; i++) {
-			Position newPos = new Position(x, i);
-			if (board.canEatOrMove(this,newPos)) {
-				newLegalMoves.add(new Move(this, newPos));
-				if (board.canEat(this, newPos)) break;
+		
+		i = x;
+		j = y+1;
+		while (i >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
 			}
+			j++;
 		}
-
-		for (int i = y-1; i >= 0; i--) {
-			Position newPos = new Position(x, i);
-			if (board.canEatOrMove(this,newPos)) {
-				newLegalMoves.add(new Move(this, newPos));
-				if (board.canEat(this, newPos)) break;
+		
+		i = x;
+		j = y-1;
+		while (i <= 7 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
 			}
+			j--;
 		}
 		
 		return newLegalMoves;

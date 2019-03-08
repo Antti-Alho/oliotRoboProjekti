@@ -63,35 +63,35 @@ public class Pawn extends Piece{
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		
-		if (super.getColour()) {
-			if (board.getPositions()[x][y--].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x][y-1]));
-			}
-			if (board.canEat(this, board.getPositions()[x+1][y+1])){
-				newLegalMoves.add(new Move(this, board.getPositions()[x+1][y-1]));
-			} 
-			if (board.canEat(this, board.getPositions()[x-1][y+1])) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x-1][y-1]));
-			}
-			if (board.getPositions()[x][y-2].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x][y-2]));
-			}
-		} else {
-			if (board.getPositions()[x][y++].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x][y+1]));
-			}
-			if (board.canEat(this, board.getPositions()[x+1][y+1])){
-				newLegalMoves.add(new Move(this, board.getPositions()[x+1][y+1]));
-			} 
-			if (board.canEat(this, board.getPositions()[x-1][y+1])) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x-1][y+1]));
-			}
-			if (board.getPositions()[x][y+2].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[x][y+2]));
+		if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+			if (!super.getColour()) {
+				if (board.getPositions()[x-1][y].getPiece() == null) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y]));
+				}
+				if (board.canEat(this, board.getPositions()[x-1][y+1])){
+					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y+1]));
+				} 
+				if (board.canEat(this, board.getPositions()[x-1][y-1])) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x-1][y-1]));
+				}
+				if (board.getPositions()[x-2][y].getPiece() == null && this.getPos() == firstPos) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x-2][y]));
+				}
+			} else {
+				if (board.getPositions()[x+1][y].getPiece() == null) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y]));
+				}
+				if (board.canEat(this, board.getPositions()[x+1][y+1])){
+					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y+1]));
+				} 
+				if (board.canEat(this, board.getPositions()[x+1][y-1])) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x+1][y-1]));
+				}
+				if (board.getPositions()[x+2][y].getPiece() == null && this.getPos() == firstPos) {
+					newLegalMoves.add(new Move(this, board.getPositions()[x+2][y]));
+				}
 			}
 		}
-		
 		
 		return newLegalMoves;
 	}

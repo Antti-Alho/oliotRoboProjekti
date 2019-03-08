@@ -48,7 +48,7 @@ class KingTest {
         ArrayList<Move> movesReal = king.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, movesReal, "list of possible king moves with 2 missing pieces next to it");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "list of possible king moves with 2 missing pieces next to it");
     }
 
     @Test
@@ -62,31 +62,21 @@ class KingTest {
 			}
 			System.out.println("  "+(i+1));
 		}
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(king, board.getPositions()[5][3]));
-        moves.add(new Move(king, board.getPositions()[5][4]));
-        moves.add(new Move(king, board.getPositions()[5][2]));
-        moves.add(new Move(king, board.getPositions()[4][4]));
-        moves.add(new Move(king, board.getPositions()[4][2]));
-        moves.add(new Move(king, board.getPositions()[3][3]));
-        moves.add(new Move(king, board.getPositions()[3][4]));
-        moves.add(new Move(king, board.getPositions()[3][2]));
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
+        movesExpected.add(new Move(king, board.getPositions()[5][3]));
+        movesExpected.add(new Move(king, board.getPositions()[5][4]));
+        movesExpected.add(new Move(king, board.getPositions()[5][2]));
+        movesExpected.add(new Move(king, board.getPositions()[4][4]));
+        movesExpected.add(new Move(king, board.getPositions()[4][2]));
+        movesExpected.add(new Move(king, board.getPositions()[3][3]));
+        movesExpected.add(new Move(king, board.getPositions()[3][4]));
+        movesExpected.add(new Move(king, board.getPositions()[3][2]));
        
-        
+        Collections.sort(movesExpected, new MoveComparator());
         ArrayList<Move> movesReal = king.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(moves, king.getMoves(board), "List of possible king moves at open field");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List of possible king moves at open field");
     }
-
-	@Test
-	void testGetName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testKing() {
-		fail("Not yet implemented");
-	}
 
 }

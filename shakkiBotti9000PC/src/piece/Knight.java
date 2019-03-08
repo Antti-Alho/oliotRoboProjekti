@@ -18,7 +18,7 @@ public class Knight extends Piece{
 	
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
 	 */
 	@Override
 	public int getValue() {
@@ -26,36 +26,89 @@ public class Knight extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take:
+	 * returns an ArrayList of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
-		while (x <= 8 && y <= 8 ) {
-			x++;
-			y++;
-			newLegalMoves.add(new Move(this,new Position(x, y)));
-			if (board.containsPiece(new Position(x, y))) {
-				break;
-			}
+		
+		int i = x+2;
+		int j = y+1;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+
+		i = x-2;
+		j = y-1;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
 		}
 		
-		return null;
+		i = x+2;
+		j = y-1;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+		
+		i = x-2;
+		j = y+1;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+		
+		i = x+1;
+		j = y+2;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+
+		
+		i = x-1;
+		j = y-2;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+		
+		i = x+1;
+		j = y-2;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+		
+		i = x-1;
+		j = y+2;
+		if (isLegal(i, j, board)) {
+			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		}
+		return newLegalMoves;
+	}
+	
+	private boolean isLegal(int i, int j, Board board) {
+		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				return true;
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 	
 	/**
 	 * Returns the string that represents this piece in the command line UI
 	 */
 	@Override
-	  public String getName(){
+	public String getName(){
 	    String s = "n";
 	    if (super.getColour()) {
 	      s.toUpperCase();
 	    }
 	    return s;
-	  }
+	}
+	
 	private int[][] eval = {
 			{ -5, -4, -3, -3, -3, -3, -5, -5},
 			{ -4, -2,  0,  0,  0,  0, -2, -4},

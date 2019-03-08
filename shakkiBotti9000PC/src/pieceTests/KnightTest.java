@@ -1,20 +1,15 @@
 package pieceTests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import piece.Knight;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
-import shakkiBotti9000PC.Position;
+
 
 
 class KnightTest {
@@ -35,30 +30,34 @@ class KnightTest {
         movesExpected.add(new Move(piece, board.getPositions()[2][5]));
         
         Collections.sort(movesExpected, new MoveComparator());
-        
         ArrayList<Move> movesReal = piece.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
         
-        assertEquals(movesExpected, piece.getMoves(board), "List Knight start moves");
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List Knight start moves");
     }
 
     @Test
     public void testGetMovesKnightAllDirections() {
     	board.move(new Move(piece, board.getPositions()[4][3]));
-        ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new Move(piece, board.getPositions()[6][2]));
-        moves.add(new Move(piece, board.getPositions()[5][1]));
+        ArrayList<Move> movesExpected = new ArrayList<Move>();
         
-        moves.add(new Move(piece, board.getPositions()[3][1]));
-        moves.add(new Move(piece, board.getPositions()[2][2]));
+        movesExpected.add(new Move(piece, board.getPositions()[6][2])); 	// knight eats pawn
+        movesExpected.add(new Move(piece, board.getPositions()[5][1]));
         
-        moves.add(new Move(piece, board.getPositions()[2][4]));
-        moves.add(new Move(piece, board.getPositions()[3][5]));
+        movesExpected.add(new Move(piece, board.getPositions()[3][1]));
+        movesExpected.add(new Move(piece, board.getPositions()[2][2]));
         
-        moves.add(new Move(piece, board.getPositions()[6][4]));
-        moves.add(new Move(piece, board.getPositions()[5][5]));
+        movesExpected.add(new Move(piece, board.getPositions()[2][4]));
+        movesExpected.add(new Move(piece, board.getPositions()[3][5]));
         
-        assertEquals(moves, piece.getMoves(board), "List Kinght moves in middle of board");
+        movesExpected.add(new Move(piece, board.getPositions()[6][4]));		// knight eats pawn
+        movesExpected.add(new Move(piece, board.getPositions()[5][5]));
+        
+        Collections.sort(movesExpected, new MoveComparator());
+        ArrayList<Move> movesReal = piece.getMoves(board);
+        Collections.sort(movesReal, new MoveComparator());
+        
+        assertEquals(movesExpected.toString(), movesReal.toString(), "List Knight moves in middle of board");
     }
  
 

@@ -11,7 +11,7 @@ public class Board {
 	Position[][] positions = new Position[8][8];
 	
 	/**
-	 * The board constructor creates the starting position of the game.
+	 * The board constructor generates the starting positions for each peace on the board.
 	 */
 	public Board() {
 		moves = new Stack<Move>();
@@ -51,10 +51,10 @@ public class Board {
 	}
 	
 	/**
-	 * return true if piece can eat other piece from the target position
-	 * @param piece that if going to eat
+	 * return true if piece can eat another piece from the target position
+	 * @param piece that is going to eat
 	 * @param pos target position
-	 * @return true if can eat. False if can't eat.
+	 * @return true if eating is possible. False if can't eat.
 	 */
 	public Boolean canEat(Piece piece, Position pos) {
 		if (positions[pos.getX()][pos.getY()].getPiece() != null && positions[pos.getX()][pos.getY()].getPiece().getColour() != piece.getColour()) {
@@ -75,17 +75,17 @@ public class Board {
 	}
 
 	/**
-	 * does the changes to move piece in board and saves the move in the move stack
-	 * @param move move object that is to be executed and saved in to the moves stack.
+	 * does the changes to move piece on the board and saves the move in the move stack
+	 * @param move object that is to be executed and saved in to the move stack.
 	 */
 	public void move(Move move) {
 		Piece piece = positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece();
 		System.out.println(piece);
-	    piece.setPos(move.getNewPos());
-	    if (move.getTarget() != null) positions[move.getNewPos().getX()][move.getNewPos().getY()].getPiece().setPos(null);
-	    positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-	    positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
-	    moves.add(move);
+	  piece.setPos(move.getNewPos());
+	  if (move.getTarget() != null) positions[move.getNewPos().getX()][move.getNewPos().getY()].getPiece().setPos(null);
+	  positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+	  positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+	  moves.add(move);
 	}
 	
 
@@ -129,7 +129,7 @@ public class Board {
 	}
 	
 	/**
-	 * returns true if the target position is empty or the piece can eat the piece that is on the way
+	 * returns true if the target position is empty or the piece can eat another piece that is on it's way
 	 * @param piece that is going to move or eat
 	 * @param newPos position where to move or eat
 	 * @return boolean value if the piece can move true if can false if can't.

@@ -32,7 +32,7 @@ public class Bishop extends Piece{
 	
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
 	 */
 	@Override
 	public int getValue() {
@@ -40,7 +40,7 @@ public class Bishop extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take:
+	 * returns an ArrayList of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -48,39 +48,71 @@ public class Bishop extends Piece{
 		int x = this.getPos().getX();
 		int y = this.getPos().getY();
 		
-		int i = x;
-		int j = y;
+		int i = x+1;
+		int j = y+1;
 		while (i <= 7 && j <= 7) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
 			i++;
 			j++;
 		}
 		
-		i = x;
-		j = y;
+		i = x-1;
+		j = y-1;
 		while (i >= 0 && j >= 0) {
-			i++;
-			j++;
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
+			j--;
 		}
 		
-		i = x;
-		j = y;
+		i = x-1;
+		j = y+1;
 		while (i >= 0 && j <= 7) {
-			i++;
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
+			i--;
 			j++;
 		}
 		
-		i = x;
-		j = y;
+		i = x+1;
+		j = y-1;
 		while (i <= 7 && j >= 0) {
+			if (board.getPositions()[i][j].getPiece() == null) {
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				break;
+			} else {
+				break;
+			}
 			i++;
-			j++;
+			j--;
 		}
 		
 		return newLegalMoves;
 	}
 
 	/**
-	 * array witch contains the pieces value in different positions
+	 * An array that contains piece's value in different positions
 	 */
 	private int[][] eval = {
 			{ -2, -1, -1, -1, -1, -1, -1, -2},
