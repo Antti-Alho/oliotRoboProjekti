@@ -56,7 +56,7 @@ public class Move {
 	
 	@Override
 	public String toString() {
-		return "("+oldPos.getX()+","+oldPos.getY()+") to ("+newPos.getX()+ ","+ newPos.getY()+")";
+		return p+"("+oldPos.getX()+","+oldPos.getY()+") to ("+newPos.getX()+ ","+ newPos.getY()+")";
 	}
 	
 }

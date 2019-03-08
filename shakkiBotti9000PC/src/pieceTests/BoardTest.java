@@ -33,13 +33,15 @@ class BoardTest {
 		Move move1 = new Move(queen, board.getPositions()[4][4]);
 		board.move(move1);
 		Move move2 = new Move(queen2, board.getPositions()[0][0]);
+		Piece piece = positions[0][0].getPiece();
 		board.move(move2);
 		
 		assertEquals(queen, board.getPositions()[4][4].getPiece(), "board executes given move");
 		assertEquals(queen2, board.getPositions()[0][0].getPiece(), "If move eats another piece the other piece disappears");
+		assertEquals(false, board.getPieces().contains(piece), "removed piece is removed from the piece list");
 	}
 
-	@Test
+	@Test 
 	void testUndo() {
 		Piece queen = positions[0][4].getPiece();
 		Piece pawn = positions[6][0].getPiece();
@@ -53,6 +55,7 @@ class BoardTest {
 		assertEquals(queen, board.getPositions()[0][4].getPiece(), "piece is in the spot is was before undo");
 		board.undo();
 		assertEquals(null, board.getPositions()[4][4].getPiece(), "piece is not int the spot it moved to after undo");
+		assertEquals(true, board.getPieces().contains(pawn), "piece that was eaten is returned to the piece list after undo");
 	}
 
 	@Test

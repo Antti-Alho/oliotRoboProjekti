@@ -11,11 +11,13 @@ public class Piece implements IPiece{
 	public static Boolean WHITE = false;
 	private Boolean colour;
 	private Position pos;
+	private Position firstPos;
 	private int value;
 	
 	public Piece(Position pos, Boolean colour) {
 		this.pos = pos;
 		this.colour = colour;
+		this.firstPos = pos;
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class Piece implements IPiece{
 	public ArrayList<Move> getMoves(Board board) {
 		return null;
 	}
-	
+
 	/**
 	 * Returns the string that represents this piece in the command line UI
 	 */
