@@ -47,7 +47,7 @@ public class Data {
 	
 	public void receiveMoves() {
 		try {
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < 5; i++) {
 				this.crdnts.add(in.readInt());
 				System.out.println(this.crdnts.get(i));
 			}

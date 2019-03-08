@@ -71,55 +71,19 @@ public class Motors {
 	public void movePieces() throws NullPointerException {
 		ArrayList<Integer> crdnts = new ArrayList<>();
 		crdnts = data.getCrdnts();
-		int firstFromX 	= crdnts.get(0); 
-		int firstFromY 	= crdnts.get(1);
-		int firstToX 	= crdnts.get(2);
-		int firstToY 	= crdnts.get(3);
-		int secondFromX = crdnts.get(4);
-		int secondFromY = crdnts.get(5);
+		int fromX = crdnts.get(0);
+		int fromY = crdnts.get(1);
+		int toX = crdnts.get(2);
+		int toY = crdnts.get(3);
+		int target = crdnts.get(4);
 		
-		length.rotate(toBoard, true);
-		largeCheck(length);
-		length.rotate(firstFromX * lenghtRot, true);
-		largeCheck(length);
-		width.rotate(firstFromY * widthRot, true);
-		largeCheck(width);
-		height.rotate(-heightRot, true);
-		mediumCheck(height);
-		pliers.rotate(-pliersRot, true);
-		mediumCheck(pliers);
-		height.rotate(heightRot, true);
-		mediumCheck(height);
-		if (firstToX >= 0) {				// siirretään nappula
-			length.rotate( (firstToX - firstFromX) * lenghtRot, true);
+		if (target >= 0) {
+			//haetaan syötävä
+			length.rotate(toBoard, true);
 			largeCheck(length);
-			width.rotate( (firstToY - firstFromY) * widthRot, true);
-			largeCheck(width);
-			height.rotate(-heightRot, true);
-			mediumCheck(height);
-			pliers.rotate(pliersRot, true);
-			mediumCheck(pliers);
-			height.rotate(heightRot, true);
-			mediumCheck(height);
-			width.rotate(-firstToY * widthRot, true);
-			largeCheck(width);
-			length.rotate(-firstToX * lenghtRot, true);
+			length.rotate(toX * lenghtRot, true);
 			largeCheck(length);
-		} else {						// syödään nappula
-			width.rotate(-firstFromY * widthRot, true);
-			largeCheck(width);
-			length.rotate(-firstFromX * lenghtRot, true);
-			largeCheck(length);
-			length.rotate(-toBoard, true);
-			largeCheck(length);
-			pliers.rotate(pliersRot, true);
-			mediumCheck(pliers);
-			length.rotate(toBoard, true);			//takasin laudalla
-			largeCheck(length);
-			//alotetaan toisen nappulan siirto
-			length.rotate(secondFromX * lenghtRot, true);
-			largeCheck(length);
-			width.rotate(secondFromY * widthRot, true);
+			width.rotate(toY * widthRot, true);
 			largeCheck(width);
 			height.rotate(-heightRot, true);
 			mediumCheck(height);
@@ -127,21 +91,46 @@ public class Motors {
 			mediumCheck(pliers);
 			height.rotate(heightRot, true);
 			mediumCheck(height);
-			length.rotate( (firstFromX - secondFromX) * lenghtRot, true);
-			largeCheck(length);
-			width.rotate( (firstFromY - secondFromY) * widthRot, true);
+			
+			//viedään syöty hautausmaalle
+			width.rotate(-toY * widthRot, true);
 			largeCheck(width);
-			height.rotate(-heightRot, true);
-			mediumCheck(height);
+			length.rotate(-toX * lenghtRot, true);
+			largeCheck(length);
+			length.rotate(-toBoard, true);
+			largeCheck(length);
 			pliers.rotate(pliersRot, true);
 			mediumCheck(pliers);
-			height.rotate(heightRot, true);
-			mediumCheck(height);
-			width.rotate(-firstFromY * widthRot, true);
-			largeCheck(width);
-			length.rotate(-firstFromX * lenghtRot, true);
+			length.rotate(toBoard, true);
 			largeCheck(length);
 		}
+		//haetaan siirrettävä
+		length.rotate(fromX * lenghtRot, true);
+		largeCheck(length);
+		width.rotate(fromY * widthRot, true);
+		largeCheck(width);
+		height.rotate(-heightRot, true);
+		mediumCheck(height);
+		pliers.rotate(-pliersRot, true);
+		mediumCheck(pliers);
+		height.rotate(heightRot, true);
+		mediumCheck(height);
+		//siirretään kohteeseen
+		length.rotate( (toX - fromX) * lenghtRot, true);
+		largeCheck(length);
+		width.rotate( (toY - fromY) * widthRot, true);
+		largeCheck(width);
+		height.rotate(-heightRot, true);
+		mediumCheck(height);
+		pliers.rotate(pliersRot, true);
+		mediumCheck(pliers);
+		height.rotate(heightRot, true);
+		mediumCheck(height);
+		//pois laudalta
+		width.rotate(-toY * widthRot, true);
+		largeCheck(width);
+		length.rotate(-toX * lenghtRot, true);
+		largeCheck(length);
 		length.rotate(-toBoard, true);
 		largeCheck(length);
 	}
