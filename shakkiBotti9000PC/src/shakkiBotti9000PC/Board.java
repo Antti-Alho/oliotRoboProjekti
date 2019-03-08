@@ -83,12 +83,10 @@ public class Board {
 	 */
 	public void move(Move move) {
 		Piece piece = positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece();
-		System.out.println(piece);
-	  piece.setPos(move.getNewPos());
-	  if (move.getTarget() != null) positions[move.getNewPos().getX()][move.getNewPos().getY()].getPiece().setPos(null);
-	  positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-	  positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
-	  moves.add(move);
+		piece.setPos(move.getNewPos());
+		positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+		positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+		moves.add(move);
 	}
 	
 
