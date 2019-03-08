@@ -24,6 +24,7 @@ public class BoardController {
 		boolean vuoro = false;
 		boolean peli = true;
 		
+
 		try {
 			socket = new Socket("10.0.1.1", 1111);
 			DataInputStream in = new DataInputStream(socket.getInputStream());
@@ -78,6 +79,32 @@ public class BoardController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+/**
+		while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
+			System.out.println("-----------------------");
+			System.out.println(" 0 1 2 3 4 5 6 7");
+			for (int i = 0; i < 8; i++) {
+				
+				for (int j = 0; j < 8; j++) {
+					System.out.print(" "+board.getPositions()[i][j].getPieceString());
+				}
+				System.out.println(" "+i);
+			}
+			System.out.println("");
+			System.out.println("-----------------------");
+			System.out.print("Anna mistä x:");
+			int x = Integer.parseInt(s.nextLine());
+			System.out.print("Anna mistä y:");
+			int y = Integer.parseInt(s.nextLine());
+			System.out.print("Anna mihin x:");
+			int x2 = Integer.parseInt(s.nextLine());
+			System.out.print("Anna mihin y:");
+			int y2 = Integer.parseInt(s.nextLine());
+			
+			board.move(new Move(board.getPositions()[x][y].getPiece(), board.getPositions()[x2][y2]));
+			Move m = ai.calculateBestMove(depth);
+			board.move(m);
+*/
 		}
 		
 	}
