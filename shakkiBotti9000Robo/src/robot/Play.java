@@ -11,14 +11,16 @@ public class Play {
 		System.out.println("Odotetaan yhteyttä tietokoneeseen.");
 		Data d = new Data();
 		System.out.println("Yhteys muodostettu.");
-		Motors m = new Motors(d);
+		Motors m = new Motors(d, b);
 		
 		Behavior b1 = new Waiting();
 		Behavior b2 = new RobotsTurn(d, m);
 		Behavior b3 = new Pressing(d, m, b);
-		Behavior [] bArray = {b1, b2, b3};
+		Behavior b4 = new Stop(m, b);
+		Behavior [] bArray = {b1, b2, b3, b4};
 		
 		Arbitrator arby = new Arbitrator(bArray);
 		arby.go();
 	}
+	
 }
