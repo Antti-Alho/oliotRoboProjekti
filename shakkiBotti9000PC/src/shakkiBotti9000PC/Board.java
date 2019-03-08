@@ -34,9 +34,9 @@ public class Board {
 		positions[7][0].setPiece(new Rook(positions[7][0], Piece.WHITE));
 		positions[7][7].setPiece(new Rook(positions[7][7], Piece.WHITE));
 		positions[0][3].setPiece(new Queen(positions[0][3], Piece.BLACK));
-		positions[7][4].setPiece(new Queen(positions[7][4], Piece.WHITE));
+		positions[7][3].setPiece(new Queen(positions[7][3], Piece.WHITE));
 		positions[0][4].setPiece(new King(positions[0][4], Piece.BLACK));
-		positions[7][3].setPiece(new King(positions[7][3], Piece.WHITE));
+		positions[7][4].setPiece(new King(positions[7][4], Piece.WHITE));
 		for (int i = 0; i <8; i++) {
 			positions[1][i].setPiece(new Pawn(new Position(1, i), Piece.BLACK));
 			positions[6][i].setPiece(new Pawn(new Position(6, i), Piece.WHITE));
@@ -79,20 +79,16 @@ public class Board {
 	 * @param move move object that is to be executed and saved in to the moves stack.
 	 */
 	public void move(Move move) {
-		for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				if (positions[i][j].getPiece() != null) {
-					if (move.getP() == positions[i][j].getPiece()) {
-						Piece piece = positions[i][j].getPiece();
-						piece.setPos(move.getNewPos());
-						positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-						positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
-						moves.add(move);
-						return;
-					}
-				}
-			}
-		}
+		Piece piece = positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece();
+		System.out.println(piece);
+	    piece.setPos(move.getNewPos());
+	    if (move.getTarget() != null) positions[move.getNewPos().getX()][move.getNewPos().getY()].getPiece().setPos(null);
+	    positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
+	    positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+	    moves.add(move);
+		
+//		positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece());
+//		positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
 	}
 	
 
