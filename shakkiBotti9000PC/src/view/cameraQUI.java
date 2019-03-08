@@ -1,6 +1,8 @@
 package view;
+
+
+
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,31 +28,30 @@ public class cameraQUI extends Application {
     	Position[][] newPosition = new Position[8][8];
 
         Pane ruutu = new Pane();
-        
-
         stage.setScene(new Scene(ruutu));
         stage.show();
         
         File file= new File("board.png");
 		BufferedImage image = ImageIO.read(file);
 		boolean find = false;
-		int n = 20;
-		int m = 20;
+		int n = 22;
+		int m = 22;
 		for (int i = 0; i < 8; i++) {
 //					System.out.println("----------- " +i);
 			for (int j = 0; j < 8; j++) {
 				newPosition[j][i] = new Position(i, j);
 				find = false;
 //						System.out.println("j = "+j);
-				for (int j2 =78+i*54+n; j2 <=78+(i+1)*54; j2+=2) {
-					for (int k =10+j*54+m; k <10+(j+1)*54; k+=2) {
+				for (int j2 =84+i*54+n; j2 <=84+(i+1)*54; j2+=2) {
+					for (int k =9+j*54+m; k <9+(j+1)*54; k+=2) {
 						
 						int clr =  image.getRGB(j2, k);
 						int red = (clr & 0x00ff0000) >> 16;
 						int green = (clr & 0x0000ff00) >> 8;
 						int blue = clr & 0x000000ff;
 						image.setRGB(j2, k,0x000000ff);
-						if (red <= 255 && red >= 110 && green <= 70 && green >= 0 && blue <= 100 && blue >= 0) {
+						if (red <= 255 && red >= 130
+								&& green <= 110 && green >= 0 && blue <= 90 && blue >= 0) {
 							if (find == false) {
 								System.out.println("Found in " + j + " " + i);
 								find = true;
