@@ -6,6 +6,7 @@ import lejos.hardware.DeviceException;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
+import robot.RobotsTurn;
 
 public class Motors {
 
@@ -14,6 +15,8 @@ public class Motors {
 	private EV3MediumRegulatedMotor height;
 	private EV3MediumRegulatedMotor pliers;
 	private Data data;
+	private Button button;
+	private boolean StopCheck = false;
 	
 	//katsotaan pelaajan näkökulmasta
 	//pitkittäin	lenght	default rotate suunta: + pelaajaa päin,	- pois päin
@@ -27,8 +30,9 @@ public class Motors {
 	int pliersRot = -325;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
 	int toBoard = 372;		// 372	vakio etäisyys odotuspaikan ja ensimmäisen ruudun välillä
 	
-	public Motors(Data data) {
+	public Motors(Data data, Button button) {
 		this.data = data;
+		this.button = button;
 		while (length == null || width == null || height == null || pliers == null) {
 			try {
 				length = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -64,7 +68,7 @@ public class Motors {
 		pliers.setSpeed(300);
 	}
 	
-	public void movePieces() {
+	public void movePieces() throws NullPointerException {
 		ArrayList<Integer> crdnts = new ArrayList<>();
 		crdnts = data.getCrdnts();
 		int firstFromX 	= crdnts.get(0); 
@@ -73,41 +77,99 @@ public class Motors {
 		int firstToY 	= crdnts.get(3);
 		int secondFromX = crdnts.get(4);
 		int secondFromY = crdnts.get(5);
-		length.rotate(toBoard);
-		length.rotate(firstFromX * lenghtRot);
-		width.rotate(firstFromY * widthRot);
-		height.rotate(-heightRot);
-		pliers.rotate(-pliersRot);
-		height.rotate(heightRot);
+		
+		length.rotate(toBoard, true);
+		largeCheck(length);
+		length.rotate(firstFromX * lenghtRot, true);
+		largeCheck(length);
+		width.rotate(firstFromY * widthRot, true);
+		largeCheck(width);
+		height.rotate(-heightRot, true);
+		mediumCheck(height);
+		pliers.rotate(-pliersRot, true);
+		mediumCheck(pliers);
+		height.rotate(heightRot, true);
+		mediumCheck(height);
 		if (firstToX >= 0) {				// siirretään nappula
-			length.rotate( (firstToX - firstFromX) * lenghtRot);
-			width.rotate( (firstToY - firstFromY) * widthRot);
-			height.rotate(-heightRot);
-			pliers.rotate(pliersRot);
-			height.rotate(heightRot);
-			width.rotate(-firstToY * widthRot);
-			length.rotate(-firstToX * lenghtRot);
+			length.rotate( (firstToX - firstFromX) * lenghtRot, true);
+			largeCheck(length);
+			width.rotate( (firstToY - firstFromY) * widthRot, true);
+			largeCheck(width);
+			height.rotate(-heightRot, true);
+			mediumCheck(height);
+			pliers.rotate(pliersRot, true);
+			mediumCheck(pliers);
+			height.rotate(heightRot, true);
+			mediumCheck(height);
+			width.rotate(-firstToY * widthRot, true);
+			largeCheck(width);
+			length.rotate(-firstToX * lenghtRot, true);
+			largeCheck(length);
 		} else {						// syödään nappula
-			width.rotate(-firstFromY * widthRot);
-			length.rotate(-firstFromX * lenghtRot);
-			length.rotate(-toBoard);
-			pliers.rotate(pliersRot);
-			length.rotate(toBoard);		//takasin laudalla
+			width.rotate(-firstFromY * widthRot, true);
+			largeCheck(width);
+			length.rotate(-firstFromX * lenghtRot, true);
+			largeCheck(length);
+			length.rotate(-toBoard, true);
+			largeCheck(length);
+			pliers.rotate(pliersRot, true);
+			mediumCheck(pliers);
+			length.rotate(toBoard, true);			//takasin laudalla
+			largeCheck(length);
 			//alotetaan toisen nappulan siirto
-			length.rotate(secondFromX * lenghtRot);
-			width.rotate(secondFromY * widthRot);
-			height.rotate(-heightRot);
-			pliers.rotate(-pliersRot);
-			height.rotate(heightRot);
-			length.rotate( (firstFromX - secondFromX) * lenghtRot);
-			width.rotate( (firstFromY - secondFromY) * widthRot);
-			height.rotate(-heightRot);
-			pliers.rotate(pliersRot);
-			height.rotate(heightRot);
-			width.rotate(-firstFromY * widthRot);
-			length.rotate(-firstFromX * lenghtRot);
+			length.rotate(secondFromX * lenghtRot, true);
+			largeCheck(length);
+			width.rotate(secondFromY * widthRot, true);
+			largeCheck(width);
+			height.rotate(-heightRot, true);
+			mediumCheck(height);
+			pliers.rotate(-pliersRot, true);
+			mediumCheck(pliers);
+			height.rotate(heightRot, true);
+			mediumCheck(height);
+			length.rotate( (firstFromX - secondFromX) * lenghtRot, true);
+			largeCheck(length);
+			width.rotate( (firstFromY - secondFromY) * widthRot, true);
+			largeCheck(width);
+			height.rotate(-heightRot, true);
+			mediumCheck(height);
+			pliers.rotate(pliersRot, true);
+			mediumCheck(pliers);
+			height.rotate(heightRot, true);
+			mediumCheck(height);
+			width.rotate(-firstFromY * widthRot, true);
+			largeCheck(width);
+			length.rotate(-firstFromX * lenghtRot, true);
+			largeCheck(length);
 		}
-		length.rotate(-toBoard);
+		length.rotate(-toBoard, true);
+		largeCheck(length);
+	}
+	
+	public void mediumCheck(EV3MediumRegulatedMotor motor) {
+		while(motor.isMoving()) {
+			if(button.pressed()==true) {
+				motor.stop();
+				throw new NullPointerException();
+			}
+		}
+	}
+	
+	public void largeCheck(EV3LargeRegulatedMotor motor) {
+		while(motor.isMoving()) {
+			if(button.pressed()==true) {
+				motor.stop();
+				throw new NullPointerException();
+			}
+		}
+	}
+	
+	public boolean isStopCheck() {
+		return StopCheck;
+	}
+
+	public void setStopCheck(boolean stopCheck) {
+		StopCheck = stopCheck;
 	}
 	
 	public void stopMotors() {

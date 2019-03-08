@@ -18,7 +18,6 @@ public class Button {
 				sensor = new EV3TouchSensor(port);
 				touch = ((EV3TouchSensor)sensor).getTouchMode();
 				sample = new float[touch.sampleSize()];
-				
 			} catch (IllegalArgumentException e) {
 				System.out.println("Kiinnitä napin johto porttiin 1.");
 			}
@@ -31,5 +30,5 @@ public class Button {
 				return true;
 			}
 		return false;
-	}
+	}	 
 }

@@ -24,11 +24,16 @@ public class RobotsTurn implements Behavior{
 	@Override
 	public void action() {
 		suppressed = false;
-		System.out.println("PELAA");
-		motors.movePieces();
-		data.clearCrdnts();
-		suppressed = true;
-		while (!suppressed)Thread.yield();
-		motors.stopMotors();
+		try {
+			motors.movePieces();
+			data.clearCrdnts();
+			suppressed = true;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			data.clearCrdnts();
+			motors.setStopCheck(true);
+			suppressed = true;
+			
+		}
 	}
 }
