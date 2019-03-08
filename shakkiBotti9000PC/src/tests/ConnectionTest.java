@@ -9,31 +9,19 @@ public class ConnectionTest {
 	public static void main(String[] args) {
 		
 		Socket s = null;
-		boolean testi = false;
-		int peli = 0;
+		boolean vuoro = false;
+		boolean peli = true;
 		
 		try {
 			s = new Socket("10.0.1.1", 1111);
 			DataInputStream in = new DataInputStream(s.getInputStream());
 			DataOutputStream out = new DataOutputStream(s.getOutputStream());
-				while (peli==0) {
-				testi = in.readBoolean();
-				System.out.println(testi);
-				if (testi == true) {
-						out.writeInt(1);
-						out.flush();
-						out.writeInt(5);
-						out.flush();
-						out.writeInt(2);
-						out.flush();
-						out.writeInt(5);
-						out.flush();
-						out.writeInt(0);
-						out.flush();
-						out.writeInt(0);
-						out.flush();
+				while (peli==true) {
+				vuoro = in.readBoolean();
+				System.out.println(peli);
+				if (peli == true) {
 				}
-				testi = false;
+				vuoro = false;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
