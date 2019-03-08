@@ -1,4 +1,4 @@
-package controller;
+package gfx;
 
 import java.io.IOException;
 
