@@ -55,7 +55,7 @@ public class cameraQUI extends Application {
 							if (find == false) {
 								System.out.println("Found in " + j + " " + i);
 								find = true;
-								newPosition[j][i].setPiece(new Piece(newPosition[j][i], Piece.WHITE));
+								newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));
 							}
 							image.setRGB(j2, k, 0x00ff0000);
 						}

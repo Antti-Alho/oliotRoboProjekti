@@ -34,13 +34,13 @@ class BishopTest {
 
     @Test
     public void testGetMovesBishopOneDirection() {
-    	board.getPositions()[1][4].setPiece(null);
+    	board.removePiece(1, 4);
         ArrayList<Move> moves = new ArrayList<Move>();        
-        moves.add(new Move(piece, board.getPositions()[1][4]));
-        moves.add(new Move(piece, board.getPositions()[2][3]));
-        moves.add(new Move(piece, board.getPositions()[3][2]));
-        moves.add(new Move(piece, board.getPositions()[4][1]));
-        moves.add(new Move(piece, board.getPositions()[5][0]));
+        moves.add(new Move(piece, 1,4,board.pieceAt(1, 4)));
+        moves.add(new Move(piece, 2,3,board.pieceAt(2, 3)));
+        moves.add(new Move(piece, 3,2,board.pieceAt(3, 2)));
+        moves.add(new Move(piece, 4,1,board.pieceAt(4, 1)));
+        moves.add(new Move(piece, 5,0,board.pieceAt(5, 0)));
         Collections.sort(moves, new MoveComparator());
         
         ArrayList<Move> movesReal = piece.getMoves(board);
@@ -50,19 +50,19 @@ class BishopTest {
     
     @Test
     public void testGetMovesBishopAllDirections() {
-    	board.move(new Move(piece, board.getPositions()[3][4]));
+    	board.move(new Move(piece, 3,4, board.pieceAt(3, 4)));
         ArrayList<Move> moves = new ArrayList<Move>();
         
-        moves.add(new Move(piece, board.getPositions()[2][3]));
-        moves.add(new Move(piece, board.getPositions()[2][5]));
+        moves.add(new Move(piece, 2,3,board.pieceAt(2, 3)));
+        moves.add(new Move(piece, 2,5,board.pieceAt(2, 5)));
         
-        moves.add(new Move(piece, board.getPositions()[4][3]));
-        moves.add(new Move(piece, board.getPositions()[5][2]));
-        moves.add(new Move(piece, board.getPositions()[6][1]));
+        moves.add(new Move(piece, 4,3,board.pieceAt(4, 3)));
+        moves.add(new Move(piece, 5,2,board.pieceAt(5, 2)));
+        moves.add(new Move(piece, 6,1,board.pieceAt(6, 1)));
         
-        moves.add(new Move(piece, board.getPositions()[4][5]));
-        moves.add(new Move(piece, board.getPositions()[5][6]));
-        moves.add(new Move(piece, board.getPositions()[6][7]));
+        moves.add(new Move(piece, 4,5,board.pieceAt(4, 5)));
+        moves.add(new Move(piece, 5,6,board.pieceAt(5, 6)));
+        moves.add(new Move(piece, 6,7,board.pieceAt(6, 7)));
    
         Collections.sort(moves, new MoveComparator());
         

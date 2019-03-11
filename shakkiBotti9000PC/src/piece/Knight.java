@@ -7,8 +7,8 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Knight extends Piece{
-	public Knight(Position pos, Boolean colour) {
-		super(pos, colour);
+	public Knight(Boolean colour, int x, int y) {
+		super(colour, x, y);
 		if (colour) {
 			super.setValue(30);
 		} else {
@@ -22,7 +22,7 @@ public class Knight extends Piece{
 	 */
 	@Override
 	public int getValue() {
-		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+		return eval[super.getX()][super.getY()] + super.getValue();
 	}
 	
 	/**
@@ -31,56 +31,15 @@ public class Knight extends Piece{
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
-		int x = this.getPos().getX();
-		int y = this.getPos().getY();
+		int x = this.getX();
+		int y = this.getY();
 		
-		int i = x+2;
-		int j = y+1;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-
-		i = x-2;
-		j = y-1;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-		
-		i = x+2;
-		j = y-1;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-		
-		i = x-2;
-		j = y+1;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-		
-		i = x+1;
-		j = y+2;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-
-		
-		i = x-1;
-		j = y-2;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-		
-		i = x+1;
-		j = y-2;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
-		}
-		
-		i = x-1;
-		j = y+2;
-		if (isLegal(i, j, board)) {
-			newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+		int[] is = {x+2,x-2,x+2,x-2,x+1,x-1,x+1,x-1};
+		int[] js = {y+1,y-1,y-1,y+1,y+2,y-2,y-2,y+2};
+		for (int i = 0; i < is.length; i++) {
+			if (isLegal(is[i], js[i], board)) {
+			newLegalMoves.add(new Move(this, is[i], js[i], board.pieceAt(is[i], js[i])));
+			}
 		}
 		return newLegalMoves;
 	}

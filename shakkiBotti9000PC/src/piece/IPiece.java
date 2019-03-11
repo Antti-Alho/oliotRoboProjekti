@@ -7,8 +7,6 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public interface IPiece {
-	Position getPos();
-	public void setPos(Position pos);
 	public int getValue();
 	public void setValue(int value);
 	public Boolean getColour();

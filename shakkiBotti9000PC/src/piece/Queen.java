@@ -7,8 +7,8 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Queen extends Piece{
-	public Queen(Position pos, Boolean colour) {
-		super(pos, colour);
+	public Queen(Boolean colour, int x, int y) {
+		super(colour, x, y);
 		if (colour) {
 			super.setValue(100);
 		} else {
@@ -22,7 +22,7 @@ public class Queen extends Piece{
 	 */
 	@Override
 	public int getValue() {
-		return eval[super.getPos().getX()][super.getPos().getY()] + super.getValue();
+		return eval[super.getX()][super.getY()] + super.getValue();
 	}
 	
 	/**
@@ -31,16 +31,16 @@ public class Queen extends Piece{
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
 		ArrayList<Move> newLegalMoves = new ArrayList<Move>();
-		int x = this.getPos().getX();
-		int y = this.getPos().getY();
+		int x = this.getX();
+		int y = this.getY();
 		
 		int i = x+1;
 		int j = y+1;
 		while (i <= 7 && j <= 7) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -53,9 +53,9 @@ public class Queen extends Piece{
 		j = y-1;
 		while (i >= 0 && j >= 0) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -68,9 +68,9 @@ public class Queen extends Piece{
 		j = y+1;
 		while (i >= 0 && j <= 7) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -83,9 +83,9 @@ public class Queen extends Piece{
 		j = y-1;
 		while (i <= 7 && j >= 0) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -98,9 +98,9 @@ public class Queen extends Piece{
 		j = y;
 		while (i <= 7 && j <= 7) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -112,9 +112,9 @@ public class Queen extends Piece{
 		j = y;
 		while (i >= 0 && j >= 0) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -126,9 +126,9 @@ public class Queen extends Piece{
 		j = y+1;
 		while (i >= 0 && j <= 7) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -140,9 +140,9 @@ public class Queen extends Piece{
 		j = y-1;
 		while (i <= 7 && j >= 0) {
 			if (board.getPositions()[i][j].getPiece() == null) {
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
-				newLegalMoves.add(new Move(this, board.getPositions()[i][j]));
+				newLegalMoves.add(new Move(this,i,j,board.pieceAt(i, j)));
 				break;
 			} else {
 				break;
@@ -152,6 +152,7 @@ public class Queen extends Piece{
 		
 		return newLegalMoves;
 	}
+
 	
 	/**
 	 * Returns the string that represents this piece in the command line UI
@@ -164,15 +165,16 @@ public class Queen extends Piece{
 	    }
 	    return s;
 	  }
+	
 	private int[][] eval = {
-			{ -2, -1, -1, -1, -1, -1, -1, -2},
-			{ -1,  0,  0,  0,  0,  0,  0, -1},
-			{ -1,  0,  0,  1,  1,  0,  0, -1},
-			{ -1,  0,  0,  1,  1,  0,  0, -1},
-			{ -1,  0,  1,  1,  1,  1,  0, -1},
-			{ -1,  1,  1,  1,  1,  1,  1, -1},
-			{ -1,  0,  0,  0,  0,  0,  0, -1},
-			{ -2, -1, -1, -1, -1, -1, -1, -2}
-		};
+		{ -2, -1, -1, -1, -1, -1, -1, -2},
+		{ -1,  0,  0,  0,  0,  0,  0, -1},
+		{ -1,  0,  0,  1,  1,  0,  0, -1},
+		{ -1,  0,  0,  1,  1,  0,  0, -1},
+		{ -1,  0,  1,  1,  1,  1,  0, -1},
+		{ -1,  1,  1,  1,  1,  1,  1, -1},
+		{ -1,  0,  0,  0,  0,  0,  0, -1},
+		{ -2, -1, -1, -1, -1, -1, -1, -2}
+	};
 
 }
