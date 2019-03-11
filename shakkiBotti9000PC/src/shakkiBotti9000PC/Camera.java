@@ -21,7 +21,7 @@ public class Camera {
 	public Camera(Board board) {
 		newPosition = new Position[8][8];
 		this.board = board;
-		Pattern pat = Pattern.compile("Logitech QuickCam 3000 .");
+		Pattern pat = Pattern.compile("UVC Camera (046d:09a5) /dev/video3");
 		Matcher m;
 		for (Webcam webcams : Webcam.getWebcams()) {
 			System.out.println(webcams.getName());
@@ -71,7 +71,7 @@ public class Camera {
 							if (red <= 255 && red >= 130 && green <= 110 && green >= 0 && blue <= 90 && blue >= 0) {
 								if (find == false) {
 									find = true;
-									newPosition[j][i].setPiece(new Piece(newPosition[j][i], Piece.WHITE));
+									newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));
 								}
 								image.setRGB(j2, k, 0xffffffff);
 							}
@@ -138,20 +138,20 @@ public class Camera {
 		int v=0;
 		if((whitePieces[7][6].getPiece() == null && newWhitePositions[7][6].getPiece() != null) 
 				&&(whitePieces[7][5].getPiece() == null && newWhitePositions[7][5].getPiece() != null)) {
-			Piece piece1 = board.positions[7][7].getPiece();
+			Piece piece1 = board.pieceAt(7,7);
 			whitePieces[7][5].setPiece(piece1);
 			whitePieces[7][7].setPiece(null);
 			
-			Piece piece2 = board.positions[7][4].getPiece();
+			Piece piece2 = board.pieceAt(7,4);
 			whitePieces[7][6].setPiece(piece2);
 			whitePieces[7][4].setPiece(null);
 		}else if ((whitePieces[7][2].getPiece() == null && newWhitePositions[7][2].getPiece() != null) 
 				&&(whitePieces[7][3].getPiece() == null && newWhitePositions[7][3].getPiece() != null)) {
-			Piece piece1 = board.positions[7][0].getPiece();
+			Piece piece1 = board.pieceAt(7,0);
 			whitePieces[7][3].setPiece(piece1);
 			whitePieces[7][0].setPiece(null);
 			
-			Piece piece2 = board.positions[7][4].getPiece();
+			Piece piece2 = board.pieceAt(7,4);
 			whitePieces[7][2].setPiece(piece2);
 			whitePieces[7][4].setPiece(null);
 		}else {
@@ -168,7 +168,7 @@ public class Camera {
 					}
 				}
 			}
-			Piece piece = board.positions[z][v].getPiece();
+			Piece piece = board.pieceAt(z,v);
 			whitePieces[x][y].setPiece(piece);
 			whitePieces[z][v].setPiece(null);
 		}

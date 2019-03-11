@@ -10,25 +10,30 @@ public class Piece implements IPiece{
 	public static Boolean BLACK = true;
 	public static Boolean WHITE = false;
 	private Boolean colour;
-	private Position pos;
-	private Position firstPos;
+	private int x;
+	private int y;
 	private int value;
 	
-	public Piece(Position pos, Boolean colour) {
-		this.pos = pos;
+	public Piece( Boolean colour, int x, int y) {
+		this.x = x;
+		this.y = y;
 		this.colour = colour;
-		this.firstPos = pos;
 	}
 
-	@Override
-	public Position getPos() {
-		return pos;
+	public int getX() {
+		return x;
 	}
 
-	@Override
-	public void setPos(Position pos) {
-		this.pos = pos;
-		
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	@Override

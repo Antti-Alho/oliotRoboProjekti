@@ -24,15 +24,15 @@ class PawnTest {
     public void initTestSystem() {
         System.out.println("--------------------");
         this.board = new Board();
-        this.pawn = (Pawn) board.getPositions()[1][4].getPiece();
-        this.pawnWhite = (Pawn) board.getPositions()[6][4].getPiece();
+        this.pawn = (Pawn) board.pieceAt(1,4);
+        this.pawnWhite = (Pawn) board.pieceAt(6,4);
     }
 	
     @Test
     public void testGetMovesFirstMoveBlack() {
         ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(pawn, board.getPositions()[2][4]));
-        movesExpected.add(new Move(pawn, board.getPositions()[3][4]));
+        movesExpected.add(new Move(pawn, 2,4,board.pieceAt(2, 4)));
+        movesExpected.add(new Move(pawn, 3,4,board.pieceAt(3, 4)));
         
         ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
@@ -42,11 +42,11 @@ class PawnTest {
     
     @Test
     public void testGetMovesNotFirstMoveBlack() {
-    	board.move(new Move(pawn, board.getPositions()[2][4]));
+    	board.move(new Move(pawn, 2,4,board.pieceAt(2, 4)));
     	positions = board.getPositions(); 
     	
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(pawn, board.getPositions()[3][4]));
+        movesExpected.add(new Move(pawn, 3,4,board.pieceAt(3, 4)));
         
         ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
@@ -58,11 +58,11 @@ class PawnTest {
     public void testGetMovesEatBlack() {
     	
     	positions = board.getPositions(); 
-    	board.move(new Move(pawn, board.getPositions()[5][4]));
+    	board.move(new Move(pawn, 5,4,board.pieceAt(5, 4)));
     	
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-    	movesExpected.add(new Move(pawn, new Position(6, 3)));
-    	movesExpected.add(new Move(pawn, new Position(6, 5)));
+    	movesExpected.add(new Move(pawn, 6,3,board.pieceAt(6, 3)));
+    	movesExpected.add(new Move(pawn, 6,5,board.pieceAt(6, 5)));
     	
     	ArrayList<Move> movesReal = pawn.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
@@ -73,8 +73,8 @@ class PawnTest {
     @Test
     public void testGetMovesFirstMoveWhite() {
         ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(pawnWhite, board.getPositions()[5][4]));
-        movesExpected.add(new Move(pawnWhite, board.getPositions()[4][4]));
+        movesExpected.add(new Move(pawnWhite, 5,4,board.pieceAt(5, 4)));
+        movesExpected.add(new Move(pawnWhite, 4,4,board.pieceAt(4, 4)));
         Collections.sort(movesExpected, new MoveComparator());
         ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
@@ -84,11 +84,11 @@ class PawnTest {
     
     @Test
     public void testGetMovesNotFirstMoveWhite() {
-    	board.move(new Move(pawnWhite, board.getPositions()[5][4]));
+    	board.move(new Move(pawnWhite, 5,4,board.pieceAt(5, 4)));
     	positions = board.getPositions(); 
     	
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(pawnWhite, board.getPositions()[4][4]));
+        movesExpected.add(new Move(pawnWhite, 4,4,board.pieceAt(4, 4)));
         
         ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());
@@ -101,11 +101,11 @@ class PawnTest {
     	
     	
     	positions = board.getPositions(); 
-    	board.move(new Move(pawnWhite, board.getPositions()[2][1]));
+    	board.move(new Move(pawnWhite,2,1,board.pieceAt(2, 1)));
     	
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-    	movesExpected.add(new Move(pawnWhite, new Position(1, 0)));
-    	movesExpected.add(new Move(pawnWhite, new Position(1, 2)));
+    	movesExpected.add(new Move(pawnWhite, 1, 0,board.pieceAt(1, 0)));
+    	movesExpected.add(new Move(pawnWhite, 1, 2,board.pieceAt(1, 2)));
     	
     	ArrayList<Move> movesReal = pawnWhite.getMoves(board);
         Collections.sort(movesReal, new MoveComparator());

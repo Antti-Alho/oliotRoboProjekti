@@ -5,17 +5,19 @@ import piece.Piece;
 public class Move {
 	
 	private Piece p;
-	private Position newPos;
-	private Position oldPos;
+	private int oldX;
+	private int oldY;
+	private int newX;
+	private int newY;
 	private Piece target;
 	
-	public Move(Piece p, Position pos) {
+	public Move(Piece p, int x, int y, Piece target) {
 		this.p = p;
-		oldPos = p.getPos();
-		this.newPos = pos;
-		if (pos.getPiece() != null) {
-			this.target = pos.getPiece();
-		}
+		this.oldX = p.getX();
+		this.oldY = p.getY();
+		this.newX = x;
+		this.newY = y;
+		this.target = target;
 	}
 
 	public Piece getP() {
@@ -25,15 +27,39 @@ public class Move {
 	public void setP(Piece p) {
 		this.p = p;
 	}
-
-	public Position getNewPos() {
-		return newPos;
-	}
-
-	public Position getOldPos() {
-		return oldPos;
-	}
 	
+	public int getOldX() {
+		return oldX;
+	}
+
+	public void setOldX(int oldX) {
+		this.oldX = oldX;
+	}
+
+	public int getOldY() {
+		return oldY;
+	}
+
+	public void setOldY(int oldY) {
+		this.oldY = oldY;
+	}
+
+	public int getNewX() {
+		return newX;
+	}
+
+	public void setNewX(int newX) {
+		this.newX = newX;
+	}
+
+	public int getNewY() {
+		return newY;
+	}
+
+	public void setNewY(int newY) {
+		this.newY = newY;
+	}
+
 	public Piece getTarget() {
 		return target;
 	}
@@ -45,10 +71,10 @@ public class Move {
 
 	public int hashCode() {
 		int hashcode = 0;
-		hashcode = hashcode * 33 ^ newPos.getX();
-		hashcode = hashcode * 33 ^ newPos.getY();
-		hashcode = hashcode * 33 ^ oldPos.getX();
-		hashcode = hashcode * 33 ^ oldPos.getY();
+		hashcode = hashcode * 33 ^ newX;
+		hashcode = hashcode * 33 ^ newY;
+		hashcode = hashcode * 33 ^ oldX;
+		hashcode = hashcode * 33 ^ oldY;
 		hashcode = hashcode * 33 ^ p.getValue();
 		hashcode = hashcode * 33 ^ p.hashCode();
         return hashcode;
@@ -56,7 +82,7 @@ public class Move {
 	
 	@Override
 	public String toString() {
-		return p+"("+oldPos.getX()+","+oldPos.getY()+") to ("+newPos.getX()+ ","+ newPos.getY()+")";
+		return p+"("+oldX+","+oldY+") to ("+newX+ ","+ newY+")";
 	}
 	
 }

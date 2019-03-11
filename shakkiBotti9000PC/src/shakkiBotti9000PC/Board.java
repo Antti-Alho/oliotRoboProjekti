@@ -7,46 +7,33 @@ import piece.*;
 public class Board {
 	
 	private Stack<Move> moves;
-	ArrayList<Piece> pieces= new ArrayList<>();
-	Position[][] positions = new Position[8][8];
+	private ArrayList<Piece> pieces;
 	
 	/**
 	 * The board constructor generates the starting positions for each peace on the board.
 	 */
 	public Board() {
+		pieces = new ArrayList<>();
 		moves = new Stack<Move>();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				positions[i][j] = new Position(i, j);
-			}
-		}
-		
-		positions[0][1].setPiece(new Knight(positions[0][1], Piece.BLACK));
-		positions[0][6].setPiece(new Knight(positions[0][6], Piece.BLACK));
-		positions[7][1].setPiece(new Knight(positions[7][1], Piece.WHITE));
-		positions[7][6].setPiece(new Knight(positions[7][6], Piece.WHITE));
-		positions[0][2].setPiece(new Bishop(positions[0][2], Piece.BLACK));
-		positions[0][5].setPiece(new Bishop(positions[0][5], Piece.BLACK));
-		positions[7][2].setPiece(new Bishop(positions[7][2], Piece.WHITE));
-		positions[7][5].setPiece(new Bishop(positions[7][5], Piece.WHITE));
-		positions[0][0].setPiece(new Rook(positions[0][0], Piece.BLACK));
-		positions[0][7].setPiece(new Rook(positions[0][7], Piece.BLACK));
-		positions[7][0].setPiece(new Rook(positions[7][0], Piece.WHITE));
-		positions[7][7].setPiece(new Rook(positions[7][7], Piece.WHITE));
-		positions[0][3].setPiece(new Queen(positions[0][3], Piece.BLACK));
-		positions[7][3].setPiece(new Queen(positions[7][3], Piece.WHITE));
-		positions[0][4].setPiece(new King(positions[0][4], Piece.BLACK));
-		positions[7][4].setPiece(new King(positions[7][4], Piece.WHITE));
+		pieces.add(new Knight(Piece.BLACK, 0,1));
+		pieces.add(new Knight(Piece.BLACK, 0,6));
+		pieces.add(new Knight(Piece.WHITE,7,1));
+		pieces.add(new Knight(Piece.WHITE,7,6));
+		pieces.add(new Bishop(Piece.BLACK,0,2));
+		pieces.add(new Bishop(Piece.BLACK,0,5));
+		pieces.add(new Bishop(Piece.WHITE,7,2));
+		pieces.add(new Bishop(Piece.WHITE,7,5));
+		pieces.add(new Rook(Piece.BLACK,0,0));
+		pieces.add(new Rook(Piece.BLACK,0,7));
+		pieces.add(new Rook(Piece.WHITE,7,0));
+		pieces.add(new Rook(Piece.WHITE,7,7));
+		pieces.add(new Queen(Piece.BLACK,0,3));
+		pieces.add(new Queen(Piece.WHITE,7,3));
+		pieces.add(new King(Piece.BLACK,0,4));
+		pieces.add(new King(Piece.WHITE,7,4));
 		for (int i = 0; i <8; i++) {
-			positions[1][i].setPiece(new Pawn(new Position(1, i), Piece.BLACK));
-			positions[6][i].setPiece(new Pawn(new Position(6, i), Piece.WHITE));
-		}
-		for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				if (positions[i][j].getPiece() != null) {
-					pieces.add(positions[i][j].getPiece());
-				}
-			}
+			pieces.add(new Pawn(Piece.BLACK,1,i));
+			pieces.add(new Pawn(Piece.WHITE,6,i));
 		}
 	}
 	
@@ -56,10 +43,14 @@ public class Board {
 	 * @param pos target position
 	 * @return true if eating is possible. False if can't eat.
 	 */
-	public Boolean canEat(Piece piece, Position pos) {
-		if (positions[pos.getX()][pos.getY()].getPiece() != null && positions[pos.getX()][pos.getY()].getPiece().getColour() != piece.getColour()) {
-			return true;
-		} else return false;
+	public Boolean canEat(Piece piece, int x,int y) {
+		if (pieceAt(x, y) != null) {
+			Piece enemy = pieceAt(x, y);
+			if (piece.getColour() != enemy.getColour()) {
+				return true;
+			} 
+		}
+		return false;
 	}
 	
 	/**
@@ -82,10 +73,12 @@ public class Board {
 	 * @param move object that is to be executed and saved in to the move stack.
 	 */
 	public void move(Move move) {
-		Piece piece = positions[move.getOldPos().getX()][move.getOldPos().getY()].getPiece();
-		piece.setPos(move.getNewPos());
-		positions[move.getNewPos().getX()][move.getNewPos().getY()].setPiece(piece);
-		positions[move.getOldPos().getX()][move.getOldPos().getY()].setPiece(null);
+		Piece piece = pieceAt(move.getOldX(), move.getOldY());
+		if (containsPiece(move.getNewX(), move.getNewY())) {
+			pieces.remove(pieceAt(move.getNewX(), move.getNewY()));
+		}
+		piece.setX(move.getNewX());
+		piece.setY(move.getNewY());
 		moves.add(move);
 	}
 	
@@ -96,12 +89,10 @@ public class Board {
 	 */
 	public void undo() {
 		Move m = moves.pop();
-		positions[m.getOldPos().getX()][m.getOldPos().getY()].setPiece(m.getP());
-		positions[m.getNewPos().getX()][m.getNewPos().getY()].setPiece(null);
-		m.getP().setPos(positions[m.getOldPos().getX()][m.getOldPos().getY()]);
+		Piece piece = pieceAt(m.getNewX(), m.getNewY());
+		piece.setX(m.getOldX());
+		piece.setY(m.getOldY());
 		if (m.getTarget() != null) {
-			positions[m.getNewPos().getX()][m.getNewPos().getY()].setPiece(m.getTarget());
-			m.getTarget().setPos(positions[m.getNewPos().getX()][m.getNewPos().getY()]);
 			pieces.add(m.getTarget());
 		}
 	}
@@ -112,9 +103,9 @@ public class Board {
 	 * @param positon where 
 	 * @return true / false
 	 */
-	public Boolean containsPiece(Position pos) {
+	public Boolean containsPiece(int x, int y) {
 		for (Piece piece : pieces) {
-			if (piece.getPos() == pos) {
+			if (piece.getX() == x && piece.getY() == y) {
 				return true;
 			}
 		} 
@@ -125,32 +116,27 @@ public class Board {
 	 * @param pos
 	 * @return
 	 */
-	public Boolean containsEnemy(Piece piece, Position pos) {
-		if (piece.getPos() == pos && piece.getColour() != pos.getPiece().getColour()) {
-			return true;
-		} 
+	public Boolean containsEnemy(Piece piece, int x, int y) {
+		if (pieceAt(x, y) != null) {
+			Piece enemy = pieceAt(x, y);
+			if (piece.getColour() != enemy.getColour()) {
+				return true;
+			} 
+		}
 		return false;
-	}
-	
-	/**
-	 * returns true if the target position is empty or the piece can eat another piece that is on it's way
-	 * @param piece that is going to move or eat
-	 * @param newPos position where to move or eat
-	 * @return boolean value if the piece can move true if can false if can't.
-	 */
-	public boolean canEatOrMove(Piece piece, Position newPos) {
-		if (!containsPiece(newPos)) {
-			return true;
-		} else if (positions[newPos.getX()][newPos.getY()].getPiece().getColour() != piece.getColour()) {
-			return true;
-		} else return false;
 	}
 	/**
 	 * removes the piece in the given position
 	 * @param pos position where piece should be removed
 	 */
-	public void removePiece(Position pos) {
-		positions[pos.getX()][pos.getY()].setPiece(null);
+	public void removePiece(int x, int y) {
+		Piece p = null;
+		for (Piece piece: pieces) {
+			if (piece.getX() == x && piece.getY() == y) {
+				p = piece;
+			}
+		}
+		if (p != null) pieces.remove(p);
 	}
 	/**
 	 * getPieces
@@ -164,6 +150,27 @@ public class Board {
 	 * @return return all position on the board in a 2D array
 	 */
 	public Position[][] getPositions(){
-		return positions;
+		Position[][] pos = new Position[8][8];
+		for (int i = 0; i < pos.length; i++) {
+			for (int j = 0; j < pos.length; j++) {
+				pos[i][j] = new Position(i, j);
+			}
+		}
+		for (Piece piece : pieces) {
+			pos[piece.getX()][piece.getY()].setPiece(piece);
+		}
+		return pos;
+	}
+	/**
+	 * returns piece at coordinate x, y;
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return piece at coordinate
+	 */
+	public Piece pieceAt(int x, int y) {
+		for (Piece piece : pieces) {
+			if (piece.getX() == x && piece.getY() == y) return piece; 
+		}
+		return null;
 	}
 }

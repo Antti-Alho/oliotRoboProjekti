@@ -41,11 +41,10 @@ public class ChessAI {
 	 * @return integer value of the of the best board evaluation in top of search tree 
 	 */
 	private int minMax(int depth, Board board, int alpha, int beta, Boolean player) {
-		ArrayList<Move> bestMoves = board.getLegalMoves(player);
 		if (depth == 0) {
 			return -eval(board.getPieces());
 		}
-		
+		ArrayList<Move> bestMoves = board.getLegalMoves(player);
 		if (player) {
 			int bestMoveVal = -99999;
 			for (Move move : bestMoves) {

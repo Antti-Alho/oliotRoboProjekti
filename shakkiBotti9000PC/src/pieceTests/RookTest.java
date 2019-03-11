@@ -25,27 +25,21 @@ class RookTest {
     public void initTestSystem() {
         System.out.println("--------------------");
         this.board = new Board();
-        this.rook = (Rook) board.getPositions()[0][0].getPiece();
-        this.board.removePiece(board.getPositions()[1][0]);
+        this.rook = (Rook) board.pieceAt(0,0);
+        this.board.removePiece(1,0);
     }
 	
     @Test
     public void testGetMovesX() {
     	positions = board.getPositions(); 
-    	for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				System.out.print(positions[i][j].getPieceString() + " ");
-			}
-			System.out.println("  "+(i+1));
-		}
         
     	ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(rook, board.getPositions()[1][0]));
-        movesExpected.add(new Move(rook, board.getPositions()[2][0]));
-        movesExpected.add(new Move(rook, board.getPositions()[3][0]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][0]));
-        movesExpected.add(new Move(rook, board.getPositions()[5][0]));
-        movesExpected.add(new Move(rook, board.getPositions()[6][0]));
+        movesExpected.add(new Move(rook, 1,0,board.pieceAt(1, 0)));
+        movesExpected.add(new Move(rook, 2,0,board.pieceAt(2, 0)));
+        movesExpected.add(new Move(rook, 3,0,board.pieceAt(3, 0)));
+        movesExpected.add(new Move(rook, 4,0,board.pieceAt(4, 0)));
+        movesExpected.add(new Move(rook, 5,0,board.pieceAt(5, 0)));
+        movesExpected.add(new Move(rook, 6,0,board.pieceAt(6, 0)));
         Collections.sort(movesExpected, new MoveComparator());
         
         ArrayList<Move> movesReal = rook.getMoves(board);
@@ -57,26 +51,20 @@ class RookTest {
     @Test
     public void testGetMovesY() {
     	positions = board.getPositions(); 
-    	board.move(new Move(rook, board.getPositions()[4][3]));
+    	board.move(new Move(rook, 4,3,board.pieceAt(4, 3)));
     	
-    	for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				System.out.print(positions[i][j].getPieceString() + " ");
-			}
-			System.out.println("  "+(i+1));
-		}
         ArrayList<Move> movesExpected = new ArrayList<Move>();
-        movesExpected.add(new Move(rook, board.getPositions()[5][3]));
-        movesExpected.add(new Move(rook, board.getPositions()[6][3]));
-        movesExpected.add(new Move(rook, board.getPositions()[3][3]));
-        movesExpected.add(new Move(rook, board.getPositions()[2][3]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][4]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][5]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][6]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][7]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][2]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][1]));
-        movesExpected.add(new Move(rook, board.getPositions()[4][0]));
+        movesExpected.add(new Move(rook, 5,3,board.pieceAt(5, 3)));
+        movesExpected.add(new Move(rook, 6,3,board.pieceAt(6, 3)));
+        movesExpected.add(new Move(rook, 3,3,board.pieceAt(3, 3)));
+        movesExpected.add(new Move(rook, 2,3,board.pieceAt(2, 3)));
+        movesExpected.add(new Move(rook, 4,4,board.pieceAt(4, 4)));
+        movesExpected.add(new Move(rook, 4,5,board.pieceAt(4, 5)));
+        movesExpected.add(new Move(rook, 4,6,board.pieceAt(4, 6)));
+        movesExpected.add(new Move(rook, 4,7,board.pieceAt(4, 7)));
+        movesExpected.add(new Move(rook, 4,2,board.pieceAt(4, 2)));
+        movesExpected.add(new Move(rook, 4,1,board.pieceAt(4, 1)));
+        movesExpected.add(new Move(rook, 4,0,board.pieceAt(4, 0)));
         
         Collections.sort(movesExpected, new MoveComparator());
         
