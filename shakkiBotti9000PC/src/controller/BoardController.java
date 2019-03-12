@@ -91,6 +91,7 @@ public class BoardController {
 				}
 				System.out.println(" "+i);
 			}
+			
 			System.out.println("");
 			System.out.println("-----------------------");
 			System.out.print("Anna mistä x:");
