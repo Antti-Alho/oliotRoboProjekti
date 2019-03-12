@@ -31,46 +31,41 @@ public class LiikkumisTesti {
 		//korkeus 280
 		//pihdit 325
 		
-		int pitkruutu = 96;
-		int poikruutu = 280;
-		int korkeusrotate = 282;
-		int pihditrotate = 325;
-		int laudalle = 372;
+		int pitkr = 94;
+		int poikr = -280;
+		int korkeusr = -282;
+		int pihditr = -325;
+		int laudalle = 390;
 		
-		int ruudustaX = 5;
-		int ruudustaY = 5;
+		int fromX = 1;
+		int fromY = 0;
 		
-		int ruutuunX = 3;
-		int ruutuunY = 3;
+		int toX = 2;
+		int toY = 0;
 		
-		//siirto
 		/**
-		pitkittain.rotate(laudalle);
-		
-		pitkittain.rotate(ruudustaX*pitkruutu);
-		poikittain.rotate(ruudustaY*poikruutu);
-		korkeus.rotate(-korkeusrotate);
-		pihdit.rotate(-pihditrotate);
-		korkeus.rotate(korkeusrotate);
-		
-		pitkittain.rotate((ruutuunX-ruudustaX)*pitkruutu);
-		poikittain.rotate((ruutuunY-ruudustaY)*poikruutu);
-		korkeus.rotate(-korkeusrotate);
-		pihdit.rotate(pihditrotate);
-		korkeus.rotate(korkeusrotate);
-		
-		poikittain.rotate(-ruutuunY*poikruutu);
-		pitkittain.rotate(-ruutuunX*pitkruutu);
-		pitkittain.rotate(-laudalle);
+		for (int i = 0 ; i < 8; i++) {
+			pitkittain.rotate(laudalle);
+			pitkittain.rotate(pitkr*i);
+			poikittain.rotate(poikr*i);
+			//nosto
+			korkeus.rotate(-korkeusr);
+			pihdit.rotate(-pihditr);
+			korkeus.rotate(korkeusr);
+			//lasku
+			korkeus.rotate(-korkeusr);
+			pihdit.rotate(pihditr);
+			korkeus.rotate(korkeusr);
+			poikittain.rotate(-poikr*i);
+			pitkittain.rotate(-pitkr*i);
+			pitkittain.rotate(-laudalle);
+			Delay.msDelay(500);
+		}
 		**/
 		
 		pitkittain.close();
 		poikittain.close();
 		korkeus.close();
 		pihdit.close();
-		
 	}
-	
-	
-	
 }
