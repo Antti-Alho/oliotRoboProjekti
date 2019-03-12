@@ -68,7 +68,7 @@ public class Camera {
 							int red = (clr & 0x00ff0000) >> 16;
 							int green = (clr & 0x0000ff00) >> 8;
 							int blue = clr & 0x000000ff;
-							if (red <= 255 && red >= 130 && green <= 110 && green >= 0 && blue <= 120 && blue >= 0) {
+							if (red <= 255 && red >= 110 && green <= 105 && green >= 0 && blue <= 115 && blue >= 0) {
 								if (find == false) {
 									find = true;
 									newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));

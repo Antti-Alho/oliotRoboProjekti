@@ -24,13 +24,20 @@ public class BoardController {
 		int depth = 3;
 		Socket socket = null;
 		boolean vuoro = false;
-		boolean peli = true;
 		Camera cam = new Camera(board);	
 		String answer=null;
-/*
+
+		try {
+			socket = new Socket("10.0.1.1", 1111);
+		      DataInputStream in = new DataInputStream(socket.getInputStream());
+		      DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 				while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
 					vuoro = in.readBoolean();
-					if (peli==true) {
+					if (vuoro==true) {
+						
+					
+						cam.takePicture();
+						cam.getEnemymove();
 						System.out.println("-----------------------");
 						System.out.println("A B C D E F G H");
 						for (int i = 0; i < 8; i++) {
@@ -41,17 +48,14 @@ public class BoardController {
 							System.out.println(" "+(i+1));
 						}
 						System.out.println("");
-					
-						cam.takePicture();
-						cam.getEnemymove();
 						
 //						board.move(new Move(board.pieceAt(x, y),x2,y2,board.pieceAt(x2, y2)));
 						Move m = ai.calculateBestMove(depth);
 						board.move(m);
 						//fromX, toX, fromY, toY, target
-						out.writeInt(m.getP().getX());
+						out.writeInt(m.getOldX());
 						out.flush();
-						out.writeInt(m.getP().getY());
+						out.writeInt(m.getOldY());
 						out.flush();
 						out.writeInt(m.getNewX());
 						out.flush();
@@ -64,14 +68,26 @@ public class BoardController {
 							out.writeInt(1);
 							out.flush();
 						}
+						System.out.println("-----------------------");
+						System.out.println("A B C D E F G H");
+						for (int i = 0; i < 8; i++) {
+							
+							for (int j = 0; j < 8; j++) {
+								System.out.print(" "+board.getPositions()[i][j].getPieceString());
+							}
+							System.out.println(" "+(i+1));
+						}
+						System.out.println("");
 					}
 					vuoro = false;
 				}
+				in.close();
+				out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-*/
+/*
 		while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
 
 			while (answer != "x") {
@@ -96,5 +112,7 @@ public class BoardController {
 				answer = sc.next();
 			}
 		}
+	}
+*/
 	}
 }
