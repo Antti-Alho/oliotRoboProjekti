@@ -21,7 +21,7 @@ public class MainGFX extends Application {
 
         initRootLayout();
 
-        showBoardGFX();
+        showChessGUI();
     }
     
     /**
@@ -37,6 +37,7 @@ public class MainGFX extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,17 +45,17 @@ public class MainGFX extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the chess GUI inside the root layout.
      */
-    public void showBoardGFX() {
+    public void showChessGUI() {
         try {
-            // Load person overview.
+            // Load chessGUI
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainGFX.class.getResource("view/BoardGFX.fxml"));
-            AnchorPane boardGFX = (AnchorPane) loader.load();
+            loader.setLocation(MainGFX.class.getResource("view/ChessGUI.fxml"));
+            BorderPane chessGUI = (BorderPane) loader.load();
             
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(boardGFX);
+            // Set chessGUI into the center of root layout.
+            rootLayout.setCenter(chessGUI);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,6 +69,10 @@ public class MainGFX extends Application {
         return primaryStage;
     }
 
+    public void Nobb() {
+    	System.out.println("aaaach");
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
