@@ -43,7 +43,6 @@ public class ChessAI {
 	 */
 	private int minMax(int depth, Board board, int alpha, int beta, Boolean player) {
 		if (depth == 0) {
-			System.out.println(eval(board.getPieces()));
 			return eval(board.getPieces());
 		}
 		ArrayList<Move> bestMoves = board.getLegalMoves(player);
