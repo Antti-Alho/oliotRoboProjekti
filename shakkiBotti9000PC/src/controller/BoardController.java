@@ -33,6 +33,7 @@ public class BoardController {
 		      DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 				while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
 					vuoro = in.readBoolean();
+					System.out.println(board.getPieces().contains(white)+ "    " +board.getPieces().contains(black));
 					if (vuoro==true) {
 						
 					

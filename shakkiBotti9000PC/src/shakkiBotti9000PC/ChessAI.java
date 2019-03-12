@@ -30,6 +30,7 @@ public class ChessAI {
 			}
 		}
 		System.out.println(bestMove);
+		System.out.println(bestMoveVal);
 		return bestMove;
 	}
 	
@@ -69,7 +70,7 @@ public class ChessAI {
 	                return bestMoveVal;
 	            }
 			}
-			return eval(board.getPieces());
+			return bestMoveVal;
 		}
 	}
 	/*
