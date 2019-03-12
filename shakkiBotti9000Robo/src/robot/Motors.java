@@ -27,7 +27,7 @@ public class Motors {
 	int lenghtRot = 94;		// 94	yksi ruutu
 	int widthRot = -280;	// 280	yksi ruutu						HUOM. käänteellinen pyörimissuunta
 	int heightRot = -282;	// 282	max liikkumis					HUOM. käänteellinen pyörimissuunta
-	int pliersRot = -325;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
+	int pliersRot = -335;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
 	int toBoard = 390; 		// 390	vakioetäisyys odotuspaikan ja ensimmäisen ruudun välillä
 	
 	public Motors(Data data, Button button) {

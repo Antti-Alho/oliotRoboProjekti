@@ -50,7 +50,7 @@ public class cameraQUI extends Application {
 						int green = (clr & 0x0000ff00) >> 8;
 						int blue = clr & 0x000000ff;
 						image.setRGB(j2, k,0x000000ff);
-						if (red <= 255 && red >= 130 && green <= 110 && green >= 0 && blue <= 120 && blue >= 0) {
+						if (red <= 255 && red >= 115 && green <= 100 && green >= 0 && blue <= 110 && blue >= 0) {
 							if (find == false) {
 								System.out.println("Found in " + j + " " + i);
 								find = true;

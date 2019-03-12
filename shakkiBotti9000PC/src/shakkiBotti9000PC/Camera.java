@@ -68,7 +68,7 @@ public class Camera {
 							int red = (clr & 0x00ff0000) >> 16;
 							int green = (clr & 0x0000ff00) >> 8;
 							int blue = clr & 0x000000ff;
-							if (red <= 255 && red >= 130 && green <= 110 && green >= 0 && blue <= 120 && blue >= 0) {
+							if (red <= 255 && red >= 115 && green <= 100 && green >= 0 && blue <= 110 && blue >= 0) {
 								if (find == false) {
 									find = true;
 									newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));
@@ -131,25 +131,12 @@ public class Camera {
 		int v=0;
 		if((whitePieces[7][6].getPiece() == null && newWhitePositions[7][6].getPiece() != null) 
 				&&(whitePieces[7][5].getPiece() == null && newWhitePositions[7][5].getPiece() != null)) {
-/*			Piece piece1 = board.pieceAt(7,7);
-			whitePieces[7][5].setPiece(piece1);
-			whitePieces[7][7].setPiece(null);
-			
-			Piece piece2 = board.pieceAt(7,4);
-			whitePieces[7][6].setPiece(piece2);
-			whitePieces[7][4].setPiece(null);
-			*/
 			board.move(new Move(board.pieceAt(7, 7), 7,5,board.pieceAt(7,5)));
 			board.move(new Move(board.pieceAt(7, 4),7,6,board.pieceAt(7,6)));			
 		}else if ((whitePieces[7][2].getPiece() == null && newWhitePositions[7][2].getPiece() != null) 
 				&&(whitePieces[7][3].getPiece() == null && newWhitePositions[7][3].getPiece() != null)) {
-			Piece piece1 = board.pieceAt(7,0);
-			whitePieces[7][3].setPiece(piece1);
-			whitePieces[7][0].setPiece(null);
-			
-			Piece piece2 = board.pieceAt(7,4);
-			whitePieces[7][2].setPiece(piece2);
-			whitePieces[7][4].setPiece(null);
+			board.move(new Move(board.pieceAt(7, 0), 7,3,board.pieceAt(7,3)));
+			board.move(new Move(board.pieceAt(7, 4),7,2,board.pieceAt(7,2)));
 		}else {
 			for (int i = 0; i < whitePieces.length; i++) {
 				for (int j = 0; j < whitePieces.length; j++) {
