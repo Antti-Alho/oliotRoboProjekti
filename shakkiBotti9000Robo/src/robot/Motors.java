@@ -63,7 +63,7 @@ public class Motors {
 	
 	public void startMotors() {
 		length.setSpeed(320);
-		width.setSpeed(450);
+		width.setSpeed(500);	//450
 		height.setSpeed(120);
 		pliers.setSpeed(300);
 	}

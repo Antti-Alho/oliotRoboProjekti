@@ -40,7 +40,7 @@ public class BoardController {
 						cam.takePicture();
 						cam.getEnemymove();
 						System.out.println("-----------------------");
-						System.out.println("A B C D E F G H");
+						System.out.println(" A B C D E F G H");
 						for (int i = 0; i < 8; i++) {
 							
 							for (int j = 0; j < 8; j++) {
@@ -49,8 +49,6 @@ public class BoardController {
 							System.out.println(" "+(i+1));
 						}
 						System.out.println("");
-						
-//						board.move(new Move(board.pieceAt(x, y),x2,y2,board.pieceAt(x2, y2)));
 						Move m = ai.calculateBestMove(depth);
 						board.move(m);
 						//fromX, toX, fromY, toY, target
@@ -70,7 +68,7 @@ public class BoardController {
 							out.flush();
 						}
 						System.out.println("-----------------------");
-						System.out.println("A B C D E F G H");
+						System.out.println(" A B C D E F G H");
 						for (int i = 0; i < 8; i++) {
 							
 							for (int j = 0; j < 8; j++) {

@@ -29,11 +29,9 @@ public class RobotsTurn implements Behavior{
 			data.clearCrdnts();
 			suppressed = true;
 		} catch (NullPointerException e) {
-			// TODO: handle exception
 			data.clearCrdnts();
 			motors.setStopCheck(true);
 			suppressed = true;
-			
 		}
 	}
 }

@@ -23,6 +23,7 @@ public class Stop implements Behavior{
 	
 	public void action() { 
 		suppressed = false;
+		System.out.println("STOP");
 		motors.setStopCheck(false);
 		suppressed = true;
 	}
