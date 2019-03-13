@@ -1,5 +1,6 @@
 package gfx;
 
+import controller.BoardController;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,17 +15,13 @@ import shakkiBotti9000PC.Position;
 public class BoardView extends Application {
 	
 	private GridPane gridPane = new GridPane();
-	private Board bc;
-	private Scene scene;
-	private Stage stage;
-	
-	public BoardView(String[] args,Board board) {
-		this.bc = board;
-		launch(args);
-	}
+	BoardController bc;
+	Scene scene;
+	Stage stage;
 	
 	@Override 
-	public void start(Stage stage) {  
+	public void start(Stage stage) {
+		this.bc = new BoardController(this);
 		this.stage = stage;
 		//Creating a Grid Pane 
 		//Setting size for the pane  
@@ -66,8 +63,7 @@ public class BoardView extends Application {
 		//Displaying the contents of the stage 
 		stage.show(); 
 	} 
-	public void letsgobois(String args[], Board board){ 
-		this.bc = board;
+	public static void main(String[] args) {
 		launch(args);
 	}
    
@@ -139,7 +135,7 @@ public class BoardView extends Application {
 		stage.setScene(scene); 
      
 		//Displaying the contents of the stage 
-		stage.show(); 
+		stage.show();   
 	} 
 } 
 	
