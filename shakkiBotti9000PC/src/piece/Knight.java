@@ -7,6 +7,13 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class Knight extends Piece{
+	
+	/**
+	 * Creates Knight of given colour in given coordinates 
+	 * @param colour True if black false if white.
+	 * @param x coordinate on the board
+	 * @param y coordinate on the board
+	 */
 	public Knight(Boolean colour, int x, int y) {
 		super(colour, x, y);
 		if (colour) {

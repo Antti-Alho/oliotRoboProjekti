@@ -43,8 +43,7 @@ public class ChessAI {
 	 */
 	private int minMax(int depth, Board board, int alpha, int beta, Boolean player) {
 		if (depth == 0) {
-			System.out.println(eval(board.getPieces()));
-			return eval(board.getPieces());
+			return -eval(board.getPieces());
 		}
 		ArrayList<Move> bestMoves = board.getLegalMoves(player);
 		if (player) {
@@ -55,9 +54,13 @@ public class ChessAI {
 				board.undo();
 	            alpha = Math.max(alpha, bestMoveVal);
 	            if (beta <= alpha) {
+	            	System.out.println(player);
+	                System.out.println(bestMoveVal);
 	                return bestMoveVal;
 	            }
 			}
+			System.out.println(player);
+            System.out.println(bestMoveVal);
 			return bestMoveVal;
 		} else {
 			int bestMoveVal = 99999;
@@ -67,10 +70,15 @@ public class ChessAI {
 				board.undo();
 	            beta = Math.min(beta, bestMoveVal);
 	            if (beta <= alpha) {
+	                System.out.println(player);
+	                System.out.println(bestMoveVal);
 	                return bestMoveVal;
 	            }
 			}
-			return eval(board.getPieces());
+			System.out.println(player);
+            System.out.println(bestMoveVal);
+
+			return bestMoveVal;
 		}
 	}
 	/*
