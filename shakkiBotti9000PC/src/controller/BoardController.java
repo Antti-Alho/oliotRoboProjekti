@@ -12,12 +12,17 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Camera;
 import shakkiBotti9000PC.ChessAI;
 import shakkiBotti9000PC.Move;
+import shakkiBotti9000PC.Position;
 
 public class BoardController {
-	static Scanner sc = new Scanner(System.in);
+	private BoardView bv;
+	private Board board;
 	
-	public static void main(String[] args) {
-		Board board = new Board();
+	public BoardController(BoardView bv) {
+		this.bv = bv;
+		this.board = new Board();
+	}
+	public void play() {
 		King white = (King) board.getPositions()[7][4].getPiece();
 		King black = (King) board.getPositions()[0][4].getPiece();
 		Scanner s = new Scanner(System.in);
@@ -26,7 +31,6 @@ public class BoardController {
 		Socket socket = null;
 		boolean vuoro = false;
 		Camera cam = new Camera(board);
-		BoardView bv = new BoardView(args,board);
 
 		try {
 			socket = new Socket("10.0.1.1", 1111);
@@ -92,5 +96,8 @@ public class BoardController {
 			e.printStackTrace();
 		}
 
+	}
+	public Position[][] getPositions() {
+		return board.getPositions();
 	}
 }
