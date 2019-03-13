@@ -6,17 +6,23 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
+import gfx.BoardView;
 import piece.King;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Camera;
 import shakkiBotti9000PC.ChessAI;
 import shakkiBotti9000PC.Move;
+import shakkiBotti9000PC.Position;
 
 public class BoardController {
-	static Scanner sc = new Scanner(System.in);
+	private BoardView bv;
+	private Board board;
 	
-	public static void main(String[] args) {
-		Board board = new Board();
+	public BoardController(BoardView bv) {
+		this.bv = bv;
+		this.board = new Board();
+	}
+	public void play() {
 		King white = (King) board.getPositions()[7][4].getPiece();
 		King black = (King) board.getPositions()[0][4].getPiece();
 		Scanner s = new Scanner(System.in);
@@ -24,8 +30,7 @@ public class BoardController {
 		int depth = 3;
 		Socket socket = null;
 		boolean vuoro = false;
-		Camera cam = new Camera(board);	
-		String answer=null;
+		Camera cam = new Camera(board);
 
 		try {
 			socket = new Socket("10.0.1.1", 1111);
@@ -37,6 +42,7 @@ public class BoardController {
 				if (vuoro==true) {
 					cam.takePicture();
 					cam.getEnemymove();
+					bv.update();
 					System.out.println("-----------------------");
 					System.out.println(" A B C D E F G H");
 					for (int i = 0; i < 8; i++) {
@@ -54,6 +60,7 @@ public class BoardController {
 					}
 					Move m = ai.calculateBestMove(depth);
 					board.move(m);
+					bv.update();
 					//fromX, fromY, toX, toY, target
 					if (board.getPieces().contains(white)==false) {
 						out.writeInt(-2);
@@ -99,32 +106,9 @@ public class BoardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-/*
-		while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
 
-			while (answer != "x") {
-				
-				
-				cam.takePicture();
-				cam.getEnemymove();
-				System.out.println("lasketaan");
-				Move m = ai.calculateBestMove(depth);
-				board.move(m);
-				System.out.println("Laskettu");
-				System.out.println("-----------------------");
-				System.out.println(" 0 1 2 3 4 5 6 7");
-				for (int i = 0; i < 8; i++) {
-					
-					for (int j = 0; j < 8; j++) {
-						System.out.print(" "+board.getPositions()[i][j].getPieceString());
-					}
-					System.out.println(" "+i);
-				}
-				System.out.println("********************* \n\nAgain");
-				answer = sc.next();
-			}
-		}
 	}
-*/
+	public Position[][] getPositions() {
+		return board.getPositions();
 	}
 }
