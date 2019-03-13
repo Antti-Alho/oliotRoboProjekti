@@ -54,13 +54,9 @@ public class ChessAI {
 				board.undo();
 	            alpha = Math.max(alpha, bestMoveVal);
 	            if (beta <= alpha) {
-	            	System.out.println(player);
-	                System.out.println(bestMoveVal);
 	                return bestMoveVal;
 	            }
 			}
-			System.out.println(player);
-            System.out.println(bestMoveVal);
 			return bestMoveVal;
 		} else {
 			int bestMoveVal = 99999;
@@ -70,14 +66,9 @@ public class ChessAI {
 				board.undo();
 	            beta = Math.min(beta, bestMoveVal);
 	            if (beta <= alpha) {
-	                System.out.println(player);
-	                System.out.println(bestMoveVal);
 	                return bestMoveVal;
 	            }
 			}
-			System.out.println(player);
-            System.out.println(bestMoveVal);
-
 			return bestMoveVal;
 		}
 	}
