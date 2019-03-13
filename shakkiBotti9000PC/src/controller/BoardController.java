@@ -19,7 +19,7 @@ public class BoardController {
 		King black = (King) board.getPositions()[0][4].getPiece();
 		Scanner s = new Scanner(System.in);
 		ChessAI ai = new ChessAI(board);
-		int depth = 5;
+		int depth = 3;
 		Socket socket = null;
 		boolean vuoro = false;
 		boolean peli = true;
