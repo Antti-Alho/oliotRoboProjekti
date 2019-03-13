@@ -3,6 +3,7 @@ package robot;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
+import lejos.utility.Delay;
 
 public class LiikkumisTesti {
 
@@ -14,7 +15,7 @@ public class LiikkumisTesti {
 		EV3MediumRegulatedMotor pihdit = new EV3MediumRegulatedMotor(MotorPort.D);
 		
 		pitkittain.setSpeed(320);
-		poikittain.setSpeed(450);
+		poikittain.setSpeed(1000);
 		korkeus.setSpeed(120);
 		pihdit.setSpeed(300);
 		
@@ -34,16 +35,23 @@ public class LiikkumisTesti {
 		int pitkr = 94;
 		int poikr = -280;
 		int korkeusr = -282;
-		int pihditr = -325;
-		int laudalle = 390;
+		int pihditr = -320;
+		int laudalle = 385;
 		
 		int fromX = 1;
 		int fromY = 0;
 		
 		int toX = 2;
-		int toY = 0;
+		int toY = 1;
+		/*
+		while(toY==1){
+			pihdit.rotate(-pihditr);
+			Delay.msDelay(1000);
+			pihdit.rotate(pihditr);
+			Delay.msDelay(3000);
+		}
+		*/
 		
-		/**
 		for (int i = 0 ; i < 8; i++) {
 			pitkittain.rotate(laudalle);
 			pitkittain.rotate(pitkr*i);
@@ -61,7 +69,7 @@ public class LiikkumisTesti {
 			pitkittain.rotate(-laudalle);
 			Delay.msDelay(500);
 		}
-		**/
+		
 		
 		pitkittain.close();
 		poikittain.close();

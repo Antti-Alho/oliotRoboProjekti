@@ -29,59 +29,72 @@ public class BoardController {
 
 		try {
 			socket = new Socket("10.0.1.1", 1111);
-		      DataInputStream in = new DataInputStream(socket.getInputStream());
-		      DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-				while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
-					vuoro = in.readBoolean();
-					System.out.println(board.getPieces().contains(white)+ "    " +board.getPieces().contains(black));
-					if (vuoro==true) {
-						
-					
-						cam.takePicture();
-						cam.getEnemymove();
-						System.out.println("-----------------------");
-						System.out.println(" A B C D E F G H");
-						for (int i = 0; i < 8; i++) {
-							
-							for (int j = 0; j < 8; j++) {
-								System.out.print(" "+board.getPositions()[i][j].getPieceString());
-							}
-							System.out.println(" "+(i+1));
+			DataInputStream in = new DataInputStream(socket.getInputStream());
+		    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+		    while (board.getPieces().contains(white) && board.getPieces().contains(black)) {
+				vuoro = in.readBoolean();
+				System.out.println(board.getPieces().contains(white)+ "    " +board.getPieces().contains(black));
+				if (vuoro==true) {
+					cam.takePicture();
+					cam.getEnemymove();
+					System.out.println("-----------------------");
+					System.out.println(" A B C D E F G H");
+					for (int i = 0; i < 8; i++) {
+						for (int j = 0; j < 8; j++) {
+							System.out.print(" "+board.getPositions()[i][j].getPieceString());
 						}
-						System.out.println("");
-						Move m = ai.calculateBestMove(depth);
-						board.move(m);
-						//fromX, toX, fromY, toY, target
+						System.out.println(" "+(i+1));
+					}
+					System.out.println("");
+					if(board.getPieces().contains(black)==false) {
+						break;
+					}
+					if (board.getPieces().size()<=13) {
+						depth = 5;
+					}
+					Move m = ai.calculateBestMove(depth);
+					board.move(m);
+					//fromX, fromY, toX, toY, target
+					if (board.getPieces().contains(white)==false) {
+						out.writeInt(-2);
+						out.flush();
+					} else {
 						out.writeInt(m.getOldX());
 						out.flush();
-						out.writeInt(m.getOldY());
-						out.flush();
-						out.writeInt(m.getNewX());
-						out.flush();
-						out.writeInt(m.getNewY());
-						out.flush();
-						if (m.getTarget() == null) {
-							out.writeInt(-1);
-							out.flush();
-						} else {
-							out.writeInt(1);
-							out.flush();
-						}
-						System.out.println("-----------------------");
-						System.out.println(" A B C D E F G H");
-						for (int i = 0; i < 8; i++) {
-							
-							for (int j = 0; j < 8; j++) {
-								System.out.print(" "+board.getPositions()[i][j].getPieceString());
-							}
-							System.out.println(" "+(i+1));
-						}
-						System.out.println("");
 					}
-					vuoro = false;
+					out.writeInt(m.getOldY());
+					out.flush();
+					out.writeInt(m.getNewX());
+					out.flush();
+					out.writeInt(m.getNewY());
+					out.flush();
+					if (m.getTarget() == null) {
+						out.writeInt(-1);
+						out.flush();
+					} else {
+						out.writeInt(1);
+						out.flush();
+					}
+					System.out.println("-----------------------");
+					System.out.println(" A B C D E F G H");
+					for (int i = 0; i < 8; i++) {
+						
+						for (int j = 0; j < 8; j++) {
+							System.out.print(" "+board.getPositions()[i][j].getPieceString());
+						}
+						System.out.println(" "+(i+1));
+					}
+					System.out.println("");
 				}
-				in.close();
-				out.close();
+				vuoro = false;
+			}
+		    for (int i = 0; i < 6; i++) {
+		    	out.writeInt(-1);
+				out.flush();
+			}
+		    System.out.println("Peli päättyi.");
+			in.close();
+			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

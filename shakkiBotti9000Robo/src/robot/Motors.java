@@ -1,5 +1,6 @@
 package robot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import lejos.hardware.DeviceException;
@@ -27,8 +28,8 @@ public class Motors {
 	int lenghtRot = 94;		// 94	yksi ruutu
 	int widthRot = -280;	// 280	yksi ruutu						HUOM. käänteellinen pyörimissuunta
 	int heightRot = -282;	// 282	max liikkumis					HUOM. käänteellinen pyörimissuunta
-	int pliersRot = -335;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
-	int toBoard = 390; 		// 390	vakioetäisyys odotuspaikan ja ensimmäisen ruudun välillä
+	int pliersRot = -320;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
+	int toBoard = 392; 		// 390	vakioetäisyys odotuspaikan ja ensimmäisen ruudun välillä
 	
 	public Motors(Data data, Button button) {
 		this.data = data;
@@ -36,6 +37,7 @@ public class Motors {
 		while (length == null || width == null || height == null || pliers == null) {
 			try {
 				length = new EV3LargeRegulatedMotor(MotorPort.A);
+				length.setSpeed(320);
 			} catch (DeviceException e) {
 				System.out.println("Laita moottori A kiinni");
 				continue;
@@ -63,7 +65,7 @@ public class Motors {
 	
 	public void startMotors() {
 		length.setSpeed(320);
-		width.setSpeed(500);	//450
+		width.setSpeed(700);	//450
 		height.setSpeed(120);
 		pliers.setSpeed(300);
 	}
@@ -77,9 +79,12 @@ public class Motors {
 		int toY = crdnts.get(3);
 		int target = crdnts.get(4);
 		
+		if (crdnts.get(0) == -1) {
+			shutDown();
+		}
 		length.rotate(toBoard, true);
 		largeCheck(length);
-		if (target >= 0) {
+		if (target == 1) {
 			//haetaan syötävä
 			length.rotate(toX * lenghtRot, true);
 			largeCheck(length);
@@ -101,6 +106,9 @@ public class Motors {
 			largeCheck(length);
 			pliers.rotate(pliersRot, true);
 			mediumCheck(pliers);
+			if(fromX == -2) {
+				shutDown();
+			}
 			length.rotate(toBoard, true);
 			largeCheck(length);
 		}
@@ -168,11 +176,19 @@ public class Motors {
 		pliers.stop(true);
 	}
 	
-	public void closeMotors() {
-		length.close();
-		width.close();
-		height.close();
-		pliers.close();
+	public void shutDown() {
+		try {
+			data.in.close();
+			data.out.close();
+			length.close();
+			width.close();
+			height.close();
+			pliers.close();
+			System.exit(0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }
