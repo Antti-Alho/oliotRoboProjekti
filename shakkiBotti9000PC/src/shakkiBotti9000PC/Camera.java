@@ -73,7 +73,7 @@ public class Camera {
 									find = true;
 									newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));
 								}
-								image.setRGB(j2, k, 0xffffffff);
+								image.setRGB(j2, k, 0x0000ff00);
 							}
 						}
 					}
@@ -155,66 +155,4 @@ public class Camera {
 		}
 		return whitePieces;
 	}
-/*
-	/**
-	 * creates list of black pieces positions
-	 * @param blacks pieces
-	 * @return list of blacks
-	 */
-/*	
-	private Position[][] createBlackArray(Position[][] original) {
-		Position[][] blacks = new Position[8][8];
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				blacks [i][j] = new Position(i, j);
-				if (original[i][j].getPiece() != null) {
-					if (original[i][j].getPiece().getColour() ==Piece.BLACK) {
-						blacks[i][j].setPiece(original[i][j].getPiece());
-					}
-				}
-			}
-		}
-		return blacks;
-	}
-	
-	/**
-	 * changes pieces places 
-	 * @param enemy
-	 * @param blacks
-	 * @return new list of pieces positions
-	 */
-/*	
-	private Position[][] newSituation(Position[][] enemy, Position[][] blacks) {
-		Position[][] positions = board.getPositions();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				positions[i][j].setPiece(null);
-			}
-		}
-		//board.move(new Move(board.pieceAt(x, y),x2,y2,board.pieceAt(x2, y2)));
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (blacks[i][j].getPiece() != null && enemy[i][j].getPiece() == null) {
-					positions[i][j].setPiece(blacks[i][j].getPiece());
-				}
-				if (enemy[i][j].getPiece() != null) {
-					positions[i][j].setPiece(enemy[i][j].getPiece());
-				}
-			}
-		}
-		return positions;
-	}
-	
-	private void print(Position[][] positions) {
-		
-		System.out.println("--------------------");
-		System.out.println("a b c d e f g h \n");
-		for (int i = 0; i < positions.length; i++) {
-			for (int j = 0; j < positions.length; j++) {
-				System.out.print(positions[i][j].getPieceString() + " ");
-			}
-			System.out.println("  "+(i+1));
-		}
-	}
-	*/
 }
