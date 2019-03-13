@@ -42,7 +42,7 @@ public class cameraQUI extends Application {
 				newPosition[j][i] = new Position(i, j);
 				find = false;
 //						System.out.println("j = "+j);
-				for (int j2 =84+i*54+n; j2 <=84+(i+1)*54; j2+=2) {
+				for (int j2 =83+i*54+n; j2 <=83+(i+1)*54; j2+=2) {
 					for (int k =9+j*54+m; k <9+(j+1)*54; k+=2) {
 						
 						int clr =  image.getRGB(j2, k);
@@ -50,8 +50,7 @@ public class cameraQUI extends Application {
 						int green = (clr & 0x0000ff00) >> 8;
 						int blue = clr & 0x000000ff;
 						image.setRGB(j2, k,0x000000ff);
-						if (red <= 255 && red >= 130
-								&& green <= 110 && green >= 0 && blue <= 90 && blue >= 0) {
+						if (red <= 255 && red >= 115 && green <= 100 && green >= 0 && blue <= 110 && blue >= 0) {
 							if (find == false) {
 								System.out.println("Found in " + j + " " + i);
 								find = true;

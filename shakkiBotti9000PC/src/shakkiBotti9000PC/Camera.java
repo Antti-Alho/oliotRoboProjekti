@@ -21,7 +21,7 @@ public class Camera {
 	public Camera(Board board) {
 		newPosition = new Position[8][8];
 		this.board = board;
-		Pattern pat = Pattern.compile("UVC Camera (046d:09a5) /dev/video3");
+		Pattern pat = Pattern.compile("Logitech QuickCam 3000 1");
 		Matcher m;
 		for (Webcam webcams : Webcam.getWebcams()) {
 			System.out.println(webcams.getName());
@@ -68,7 +68,7 @@ public class Camera {
 							int red = (clr & 0x00ff0000) >> 16;
 							int green = (clr & 0x0000ff00) >> 8;
 							int blue = clr & 0x000000ff;
-							if (red <= 255 && red >= 130 && green <= 110 && green >= 0 && blue <= 90 && blue >= 0) {
+							if (red <= 255 && red >= 115 && green <= 100 && green >= 0 && blue <= 110 && blue >= 0) {
 								if (find == false) {
 									find = true;
 									newPosition[j][i].setPiece(new Piece(Piece.WHITE,i,j));
@@ -88,19 +88,12 @@ public class Camera {
 	 * 
 	 * @return new game situation to the use 
 	 */
-	public Position[][] getEnemymove() {
+	public void getEnemymove() {
 		Position[][] copyOfOriginal = board.getPositions();
 		analyzePicture();
 		Position[][] endPositionWhite = movePiece(createWhiteArray(copyOfOriginal), newPosition);
-//		System.out.println("endPositionWhite");
-//		print(endPositionWhite);
-		Position[][] endPositionBlack = createBlackArray(copyOfOriginal);
-//		System.out.println("endPositionBlack");
-//		print(endPositionBlack);
-		Position[][] endPosition = newSituation(endPositionWhite,endPositionBlack);
-//		System.out.println("endPosition");
-		print(endPosition);
-		return endPosition;
+		Position[][] movePiece;
+
 	}
 	
 	/**
@@ -138,22 +131,12 @@ public class Camera {
 		int v=0;
 		if((whitePieces[7][6].getPiece() == null && newWhitePositions[7][6].getPiece() != null) 
 				&&(whitePieces[7][5].getPiece() == null && newWhitePositions[7][5].getPiece() != null)) {
-			Piece piece1 = board.pieceAt(7,7);
-			whitePieces[7][5].setPiece(piece1);
-			whitePieces[7][7].setPiece(null);
-			
-			Piece piece2 = board.pieceAt(7,4);
-			whitePieces[7][6].setPiece(piece2);
-			whitePieces[7][4].setPiece(null);
+			board.move(new Move(board.pieceAt(7, 7), 7,5,board.pieceAt(7,5)));
+			board.move(new Move(board.pieceAt(7, 4),7,6,board.pieceAt(7,6)));			
 		}else if ((whitePieces[7][2].getPiece() == null && newWhitePositions[7][2].getPiece() != null) 
 				&&(whitePieces[7][3].getPiece() == null && newWhitePositions[7][3].getPiece() != null)) {
-			Piece piece1 = board.pieceAt(7,0);
-			whitePieces[7][3].setPiece(piece1);
-			whitePieces[7][0].setPiece(null);
-			
-			Piece piece2 = board.pieceAt(7,4);
-			whitePieces[7][2].setPiece(piece2);
-			whitePieces[7][4].setPiece(null);
+			board.move(new Move(board.pieceAt(7, 0), 7,3,board.pieceAt(7,3)));
+			board.move(new Move(board.pieceAt(7, 4),7,2,board.pieceAt(7,2)));
 		}else {
 			for (int i = 0; i < whitePieces.length; i++) {
 				for (int j = 0; j < whitePieces.length; j++) {
@@ -168,18 +151,17 @@ public class Camera {
 					}
 				}
 			}
-			Piece piece = board.pieceAt(z,v);
-			whitePieces[x][y].setPiece(piece);
-			whitePieces[z][v].setPiece(null);
+			board.move(new Move(board.pieceAt(z, v),x,y,board.pieceAt(x, y)));
 		}
 		return whitePieces;
 	}
-
+/*
 	/**
 	 * creates list of black pieces positions
 	 * @param blacks pieces
 	 * @return list of blacks
 	 */
+/*	
 	private Position[][] createBlackArray(Position[][] original) {
 		Position[][] blacks = new Position[8][8];
 		for (int i = 0; i < 8; i++) {
@@ -201,6 +183,7 @@ public class Camera {
 	 * @param blacks
 	 * @return new list of pieces positions
 	 */
+/*	
 	private Position[][] newSituation(Position[][] enemy, Position[][] blacks) {
 		Position[][] positions = board.getPositions();
 		for (int i = 0; i < 8; i++) {
@@ -208,6 +191,7 @@ public class Camera {
 				positions[i][j].setPiece(null);
 			}
 		}
+		//board.move(new Move(board.pieceAt(x, y),x2,y2,board.pieceAt(x2, y2)));
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (blacks[i][j].getPiece() != null && enemy[i][j].getPiece() == null) {
@@ -215,8 +199,6 @@ public class Camera {
 				}
 				if (enemy[i][j].getPiece() != null) {
 					positions[i][j].setPiece(enemy[i][j].getPiece());
-					System.out.println(i + " " + j +": "+ positions[i][j].getPieceString());
-				//	enemy[i][j].setPiece(null);
 				}
 			}
 		}
@@ -234,4 +216,5 @@ public class Camera {
 			System.out.println("  "+(i+1));
 		}
 	}
+	*/
 }

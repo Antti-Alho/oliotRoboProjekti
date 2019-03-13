@@ -72,8 +72,10 @@ public class Pawn extends Piece{
 		int y = this.getY();
 		if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
 			if (!super.getColour()) {
-				if (board.pieceAt(x-1,y) == null) {
-					newLegalMoves.add(new Move(this,x-1,y,board.pieceAt(x-1,y)));
+				if(x >= 1) {
+					if (board.pieceAt(x-1,y) == null) {
+						newLegalMoves.add(new Move(this,x-1,y,board.pieceAt(x-1,y)));
+					}
 				}
 				if (y != 7) {
 					if (board.canEat(this, x-1,y+1)){
@@ -85,12 +87,16 @@ public class Pawn extends Piece{
 						newLegalMoves.add(new Move(this,x-1,y-1,board.pieceAt(x-1,y-1)));
 					}
 				}
-				if (board.pieceAt(x-2,y) == null && this.getX() == firstX && this.getY() == firstY && board.pieceAt(x-1,y) == null) {
-					newLegalMoves.add(new Move(this,x-2,y,board.pieceAt(x-2,y)));
+				if(x >= 2) {
+					if (board.pieceAt(x-2,y) == null && this.getX() == firstX && this.getY() == firstY && board.pieceAt(x-1,y) == null) {
+						newLegalMoves.add(new Move(this,x-2,y,board.pieceAt(x-2,y)));
+					}
 				}
 			} else {
-				if (board.pieceAt(x+1,y) == null) {
-					newLegalMoves.add(new Move(this,x+1,y,board.pieceAt(x+1,y)));
+				if(x <= 6) {
+					if (board.pieceAt(x+1,y) == null) {
+						newLegalMoves.add(new Move(this,x+1,y,board.pieceAt(x+1,y)));
+					}
 				}
 				if (y != 7) {
 					if (board.canEat(this, x+1,y+1)){
@@ -102,8 +108,10 @@ public class Pawn extends Piece{
 						newLegalMoves.add(new Move(this,x+1,y-1,board.pieceAt(x+1,y-1)));
 					}
 				}
-				if (board.pieceAt(x+2,y) == null && this.getX() == firstX && this.getY() == firstY && board.pieceAt(x+1,y) == null) {
-					newLegalMoves.add(new Move(this,x+2,y,board.pieceAt(x+2,y)));
+				if(x <= 5) {
+					if (board.pieceAt(x+2,y) == null && this.getX() == firstX && this.getY() == firstY && board.pieceAt(x+1,y) == null) {
+						newLegalMoves.add(new Move(this,x+2,y,board.pieceAt(x+2,y)));
+					}
 				}
 			}
 		}

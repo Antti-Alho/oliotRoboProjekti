@@ -24,11 +24,11 @@ public class Motors {
 	//korkeus		height	default rotate suunta: + alas, 			- ylös
 	//pihdit 	 	pliers	default rotate suunta: + kiinni, 		- auki
 	
-	int lenghtRot = 96;		// 96	yksi ruutu
+	int lenghtRot = 94;		// 94	yksi ruutu
 	int widthRot = -280;	// 280	yksi ruutu						HUOM. käänteellinen pyörimissuunta
 	int heightRot = -282;	// 282	max liikkumis					HUOM. käänteellinen pyörimissuunta
-	int pliersRot = -325;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
-	int toBoard = 372;		// 372	vakio etäisyys odotuspaikan ja ensimmäisen ruudun välillä
+	int pliersRot = -335;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
+	int toBoard = 390; 		// 390	vakioetäisyys odotuspaikan ja ensimmäisen ruudun välillä
 	
 	public Motors(Data data, Button button) {
 		this.data = data;
@@ -77,10 +77,10 @@ public class Motors {
 		int toY = crdnts.get(3);
 		int target = crdnts.get(4);
 		
+		length.rotate(toBoard, true);
+		largeCheck(length);
 		if (target >= 0) {
 			//haetaan syötävä
-			length.rotate(toBoard, true);
-			largeCheck(length);
 			length.rotate(toX * lenghtRot, true);
 			largeCheck(length);
 			width.rotate(toY * widthRot, true);
