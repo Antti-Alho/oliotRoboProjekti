@@ -8,6 +8,13 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
 public class King extends Piece{
+	
+	/**
+	 * Creates King of given colour in given coordinates 
+	 * @param colour True if black false if white.
+	 * @param x coordinate on the board
+	 * @param y coordinate on the board
+	 */
 	public King(Boolean colour, int x, int y) {
 		super(colour, x, y);
 		if (colour) {

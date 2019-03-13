@@ -17,14 +17,19 @@ public class Pawn extends Piece{
 	private int[][] eval = {
 			{  0,  0,  0,  0,  0,  0,  0,  0},
 			{  3,  3,  3,  3,  3,  3,  3,  3},
-			{  1,  1,  3,  3,  3,  3,  1,  1},
-			{  1,  0,  5,  2,  2,  5,  0,  1},
+			{  1,  1,  2,  3,  3,  2,  1,  1},
+			{  1,  0,  3,  2,  2,  3,  0,  1},
 			{  0,  0,  1,  1,  1,  1,  0,  0},
 			{  1, -1, -1,  0,  0, -1, -1,  1},
 			{  1,  1,  1, -2, -2,  1,  1,  1},
 			{  0,  0,  0,  0,  0,  0,  0,  0}
 		};
-	
+	/**
+	 * 
+	 * @param colour True if black false if white.
+	 * @param x coordinate on the board
+	 * @param y coordinate on the board
+	 */
 	public Pawn(Boolean colour, int x, int y) {
 		super(colour, x, y);
 		this.firstX = x;
