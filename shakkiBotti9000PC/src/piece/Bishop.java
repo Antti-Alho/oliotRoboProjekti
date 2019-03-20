@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
-
+/**
+ * 
+ * @author antti
+ *
+ */
 public class Bishop extends Piece{
 
 	/**

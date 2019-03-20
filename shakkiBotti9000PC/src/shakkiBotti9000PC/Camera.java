@@ -10,13 +10,18 @@ import javax.imageio.ImageIO;
 import com.github.sarxos.webcam.Webcam;
 import piece.Piece;
 
+/**
+ * @author Heidi Joensuu
+ */
 public class Camera {
 	private Board board;
 	private Webcam webcam;
 	private Position[][] newPosition;
+	
 	/**
-	 * 
-	 * The camera constructor takes connection to the webcamera
+	 * The camera constructor creates connection to the webcam
+	 * change the name of the camera if your camera is not Logitech QuickCam 3000
+	 * or if you have multiple of the same cameras connected
 	 */
 	public Camera(Board board) {
 		newPosition = new Position[8][8];
@@ -35,7 +40,7 @@ public class Camera {
 	}
 
 	/**
-	 * Takes picture of a board with a camera
+	 * Takes picture of the board with the webcam
 	 */
 	public void takePicture() {
 		try {
@@ -49,9 +54,9 @@ public class Camera {
 	}
 	
 	/**
-	 * analyzes picture separating "white" pieces from the picture 
+	 * analyses picture separating "white" pieces from the picture 
 	 */
-	private void analyzePicture() {
+	private void analysePicture() {
 		try {
 			File file= new File("board.png");
 			BufferedImage image = ImageIO.read(file);
@@ -85,21 +90,19 @@ public class Camera {
 	}
 	
 	/**
-	 * 
-	 * @return new game situation to the use 
+	 *  Does the changes to the board that were found in the picture
 	 */
-	public void getEnemymove() {
+	public void enemyMove() {
 		Position[][] copyOfOriginal = board.getPositions();
-		analyzePicture();
+		analysePicture();
 		Position[][] endPositionWhite = movePiece(createWhiteArray(copyOfOriginal), newPosition);
 		Position[][] movePiece;
-
 	}
 	
 	/**
-	 * creates new list of old positions of whites
+	 * creates new list of the positions of white pieces on the board
 	 * @param positions from board
-	 * @return whitepieces list
+	 * @return white piece list
 	 */
 	private Position[][] createWhiteArray(Position[][] original) {
 		Position[][] enemy = new Position[8][8];
@@ -117,11 +120,11 @@ public class Camera {
 	}
 	
 	/**
-	 * checks the differences of current pieces and old pieces and then saves
-	 * new changes to the whitepieces list
+	 * checks the differences of current pieces and old pieces and then creates 
+	 * an array of positions with the updated white piece positions
 	 * @param whitePieces as a old list
 	 * @param newPosition  as a new list
-	 * @return
+	 * @return Position[][] returns 2d Array of positions
 	 */
 	private Position[][] movePiece(Position[][] whitePieces, Position[][] newPosition) {
 		Position[][]newWhitePositions = newPosition;

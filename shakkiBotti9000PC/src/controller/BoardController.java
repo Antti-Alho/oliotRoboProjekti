@@ -6,23 +6,16 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-import gfx.BoardView;
 import piece.King;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Camera;
 import shakkiBotti9000PC.ChessAI;
 import shakkiBotti9000PC.Move;
-import shakkiBotti9000PC.Position;
 
 public class BoardController {
-	private BoardView bv;
-	private Board board;
-	
-	public BoardController(BoardView bv) {
-		this.bv = bv;
-		this.board = new Board();
-	}
-	public void play() {
+
+	public static void main(String[] args){
+		Board board = new Board();
 		King white = (King) board.getPositions()[7][4].getPiece();
 		King black = (King) board.getPositions()[0][4].getPiece();
 		Scanner s = new Scanner(System.in);
@@ -41,8 +34,7 @@ public class BoardController {
 				System.out.println(board.getPieces().contains(white)+ "    " +board.getPieces().contains(black));
 				if (vuoro==true) {
 					cam.takePicture();
-					cam.getEnemymove();
-					bv.update();
+					cam.enemyMove();
 					System.out.println("-----------------------");
 					System.out.println(" A B C D E F G H");
 					for (int i = 0; i < 8; i++) {
@@ -60,8 +52,6 @@ public class BoardController {
 					}
 					Move m = ai.calculateBestMove(depth);
 					board.move(m);
-					bv.update();
-					//fromX, fromY, toX, toY, target
 					if (board.getPieces().contains(white)==false) {
 						out.writeInt(-2);
 						out.flush();
@@ -107,8 +97,5 @@ public class BoardController {
 			e.printStackTrace();
 		}
 
-	}
-	public Position[][] getPositions() {
-		return board.getPositions();
 	}
 }

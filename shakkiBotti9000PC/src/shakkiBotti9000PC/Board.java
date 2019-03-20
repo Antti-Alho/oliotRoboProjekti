@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 import piece.*;
 
+/**
+ * @author Antti Alho
+ */
 public class Board {
 	
 	private Stack<Move> moves;
@@ -69,7 +72,7 @@ public class Board {
 	}
 
 	/**
-	 * does the changes to move piece on the board and saves the move in the move stack
+	 * executes the changes changes to the board that are saved in the move object.
 	 * @param move object that is to be executed and saved in to the move stack.
 	 */
 	public void move(Move move) {
@@ -85,7 +88,6 @@ public class Board {
 
 	/**
 	 * takes the last move from the move stack and moves the piece back where it came from
-	 * used in the MinMax algorithm for the AI
 	 */
 	public void undo() {
 		Move m = moves.pop();
@@ -100,7 +102,7 @@ public class Board {
 	/**
 	 * returns true if the given position contains piece
 	 * returns false if the position does not contain a piece
-	 * @param positon where 
+	 * @param positon where to look for a piece 
 	 * @return true / false
 	 */
 	public Boolean containsPiece(int x, int y) {
@@ -111,10 +113,13 @@ public class Board {
 		} 
 		return false;
 	}
+	
 	/**
 	 * Return true if target position contains enemy piece
-	 * @param pos
-	 * @return
+	 * @param Piece which piece is going to move
+	 * @param int x x coordinate of target position
+	 * @param int y y coordinate of target position
+	 * @return returns true if piece at x y has different colour
 	 */
 	public Boolean containsEnemy(Piece piece, int x, int y) {
 		if (pieceAt(x, y) != null) {
@@ -126,8 +131,9 @@ public class Board {
 		return false;
 	}
 	/**
-	 * removes the piece in the given position
-	 * @param pos position where piece should be removed
+	 * removes the piece from the piece list in the given position
+	 * @param int x x coordinate where to remove
+	 * @param int y y coordinate where to remove pieces
 	 */
 	public void removePiece(int x, int y) {
 		Piece p = null;
@@ -138,15 +144,18 @@ public class Board {
 		}
 		if (p != null) pieces.remove(p);
 	}
+	
 	/**
-	 * getPieces
+	 * return list of pieces that are currently on the board
 	 * @return ArrayList<piece> that contain all the pieces on the board
 	 */
 	public ArrayList<Piece> getPieces(){
 		return pieces;
 	}
+	
 	/**
-	 * getPositions
+	 * creates an array of position so that the board can be more easily printed
+	 * and handled in 
 	 * @return return all position on the board in a 2D array
 	 */
 	public Position[][] getPositions(){
@@ -161,6 +170,7 @@ public class Board {
 		}
 		return pos;
 	}
+	
 	/**
 	 * returns piece at coordinate x, y;
 	 * @param x coordinate

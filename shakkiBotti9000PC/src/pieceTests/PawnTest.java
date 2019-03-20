@@ -12,7 +12,6 @@ import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 import org.junit.jupiter.api.BeforeEach;
 
-
 class PawnTest {
 
 	private Pawn pawn;
