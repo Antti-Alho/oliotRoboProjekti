@@ -14,6 +14,11 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Tests King movement
+ * @author antti
+ *
+ */
 class KingTest {
 	
 	private King king;

@@ -14,6 +14,11 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Tests Queen movement
+ * @author antti
+ *
+ */
 class QueenTest {
 	
 	private Queen queen;

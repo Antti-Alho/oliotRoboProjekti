@@ -6,17 +6,16 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 /**
- * 
+ * Bishop specific functionality
  * @author antti
  *
  */
 public class Bishop extends Piece{
 
 	/**
-	 * 
-	 * @param colour
-	 * @param x
-	 * @param y
+	 * @param colour value witch represents the colour of the piece use Piece.BLACK or Piece.WHITE for clarity
+	 * @param x coordinate of the piece to be created
+	 * @param y coordinate of the piece to be created
 	 */
 	public Bishop(Boolean colour, int x, int y) {
 		super(colour, x, y);
@@ -24,7 +23,8 @@ public class Bishop extends Piece{
 	}
   
 	/**
-	 * Returns the string that represents this piece in the command line UI
+	 * Returns the string that represents this piece for the command line UI
+	 * @return string representation of the piece.
 	 */
 	@Override
 	  public String getName(){
@@ -38,14 +38,27 @@ public class Bishop extends Piece{
 	/**
 	 * return the current value of the piece to the minMax algorithm,
 	 * this includes the position evaluation that is read from the evaluation table.
+	 * @return current value of the piece on the board
 	 */
 	@Override
 	public int getValue() {
 		return eval[super.getX()][super.getY()] + super.getValue();
 	}
+	private int[][] eval = {
+			{ -2, -1, -1, -1, -1, -1, -1, -2},
+			{ -1,  0,  0,  0,  0,  0,  0, -1},
+			{ -1,  0,  0,  1,  1,  0,  0, -1},
+			{ -1,  0,  0,  1,  1,  0,  0, -1},
+			{ -1,  0,  1,  1,  1,  1,  0, -1},
+			{ -1,  1,  1,  1,  1,  1,  1, -1},
+			{ -1,  0,  0,  0,  0,  0,  0, -1},
+			{ -2, -1, -1, -1, -1, -1, -1, -2}
+	};
 	
 	/**
 	 * returns an ArrayList of all possible moves the piece can currently take.
+	 * @param board the board where this piece is.
+	 * @return ArrayList of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -115,20 +128,5 @@ public class Bishop extends Piece{
 		
 		return newLegalMoves;
 	}
-
-	/**
-	 * An array that contains piece's value in different positions
-	 */
-	private int[][] eval = {
-			{ -2, -1, -1, -1, -1, -1, -1, -2},
-			{ -1,  0,  0,  0,  0,  0,  0, -1},
-			{ -1,  0,  0,  1,  1,  0,  0, -1},
-			{ -1,  0,  0,  1,  1,  0,  0, -1},
-			{ -1,  0,  1,  1,  1,  1,  0, -1},
-			{ -1,  1,  1,  1,  1,  1,  1, -1},
-			{ -1,  0,  0,  0,  0,  0,  0, -1},
-			{ -2, -1, -1, -1, -1, -1, -1, -2}
-		};
-	
 
 }

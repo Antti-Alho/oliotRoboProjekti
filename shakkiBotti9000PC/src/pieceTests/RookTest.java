@@ -15,6 +15,11 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Tests Rook movement
+ * @author antti
+ *
+ */
 class RookTest {
 
 	private Rook rook;

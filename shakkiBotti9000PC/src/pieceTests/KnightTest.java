@@ -10,6 +10,12 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 
+
+/**
+ * Tests Knight movement
+ * @author antti
+ *
+ */
 class KnightTest {
 
 	private Board board;

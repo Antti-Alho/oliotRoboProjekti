@@ -2,8 +2,7 @@ package shakkiBotti9000PC;
 
 import piece.Piece;
 /**
- * @author Antti Alho
- * This is a data class that saves the information to replicate or undo every move.
+ * Data class that saves the information to replicate or undo every move made on board.
  */
 public class Move {
 	

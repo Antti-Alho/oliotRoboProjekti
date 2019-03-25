@@ -5,6 +5,8 @@ import java.util.Stack;
 import piece.*;
 
 /**
+ * Controls and updates the the positions of pieces
+ * and contains utility methods for the minMax algorithm
  * @author Antti Alho
  */
 public class Board {
@@ -43,7 +45,8 @@ public class Board {
 	/**
 	 * return true if piece can eat another piece from the target position
 	 * @param piece that is going to eat
-	 * @param pos target position
+	 * @param x x coordinate where piece is going to eat
+	 * @param y y coordinate where piece is going to eat
 	 * @return true if eating is possible. False if can't eat.
 	 */
 	public Boolean canEat(Piece piece, int x,int y) {
@@ -57,14 +60,14 @@ public class Board {
 	}
 	
 	/**
-	 * goes trough all the pieces on the board and asks for all the legal moves
-	 * @param player 
-	 * @return ArrayList of legal moves on the board
+	 * goes trough all certain coloured pieces on the board and asks for all the legal moves
+	 * @param colour boolean representation of the colour use Piece.WHITE or Piece.BLACK for clarity
+	 * @return ArrayList of legal moves on the board player can take
 	 */
-	public ArrayList<Move> getLegalMoves(Boolean player){
+	public ArrayList<Move> getLegalMoves(Boolean colour){
 		ArrayList<Move> moves = new ArrayList<Move>();
 		for (Piece piece : pieces) {
-			if(piece.getColour() == player) {
+			if(piece.getColour() == colour) {
 				moves.addAll(piece.getMoves(this));
 			}
 		}
@@ -102,7 +105,8 @@ public class Board {
 	/**
 	 * returns true if the given position contains piece
 	 * returns false if the position does not contain a piece
-	 * @param positon where to look for a piece 
+	 * @param x x coordinate where to look for piece
+	 * @param y y coordinate where to look for piece 
 	 * @return true / false
 	 */
 	public Boolean containsPiece(int x, int y) {
@@ -116,9 +120,9 @@ public class Board {
 	
 	/**
 	 * Return true if target position contains enemy piece
-	 * @param Piece which piece is going to move
-	 * @param int x x coordinate of target position
-	 * @param int y y coordinate of target position
+	 * @param piece which piece is going to move
+	 * @param x x coordinate of target position
+	 * @param y y coordinate of target position
 	 * @return returns true if piece at x y has different colour
 	 */
 	public Boolean containsEnemy(Piece piece, int x, int y) {
@@ -132,8 +136,8 @@ public class Board {
 	}
 	/**
 	 * removes the piece from the piece list in the given position
-	 * @param int x x coordinate where to remove
-	 * @param int y y coordinate where to remove pieces
+	 * @param x x coordinate where to remove
+	 * @param y y coordinate where to remove pieces
 	 */
 	public void removePiece(int x, int y) {
 		Piece p = null;
@@ -147,7 +151,7 @@ public class Board {
 	
 	/**
 	 * return list of pieces that are currently on the board
-	 * @return ArrayList<piece> that contain all the pieces on the board
+	 * @return ArrayList that contain all the pieces on the board
 	 */
 	public ArrayList<Piece> getPieces(){
 		return pieces;

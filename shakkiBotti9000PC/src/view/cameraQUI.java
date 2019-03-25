@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import piece.Piece;
 import shakkiBotti9000PC.Position;
 
-public class cameraTest extends Application {
+public class cameraQUI extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {

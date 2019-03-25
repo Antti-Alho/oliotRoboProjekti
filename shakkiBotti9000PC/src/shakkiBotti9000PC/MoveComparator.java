@@ -1,7 +1,10 @@
 package shakkiBotti9000PC;
 
 import java.util.Comparator;
-
+/**
+ * Comparator class to compare and sort moves for the tests
+ * @author antti
+ */
 public class MoveComparator implements Comparator<Move>{
 
 	/**

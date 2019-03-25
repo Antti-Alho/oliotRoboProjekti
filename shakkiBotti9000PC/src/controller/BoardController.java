@@ -12,6 +12,11 @@ import shakkiBotti9000PC.Camera;
 import shakkiBotti9000PC.ChessAI;
 import shakkiBotti9000PC.Move;
 
+/**
+ * main Controller which contains the main game loop
+ * @author Antti Alho
+ *
+ */
 public class BoardController {
 
 	public static void main(String[] args){
@@ -93,7 +98,6 @@ public class BoardController {
 			in.close();
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

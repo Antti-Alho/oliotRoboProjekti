@@ -11,6 +11,7 @@ import com.github.sarxos.webcam.Webcam;
 import piece.Piece;
 
 /**
+ * Takes pictures and parses the new positions for the pieces from the images.
  * @author Heidi Joensuu
  */
 public class Camera {
@@ -22,6 +23,7 @@ public class Camera {
 	 * The camera constructor creates connection to the webcam
 	 * change the name of the camera if your camera is not Logitech QuickCam 3000
 	 * or if you have multiple of the same cameras connected
+	 * @param board current board in play
 	 */
 	public Camera(Board board) {
 		newPosition = new Position[8][8];
@@ -101,7 +103,7 @@ public class Camera {
 	
 	/**
 	 * creates new list of the positions of white pieces on the board
-	 * @param positions from board
+	 * @param original positions from board
 	 * @return white piece list
 	 */
 	private Position[][] createWhiteArray(Position[][] original) {
@@ -122,9 +124,9 @@ public class Camera {
 	/**
 	 * checks the differences of current pieces and old pieces and then creates 
 	 * an array of positions with the updated white piece positions
-	 * @param whitePieces as a old list
-	 * @param newPosition  as a new list
-	 * @return Position[][] returns 2d Array of positions
+	 * @param whitePieces old positions of white pieces
+	 * @param newPosition new positions of generic white pieces
+	 * @return Position[][] Real pieces from white pieces in the positions of generic pieces from new positions
 	 */
 	private Position[][] movePiece(Position[][] whitePieces, Position[][] newPosition) {
 		Position[][]newWhitePositions = newPosition;

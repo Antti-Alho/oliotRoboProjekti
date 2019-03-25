@@ -11,7 +11,11 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 import shakkiBotti9000PC.Position;
 import org.junit.jupiter.api.BeforeEach;
-
+/**
+ * Tests Pawn movement.
+ * @author antti
+ *
+ */
 class PawnTest {
 
 	private Pawn pawn;

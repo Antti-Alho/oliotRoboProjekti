@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import piece.Piece;
 
 /**
- * @author antti
+ * MinMax algorithm. 
+ * Calculates the "best" move for the robot.
  */
 public class ChessAI {
 	
@@ -41,6 +42,7 @@ public class ChessAI {
 	/**
 	 * recursive part of the minMax algorithm
 	 * @param depth how deep to the search tree we still have to go
+	 * @param board current board situation
 	 * @param alpha current largest board value found
 	 * @param beta current lowest board value found
 	 * @param player true/false witch player we are currently evaluating true for AI false for player
@@ -78,9 +80,9 @@ public class ChessAI {
 		}
 	}
 	/**
-	 * final evaluation of board value in top of minMax algorithm. 
+	 * Final evaluation of board value in top of minMax algorithm. 
 	 * Enemy pieces add negative values the AIs pieces add positive values.
-	 * @param ArrayList<Piece> pieces arrayList of pieces currently on the board
+	 * @param pieces ArrayList of pieces currently on the board
 	 * @return returns the total value of the pieces on the board
 	 */
 	private int eval(ArrayList<Piece> pieces) {
