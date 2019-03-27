@@ -1,4 +1,4 @@
 # oliotRoboProjekti
 
-[PC docs](/docs/doc/index.html)
-[robo docs](/docs/robodocs/index.html)
+[PC docs](https://antti-alho.github.io/oliotRoboProjekti/)
+[robo docs](/docs/robodocs/ind)
