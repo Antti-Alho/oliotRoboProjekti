@@ -11,7 +11,11 @@ import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
 
 
-
+/**
+ * Tests Knight movement
+ * @author antti
+ *
+ */
 class KnightTest {
 
 	private Board board;
@@ -59,6 +63,5 @@ class KnightTest {
         
         assertEquals(movesExpected.toString(), movesReal.toString(), "List Knight moves in middle of board");
     }
- 
 
 }

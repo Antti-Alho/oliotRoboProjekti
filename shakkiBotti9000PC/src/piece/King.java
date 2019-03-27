@@ -7,13 +7,18 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
+/**
+ * King specific functionality
+ * @author antti
+ *
+ */
 public class King extends Piece{
 	
 	/**
 	 * Creates King of given colour in given coordinates 
-	 * @param colour True if black false if white.
-	 * @param x coordinate on the board
-	 * @param y coordinate on the board
+	 * @param colour boolean value witch represents the colour of the piece use Piece.BLACK or Piece.WHITE for clarity
+	 * @param x coordinate of the piece to be created
+	 * @param y coordinate of the piece to be created
 	 */
 	public King(Boolean colour, int x, int y) {
 		super(colour, x, y);
@@ -27,14 +32,27 @@ public class King extends Piece{
 	/**
 	 * return the current value of the piece to the minMax algorithm,
 	 * this includes the position evaluation that is read from the evaluation table.
+	 * @return current value of the piece on the board
 	 */
 	@Override
 	public int getValue() {
-		return eval[super.getX()][super.getY()] + super.getValue();
+		return (eval[super.getX()][super.getY()] + super.getValue());
 	}
+	private int[][] eval = {
+			{  3,  1,  0,  0,  0,  1,  2,  3},
+		    {  2,  2,  0,  0,  0,  0,  2,  2},
+		    { -3, -1, -2, -1, -1, -2, -1, -3},
+		    { -3, -1, -3, -5, -5, -3, -1, -3},
+		    { -3, -1, -3, -4, -4, -3, -1, -3},
+		    { -3, -1, -2, -3, -3, -2, -1, -3},
+		    { -3, -3, -5, -5, -5, -5, -3, -3},
+		    { -5, -3, -3, -3, -3, -3, -3, -5}
+	};
 	
 	/**
 	 * returns an ArrayList of all possible moves the piece can currently take.
+	 * @param board current board in play
+	 * @return ArrayList moves the piece can currently take
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -52,20 +70,28 @@ public class King extends Piece{
 		return newLegalMoves;
 	}
 
-	
-	private boolean isLegal(int i, int j, Board board) {
-		if (i >= 0 && i <= 7 && j >= 0 && j <= 7) {
-			if (board.getPositions()[i][j].getPiece() == null) {
+	/**
+	 * Returns true if king can move to this position
+	 * @param x x coordinate of king
+	 * @param y y coordinate of king
+	 * @param board current board in play
+	 * @return True if king can move to this position. False if king can't move.
+	 */
+	private boolean isLegal(int x, int y, Board board) {
+		if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+			if (board.pieceAt(x, y) == null) {
 				return true;
-			} else if (board.getPositions()[i][j].getPiece().getColour() != this.getColour()){
+			} else if (board.pieceAt(x, y).getColour() != this.getColour()){
 				return true;
 			}
 			return false;
 		}
 		return false;
 	}
+	
 	/**
-	 * Returns the string that represents this piece in the command line UI
+	 * Returns the string that represents this piece for the command line UI
+	 * @return string representation of the piece.
 	 */
 	@Override
 	  public String getName(){
@@ -76,16 +102,7 @@ public class King extends Piece{
 	    return s;
 	  }
 	
-	private int[][] eval = {
-		{  3,  1,  0,  0,  0,  1,  2,  3},
-	    {  2,  2,  0,  0,  0,  0,  2,  2},
-	    { -3, -1, -2, -1, -1, -2, -1, -3},
-	    { -3, -1, -3, -5, -5, -3, -1, -3},
-	    { -3, -1, -3, -4, -4, -3, -1, -3},
-	    { -3, -1, -2, -3, -3, -2, -1, -3},
-	    { -3, -3, -5, -5, -5, -5, -3, -3},
-	    { -5, -3, -3, -3, -3, -3, -3, -5}
-	  };
+
 
 
 }

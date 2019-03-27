@@ -6,6 +6,11 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Rooks specific functionality
+ * @author antti
+ *
+ */
 public class Rook extends Piece{
   
 	public Rook(Boolean colour, int x, int y) {
@@ -20,6 +25,7 @@ public class Rook extends Piece{
 	/**
 	 * return the current value of the piece to the minMax algorithm,
 	 * this includes the position evaluation that is read from the evaluation table.
+	 * @return current value of the piece on the board
 	 */
 	@Override
 	public int getValue() {
@@ -28,8 +34,8 @@ public class Rook extends Piece{
 	
 	/**
 	 * returns an ArrayList of all possible moves the piece can currently take.
-	 * @param Board the board where this piece is.
-	 * @return ArrayList<Move> of all possible moves the piece can currently take.
+	 * @param board current board in play.
+	 * @return ArrayList list of all possible moves the piece can currently take.
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -97,7 +103,8 @@ public class Rook extends Piece{
 	}
   
 	/**
-	 * Returns the string that represents this piece in the command line UI
+	 * Returns the string that represents this piece for the command line UI
+	 * @return string representation of the piece.
 	 */
 	@Override
 	  public String getName(){

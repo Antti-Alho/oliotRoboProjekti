@@ -11,6 +11,10 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Tests for board class
+ * @author antti
+ */
 class BoardTest {
 	Board board;
 	Position[][] positions;

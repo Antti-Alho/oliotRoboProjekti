@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 import piece.*;
 
+/**
+ * Controls and updates the the positions of pieces
+ * and contains utility methods for the minMax algorithm
+ * @author Antti Alho
+ */
 public class Board {
 	
 	private Stack<Move> moves;
@@ -40,7 +45,8 @@ public class Board {
 	/**
 	 * return true if piece can eat another piece from the target position
 	 * @param piece that is going to eat
-	 * @param pos target position
+	 * @param x x coordinate where piece is going to eat
+	 * @param y y coordinate where piece is going to eat
 	 * @return true if eating is possible. False if can't eat.
 	 */
 	public Boolean canEat(Piece piece, int x,int y) {
@@ -54,14 +60,14 @@ public class Board {
 	}
 	
 	/**
-	 * goes trough all the pieces on the board and asks for all the legal moves
-	 * @param player 
-	 * @return ArrayList of legal moves on the board
+	 * goes trough all certain coloured pieces on the board and asks for all the legal moves
+	 * @param colour boolean representation of the colour use Piece.WHITE or Piece.BLACK for clarity
+	 * @return ArrayList of legal moves on the board player can take
 	 */
-	public ArrayList<Move> getLegalMoves(Boolean player){
+	public ArrayList<Move> getLegalMoves(Boolean colour){
 		ArrayList<Move> moves = new ArrayList<Move>();
 		for (Piece piece : pieces) {
-			if(piece.getColour() == player) {
+			if(piece.getColour() == colour) {
 				moves.addAll(piece.getMoves(this));
 			}
 		}
@@ -69,7 +75,7 @@ public class Board {
 	}
 
 	/**
-	 * does the changes to move piece on the board and saves the move in the move stack
+	 * executes the changes changes to the board that are saved in the move object.
 	 * @param move object that is to be executed and saved in to the move stack.
 	 */
 	public void move(Move move) {
@@ -85,7 +91,6 @@ public class Board {
 
 	/**
 	 * takes the last move from the move stack and moves the piece back where it came from
-	 * used in the MinMax algorithm for the AI
 	 */
 	public void undo() {
 		Move m = moves.pop();
@@ -100,7 +105,8 @@ public class Board {
 	/**
 	 * returns true if the given position contains piece
 	 * returns false if the position does not contain a piece
-	 * @param positon where 
+	 * @param x x coordinate where to look for piece
+	 * @param y y coordinate where to look for piece 
 	 * @return true / false
 	 */
 	public Boolean containsPiece(int x, int y) {
@@ -111,10 +117,13 @@ public class Board {
 		} 
 		return false;
 	}
+	
 	/**
 	 * Return true if target position contains enemy piece
-	 * @param pos
-	 * @return
+	 * @param piece which piece is going to move
+	 * @param x x coordinate of target position
+	 * @param y y coordinate of target position
+	 * @return returns true if piece at x y has different colour
 	 */
 	public Boolean containsEnemy(Piece piece, int x, int y) {
 		if (pieceAt(x, y) != null) {
@@ -126,8 +135,9 @@ public class Board {
 		return false;
 	}
 	/**
-	 * removes the piece in the given position
-	 * @param pos position where piece should be removed
+	 * removes the piece from the piece list in the given position
+	 * @param x x coordinate where to remove
+	 * @param y y coordinate where to remove pieces
 	 */
 	public void removePiece(int x, int y) {
 		Piece p = null;
@@ -138,15 +148,18 @@ public class Board {
 		}
 		if (p != null) pieces.remove(p);
 	}
+	
 	/**
-	 * getPieces
-	 * @return ArrayList<piece> that contain all the pieces on the board
+	 * return list of pieces that are currently on the board
+	 * @return ArrayList that contain all the pieces on the board
 	 */
 	public ArrayList<Piece> getPieces(){
 		return pieces;
 	}
+	
 	/**
-	 * getPositions
+	 * creates an array of position so that the board can be more easily printed
+	 * and handled in 
 	 * @return return all position on the board in a 2D array
 	 */
 	public Position[][] getPositions(){
@@ -161,6 +174,7 @@ public class Board {
 		}
 		return pos;
 	}
+	
 	/**
 	 * returns piece at coordinate x, y;
 	 * @param x coordinate

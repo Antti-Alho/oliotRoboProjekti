@@ -6,29 +6,22 @@ import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.Position;
 
+/**
+ * Pawn specific functionality
+ * @author antti
+ *
+ */
 public class Pawn extends Piece{
 	
 	private int firstX;
 	private int firstY;
 	
-	/*
-	 * evaluation array witch tells how much the piece if worth in each position.
-	 */
-	private int[][] eval = {
-			{  0,  0,  0,  0,  0,  0,  0,  0},
-			{  3,  3,  3,  3,  3,  3,  3,  3},
-			{  1,  1,  2,  3,  3,  2,  1,  1},
-			{  1,  0,  3,  2,  2,  3,  0,  1},
-			{  0,  0,  1,  1,  1,  1,  0,  0},
-			{  1, -1, -1,  0,  0, -1, -1,  1},
-			{  1,  1,  1, -2, -2,  1,  1,  1},
-			{  0,  0,  0,  0,  0,  0,  0,  0}
-		};
+
 	/**
-	 * 
-	 * @param colour True if black false if white.
-	 * @param x coordinate on the board
-	 * @param y coordinate on the board
+	 * Creates Pawn of given colour in given coordinates 
+	 * @param colour boolean value witch represents the colour of the piece use Piece.BLACK or Piece.WHITE for clarity
+	 * @param x coordinate of the piece to be created
+	 * @param y coordinate of the piece to be created
 	 */
 	public Pawn(Boolean colour, int x, int y) {
 		super(colour, x, y);
@@ -42,7 +35,8 @@ public class Pawn extends Piece{
 	}
   
 	/**
-	 * Returns the string that represents this piece in the command line UI
+	 * Returns the string that represents this piece for the command line UI
+	 * @return string representation of the piece.
 	 */
 	@Override
 	  public String getName(){
@@ -55,7 +49,8 @@ public class Pawn extends Piece{
 	
 	/**
 	 * return the current value of the piece to the minMax algorithm,
-	 * this including the position evaluation that is read from the evaluation table.
+	 * this includes the position evaluation that is read from the evaluation table.
+	 * @return current value of the piece on the board
 	 */
 	@Override
 	public int getValue() {
@@ -63,7 +58,9 @@ public class Pawn extends Piece{
 	}
 	
 	/**
-	 * returns an ArrayList of moves the piece can currently take.
+	 * returns an ArrayList of all possible moves the piece can currently take.
+	 * @param board current board in play
+	 * @return ArrayList list of moves the piece can currently take
 	 */
 	@Override
 	public ArrayList<Move> getMoves(Board board) {
@@ -119,5 +116,17 @@ public class Pawn extends Piece{
 		return newLegalMoves;
 	}
 
-
+	/*
+	 * evaluation array witch tells how much the piece if worth in each position.
+	 */
+	private int[][] eval = {
+			{  0,  0,  0,  0,  0,  0,  0,  0},
+			{  3,  3,  3,  3,  3,  3,  3,  3},
+			{  1,  1,  2,  3,  3,  2,  1,  1},
+			{  1,  0,  3,  2,  2,  3,  0,  1},
+			{  0,  0,  1,  1,  1,  1,  0,  0},
+			{  1, -1, -1,  0,  0, -1, -1,  1},
+			{  1,  1,  1, -2, -2,  1,  1,  1},
+			{  0,  0,  0,  0,  0,  0,  0,  0}
+		};
 }

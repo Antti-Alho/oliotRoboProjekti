@@ -1,7 +1,9 @@
 package shakkiBotti9000PC;
 
 import piece.Piece;
-
+/**
+ * Data class that saves the information to replicate or undo every move made on board.
+ */
 public class Move {
 	
 	private Piece p;
@@ -11,6 +13,13 @@ public class Move {
 	private int newY;
 	private Piece target;
 	
+	/**
+	 * @param p the piece that is going to move
+	 * @param x coordinate where to move
+	 * @param y coordinate where to move
+	 * @param target possible target that is going to be removed from the board 
+	 * when the move is executed, should be null if there is no target.
+	 */
 	public Move(Piece p, int x, int y, Piece target) {
 		this.p = p;
 		this.oldX = p.getX();
@@ -67,7 +76,6 @@ public class Move {
 	public void setTarget(Piece piece) {
 		this.target = piece;
 	}
-	
 
 	public int hashCode() {
 		int hashcode = 0;

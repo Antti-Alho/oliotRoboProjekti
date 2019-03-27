@@ -14,7 +14,11 @@ import piece.Pawn;
 import shakkiBotti9000PC.Board;
 import shakkiBotti9000PC.Move;
 import shakkiBotti9000PC.MoveComparator;
-
+/**
+ * Tests for bishop movement
+ * @author antti
+ *
+ */
 class BishopTest {
 
 	private Board board;
