@@ -8,15 +8,37 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import robot.RobotsTurn;
-
+/**
+ * Handles the Lego EV3 motors and their movements.
+ */
 public class Motors {
-
+	/**
+	 * Determinates the motor which is used for moving the robot in the longitudinal direction.
+	 */
 	private EV3LargeRegulatedMotor length;
+	/**
+	 * Determinates the motor which is used for moving the robot in the width direction.
+	 */
 	private EV3LargeRegulatedMotor width;
+	/**
+	 * Determinates the motor which is used for rising and lowering the pliers.
+	 */
 	private EV3MediumRegulatedMotor height;
+	/**
+	 * Determinates the motor which is used for opening and closing the pliers.
+	 */
 	private EV3MediumRegulatedMotor pliers;
+	/**
+	 * Defines the Data class used for fetching data which will be used to determinate the moves.
+	 */
 	private Data data;
+	/**
+	 * Defines the Button class used for reading the touch sensor input.
+	 */
 	private Button button;
+	/**
+	 * Used in the emergency stop.
+	 */
 	private boolean StopCheck = false;
 	
 	//katsotaan pelaajan näkökulmasta
@@ -24,13 +46,31 @@ public class Motors {
 	//poikittain 	width 	default rotate suunta: + vasemmalle, 	- oikealle
 	//korkeus		height	default rotate suunta: + alas, 			- ylös
 	//pihdit 	 	pliers	default rotate suunta: + kiinni, 		- auki
-	
+	/**
+	 * The amount of degrees the length-motor needs to rotate for advancing one square on the board. 
+	 */
 	int lenghtRot = 94;		// 94	yksi ruutu
+	/**
+	 * The amount of degrees the width-motor needs to rotate for advancing one square on the board. 
+	 */
 	int widthRot = -280;	// 280	yksi ruutu						HUOM. käänteellinen pyörimissuunta
+	/**
+	 * The maximum degrees the height-motor is able to rotate.
+	 */
 	int heightRot = -282;	// 282	max liikkumis					HUOM. käänteellinen pyörimissuunta
+	/**
+	 * The amount of degrees the pliers-motor needs to rotate to firmly grip on any of the chess pieces.
+	 */
 	int pliersRot = -320;	// 325	sopiva kaikkille nappuloille	HUOM. käänteellinen pyörimissuunta
+	/**
+	 * The amount of degrees the length-motor needs to rotate to reach the first square of the board when the robot is in it's starting position.
+	 */
 	int toBoard = 392; 		// 390	vakioetäisyys odotuspaikan ja ensimmäisen ruudun välillä
-	
+	/**
+	 * Initializes the motors the robot will be using.
+	 * @param data Determinants the Data class the motors will be utilizing.
+	 * @param button Determinants the Button class the motors will be utilizing.
+	 */
 	public Motors(Data data, Button button) {
 		this.data = data;
 		this.button = button;
@@ -62,14 +102,19 @@ public class Motors {
 			}
 		}
 	}
-	
+	/**
+	 * Sets how fast each of the motors will be rotating.
+	 */
 	public void startMotors() {
 		length.setSpeed(320);
-		width.setSpeed(700);	//450
+		width.setSpeed(550);	//450
 		height.setSpeed(120);
 		pliers.setSpeed(300);
 	}
-	
+	/**
+	 * Moves the chess pieces on the board. Starting and ending location of each move and possibility of target being eaten is fetched from the Data class in an arraylist.
+	 * @throws NullPointerException If the touch sensor is pressed during the robot is performing it's move, this is send to end the movement.
+	 */
 	public void movePieces() throws NullPointerException {
 		ArrayList<Integer> crdnts = new ArrayList<>();
 		crdnts = data.getCrdnts();
@@ -142,7 +187,10 @@ public class Motors {
 		length.rotate(-toBoard, true);
 		largeCheck(length);
 	}
-	
+	/**
+	 * Checks if the touch sensor is pressed during a EV3 medium motor is rotating. If it's pressed, exception is thrown which triggers emergency stop.
+	 * @param motor Which medium sensor is rotating while the check is being performed.
+	 */
 	public void mediumCheck(EV3MediumRegulatedMotor motor) {
 		while(motor.isMoving()) {
 			if(button.pressed()==true) {
@@ -151,7 +199,10 @@ public class Motors {
 			}
 		}
 	}
-	
+	/**
+	 * Checks if the touch sensor is pressed during a EV3 large motor is rotating. If it's pressed, exception is thrown which triggers emergency stop.
+	 * @param motor Which large sensor is rotating while the check is being performed.
+	 */
 	public void largeCheck(EV3LargeRegulatedMotor motor) {
 		while(motor.isMoving()) {
 			if(button.pressed()==true) {
@@ -160,22 +211,32 @@ public class Motors {
 			}
 		}
 	}
-	
+	/**
+	 * Checks if the touch sensor have been pressed while a motor have been moving.
+	 * @return Returns true if the touch sensor have been pressed while a motor have been moved. Returns false if not.
+	 */
 	public boolean isStopCheck() {
 		return StopCheck;
 	}
-
+	/**
+	 * Sets the status of the emergency stop check.
+	 * @param stopCheck Is the emergency stop check set false for resuming or true for continuing the emergency stop. 
+	 */
 	public void setStopCheck(boolean stopCheck) {
 		StopCheck = stopCheck;
 	}
-	
+	/**
+	 * Stops the movement of all the motors.
+	 */
 	public void stopMotors() {
 		length.stop(true);
 		width.stop(true);
 		height.stop(true);
 		pliers.stop(true);
 	}
-	
+	/**
+	 * Shuts down all of the motors, data input and output streams and ends the program.
+	 */
 	public void shutDown() {
 		try {
 			data.in.close();
