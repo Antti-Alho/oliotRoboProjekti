@@ -45,7 +45,7 @@ public class ChessAI {
 	 * @param board current board situation
 	 * @param alpha current largest board value found
 	 * @param beta current lowest board value found
-	 * @param player true/false witch player we are currently evaluating true for AI false for player
+	 * @param player true/false which player we are currently evaluating true for AI false for player
 	 * @return integer value of the of the best board evaluation in top of search tree 
 	 */
 	private int minMax(int depth, Board board, int alpha, int beta, Boolean player) {
