@@ -2,7 +2,11 @@ package robot;
 
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
-
+/**
+ * The main loop that initializes the whole program and commences the behavior performance.
+ * @author ville
+ *
+ */
 public class Play {
 	
 	public static void main(String[] args) {
